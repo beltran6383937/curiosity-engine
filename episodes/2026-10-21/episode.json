@@ -1,0 +1,48 @@
+{
+  "id": "2026-10-21",
+  "category": "animales",
+  "title": "Wombat: un intestino que fabrica heces casi cúbicas",
+  "hooks": [
+    { "n": 69, "views": "1.4M", "template": "Why does [thing] [surprising comparison]?", "text": "¿Por qué el wombat hace cacas casi cúbicas?", "chosen": true },
+    { "n": 35, "views": "4.9M", "template": "[Thing] doesn't actually look like this.", "text": "La caca de un animal no siempre es así.", "chosen": false },
+    { "n": 20, "views": "9.9M", "template": "[Authority] have found a new [thing] and I'm going to show it to you.", "text": "Unos científicos tienen una explicación para unas cacas con esquinas, y te la voy a enseñar.", "chosen": false }
+  ],
+  "lines": [
+    "¿Por qué el wombat hace cacas casi cúbicas?",
+    "No usa ningún molde.",
+    "El secreto está dentro de su intestino.",
+    "Pero ¿cómo sale una esquina de un tubo blando?",
+    "En 2021, un equipo de científicos lo estudió a fondo.",
+    "La forma cúbica aparece en el último 17 % del intestino.",
+    "Allí la pared no es igual en todas partes.",
+    "Hay zonas con el doble de grosor.",
+    "Y cuatro veces más rígidas.",
+    "Según su modelo matemático, esas zonas rígidas se contraen más rápido.",
+    "Y proponen que así nacen las esquinas.",
+    "Ojo: el estudio no lo vio en directo dentro de un wombat.",
+    "Es lo que predicen las cuentas, no una grabación.",
+    "Un tubo blando que, según las matemáticas, sabe hacer esquinas."
+  ],
+  "say": {
+    "4": "En dos mil veintiuno, un equipo de científicos lo estudió a fondo."
+  },
+  "claims": [
+    { "claim": "Las heces casi cúbicas del wombat se forman en el último 17 % del intestino (Yang et al., Soft Matter 17, 475-488, 2021)", "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1039/D0SM01230K&resultType=core&format=json", "status": "verified" },
+    { "claim": "El tejido del intestino del wombat tiene regiones con el doble de grosor y cuatro veces más rigidez (medido en tejido: histología y ensayos de tracción)", "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1039/D0SM01230K&resultType=core&format=json", "status": "verified" },
+    { "claim": "Los autores proponen que las esquinas se deben a una contracción más rápida en las zonas rígidas; es un resultado de su modelo matemático, no una observación directa in vivo", "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1039/D0SM01230K&resultType=core&format=json", "status": "verified" }
+  ],
+  "keys": ["wombat", "cúbicas", "molde", "intestino", "esquina", "2021", "17", "17 %", "doble", "grosor", "cuatro", "rígidas", "modelo", "proponen", "esquinas"],
+  "publication": {
+    "cta": null,
+    "cta_reason": "No hay recurso descargable creado para este episodio: sin CTA de palabra clave (regla: no prometer lo que no existe).",
+    "instagram": {
+      "caption": "¿Por qué el wombat hace cacas casi cúbicas? Sin molde, y con una pista en el intestino 🐾\n\nLas heces toman forma en el último 17 % del intestino, donde la pared tiene zonas con el doble de grosor y cuatro veces más rígidas.\n\nSegún el modelo matemático de un equipo científico (Yang et al., Soft Matter, 2021), esas zonas se contraen más rápido y de ahí nacerían las esquinas. Ojo: es lo que predicen las cuentas, el estudio no lo vio en directo dentro de un wombat.\n\nVoz generada con IA.\n\n#wombat #curiosidades #animales",
+      "ai_label": true
+    },
+    "tiktok": {
+      "caption": "El wombat no usa molde: sus cacas casi cúbicas se forman en el último 17 % del intestino 🐾 Según un modelo matemático (Yang et al., 2021), las zonas más rígidas se contraen más rápido. Es un modelo, no una observación directa. Voz generada con IA. #wombat #animales #ciencia #curiosidades #naturaleza",
+      "ai_label": true
+    },
+    "cover": "fotograma del gancho: un wombat con el texto de la pregunta '¿Por qué el wombat hace cacas casi cúbicas?'"
+  }
+}

@@ -1,8 +1,45 @@
 {
  "date": "2026-10-21",
- "state": "FAILED",
- "episode": null,
- "steps": {},
+ "state": "NEEDS_ATTENTION",
+ "episode": "2026-10-21",
+ "steps": {
+  "RESEARCHING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T11:11:10.019Z",
+   "doneAt": "2026-10-21T11:16:59.922Z"
+  },
+  "SCRIPTING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T11:16:59.924Z",
+   "doneAt": "2026-10-21T11:29:52.624Z"
+  },
+  "VOICE": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T11:32:24.400Z",
+   "doneAt": "2026-10-21T11:39:27.177Z"
+  },
+  "RENDERING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T11:39:27.178Z",
+   "doneAt": "2026-10-21T11:44:54.853Z"
+  },
+  "QUALITY_CHECK": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T11:44:54.853Z",
+   "doneAt": "2026-10-21T11:45:00.396Z"
+  },
+  "VISUAL_REVIEW": {
+   "status": "failed",
+   "attempts": 3,
+   "startedAt": "2026-10-21T11:46:34.817Z",
+   "error": "SENTINEL rechaza (80): El morro del wombat queda cortado por el borde izquierdo del encuadre durante el travelling (ya pegado al borde en t0.6). | Modelo 3D del wombat muy tosco (cuerpo de salchicha, orejas con costura visible). Aceptable como esquema, poco pulido para el plano de gancho. | Escena casi vacía: solo fondo y"
+  }
+ },
  "platforms": {
   "instagram": {
    "status": "pending",
@@ -29,6 +66,40 @@
   {
    "at": "2026-10-21T10:39:37.193Z",
    "msg": "Reset manual: token de Claude inválido (401), se relanza tras corregirlo"
+  },
+  {
+   "at": "2026-10-21T11:16:59.922Z",
+   "msg": "RESEARCHING ok"
+  },
+  {
+   "at": "2026-10-21T11:29:52.624Z",
+   "msg": "SCRIPTING ok"
+  },
+  {
+   "at": "2026-10-21T11:39:27.177Z",
+   "msg": "VOICE ok"
+  },
+  {
+   "at": "2026-10-21T11:44:54.853Z",
+   "msg": "RENDERING ok"
+  },
+  {
+   "at": "2026-10-21T11:45:00.396Z",
+   "msg": "QUALITY_CHECK ok"
+  },
+  {
+   "at": "2026-10-21T11:46:13.536Z",
+   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (82): El morro del wombat queda cortado por el borde izquierdo del encuadre durante el travelling. | Modelo 3D del wombat muy tosco (cuerpo de salchicha, oreja con un pequeño hueco/costura visible en el cuello). Aceptable como esquema, pero poco pulido para el plano de gancho. | Escena casi vacía: solo fo"
+  },
+  {
+   "at": "2026-10-21T11:46:34.816Z",
+   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (82): El morro del wombat toca/queda cortado por el borde izquierdo del encuadre durante el travelling (también visible en t0.6). | Modelo 3D del wombat muy tosco (cuerpo de salchicha, orejas con costura visible). Aceptable como esquema, poco pulido para el plano de gancho. | Escena casi vacía: solo fondo"
+  },
+  {
+   "at": "2026-10-21T11:46:59.269Z",
+   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (80): El morro del wombat queda cortado por el borde izquierdo del encuadre durante el travelling (ya pegado al borde en t0.6). | Modelo 3D del wombat muy tosco (cuerpo de salchicha, orejas con costura visible). Aceptable como esquema, poco pulido para el plano de gancho. | Escena casi vacía: solo fondo y"
   }
- ]
+ ],
+ "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",
+ "duration": 41.6
 }

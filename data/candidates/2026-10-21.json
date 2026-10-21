@@ -1,0 +1,81 @@
+[
+  {
+    "id": "wombat-cubos",
+    "category": "animales",
+    "title": "El único animal que hace caca en cubos",
+    "hook": "Un wombat produce cubos perfectos, y no es porque los moldee: es su intestino.",
+    "hook_fact": "Los cubos se forman en el último ~17 % del intestino, por zonas de distinta rigidez.",
+    "claims": [
+      {"claim": "Los cubos se forman en el último 17 % del intestino del wombat (disecciones). Un resumen previo de congreso (APS DFD 2018) hablaba del último 8 %: las cifras difieren entre ambas fuentes.", "source": "https://pubs.rsc.org/en/Content/ArticleLanding/2021/SM/D0SM01230K ; https://meetings.aps.org/Meeting/DFD18/Event/333058", "kind": "evidence", "status": "unverified"},
+      {"claim": "Según el abstract de Soft Matter 17, 475-488 (2021, Yang et al.), la sección del intestino tiene regiones con el doble de grosor y cuatro veces más rigidez; la contracción más rápida en las zonas rígidas daría las esquinas.", "source": "https://pubs.rsc.org/en/Content/ArticleLanding/2021/SM/D0SM01230K", "kind": "evidence", "status": "unverified"},
+      {"claim": "Cada cubo mide ~2 cm (resumen APS 2018, dos wombats de nariz desnuda atropellados en Tasmania).", "source": "https://meetings.aps.org/Meeting/DFD18/Event/333058", "kind": "evidence", "status": "unverified"},
+      {"claim": "El modelo matemático explica las esquinas; no se ha demostrado in vivo. Es un modelo, no una observación directa.", "source": "https://pubs.rsc.org/en/Content/ArticleLanding/2021/SM/D0SM01230K", "kind": "interpretation", "status": "unverified"}
+    ],
+    "visual_idea": "Cubos apilados como dados junto a un corte animado del intestino con zonas gruesas y finas.",
+    "scores": {"sorpresa": 20, "visual": 16, "curiosidad": 16, "claridad": 13, "novedad": 3, "respaldo": 8},
+    "total": 76
+  },
+  {
+    "id": "camaron-mantis-golpe",
+    "category": "animales",
+    "title": "Un camarón de 10 cm golpea más rápido que una bala de .22 en aceleración",
+    "hook": "Un camarón mantis golpea tan rápido que el agua hierve a su paso.",
+    "hook_fact": "Velocidad pico de 14 a 23 m/s y aceleración de 6.300 a 8.000 g, con cavitación.",
+    "claims": [
+      {"claim": "Velocidad pico del apéndice: 14-23 m/s (Univ. California Berkeley, nota de prensa sobre Patek, Korff y Caldwell, Nature 428, 819-820, 22 abril 2004).", "source": "https://newsarchive.berkeley.edu/news/media/releases/2004/04/21_shrimp.shtml", "kind": "evidence", "status": "unverified"},
+      {"claim": "Aceleración pico: 6.300-8.000 veces la gravedad según Berkeley; otras fuentes secundarias citan más de 10.400 g. Cifra variable: dar rango y verificar en el artículo de Nature. La comparación con la bala .22 procede de prensa secundaria.", "source": "https://newsarchive.berkeley.edu/news/media/releases/2004/04/21_shrimp.shtml", "kind": "evidence", "status": "unverified"},
+      {"claim": "Las imágenes de alta velocidad muestran burbujas de vapor (cavitación) junto a la presa; el abstract lo plantea como posible daño destructivo, no como resultado cerrado.", "source": "https://newsarchive.berkeley.edu/news/media/releases/2004/04/21_shrimp.shtml", "kind": "hypothesis", "status": "unverified"},
+      {"claim": "El golpe usa un resorte de exoesqueleto en forma de silla de montar que almacena y libera energía. No incluir cifras de temperatura (el Berkeley no las menciona; solo aparecen en blogs).", "source": "https://newsarchive.berkeley.edu/news/media/releases/2004/04/21_shrimp.shtml", "kind": "evidence", "status": "unverified"}
+    ],
+    "visual_idea": "Cámara lenta ultra alta velocidad del golpe con burbuja de cavitación y reloj en milisegundos.",
+    "scores": {"sorpresa": 20, "visual": 19, "curiosidad": 15, "claridad": 12, "novedad": 2, "respaldo": 7},
+    "total": 75
+  },
+  {
+    "id": "godwit-11-dias",
+    "category": "animales",
+    "title": "Un ave que vuela 11 días sin parar ni comer",
+    "hook": "Una aguja de cola barrada cruzó el Pacífico durante 11 días sin aterrizar una sola vez.",
+    "hook_fact": "Vuelo ininterrumpido de ~11 días, Alaska a Nueva Zelanda/Tasmania, entre ~12.000 y 13.500 km según el caso.",
+    "claims": [
+      {"claim": "Macho 4BBRW (Global Flyway Network): ~11 días, cerca de 12.200-12.854 km (7.581-7.987 millas) de Alaska a Nueva Zelanda; la cifra de 7.500 millas es la que da Smithsonian.", "source": "https://www.smithsonianmag.com/smart-news/bird-designed-jet-fighter-sets-new-record-longest-nonstop-bird-migration-180976078/", "kind": "evidence", "status": "unverified"},
+      {"claim": "Otro caso: un juvenil salió de Alaska el 13 oct 2022 y llegó a Tasmania 11 días después; 13.560 km (CBC) u 8.425 millas (Alaska Science Forum). Sospecha de confusión entre aves y vuelos: confirmar con USGS/UAF.", "source": "https://www.uaf.edu/news/750-miles-per-day-for-11-days-no-rest.php ; https://www.cbc.ca/news/science/godwit-migration-alaska-tasmania-record-1.6632658", "kind": "evidence", "status": "unverified"},
+      {"claim": "Los investigadores no saben si es comportamiento normal, pues solo se han rastreado pocas aves.", "source": "https://www.cbc.ca/news/science/godwit-migration-alaska-tasmania-record-1.6632658", "kind": "interpretation", "status": "unverified"},
+      {"claim": "La afirmación de que no duerme es del medio secundario (Gizmodo vía Smithsonian), no está demostrada; las aves pueden dormir con medio cerebro. Tratar como hipótesis.", "source": "https://www.smithsonianmag.com/smart-news/bird-designed-jet-fighter-sets-new-record-longest-nonstop-bird-migration-180976078/", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Mapa del Pacífico con la ruta del satélite y contador de días del 1 al 11.",
+    "scores": {"sorpresa": 18, "visual": 17, "curiosidad": 14, "claridad": 12, "novedad": 3, "respaldo": 5},
+    "total": 69
+  },
+  {
+    "id": "koala-huellas",
+    "category": "animales",
+    "title": "Un koala podría incriminarte en la escena de un crimen",
+    "hook": "Las huellas dactilares de un koala son casi indistinguibles de las humanas, aunque no estamos emparentados.",
+    "hook_fact": "Ni al microscopio se distinguen; el ancestro común sin huellas vivió hace al menos 70 millones de años (según el artículo).",
+    "claims": [
+      {"claim": "Henneberg, Lambert y Leigh (1997), 'Fingerprint homoplasy: Koalas and humans', Natural Science 1:4. Describe dermatoglifos del koala microscópica y macroscópicamente similares a los humanos.", "source": "https://digital.library.adelaide.edu.au/dspace/handle/2440/5433", "kind": "evidence", "status": "unverified"},
+      {"claim": "El artículo sugiere que la similitud aparece en mamíferos que evolucionaron por separado al menos 70 millones de años (evolución convergente). La cifra procede de la afirmación de los autores.", "source": "https://digital.library.adelaide.edu.au/dspace/handle/2440/5433", "kind": "interpretation", "status": "unverified"},
+      {"claim": "Explicación propuesta: adaptación biomecánica al agarre de ramas y hojas de eucalipto. Es hipótesis; los parientes (wombats, canguros) no tienen huellas.", "source": "https://www.pbs.org/wgbh/nova/article/koala-fingerprints/", "kind": "hypothesis", "status": "unverified"},
+      {"claim": "El caso del koala en escenas de crimen reales no está respaldado; Snopes lo trata como verificación. No afirmarlo como hecho.", "source": "https://www.snopes.com/fact-check/koala-fingerprints-crime-scene/", "kind": "interpretation", "status": "unverified"}
+    ],
+    "visual_idea": "Macro de un dedo de koala junto a un dedo humano con las crestas superpuestas.",
+    "scores": {"sorpresa": 17, "visual": 14, "curiosidad": 14, "claridad": 13, "novedad": 3, "respaldo": 6},
+    "total": 67
+  },
+  {
+    "id": "pulpo-corazones",
+    "category": "animales",
+    "title": "El pulpo tiene tres corazones y uno se para cuando nada",
+    "hook": "Cuando un pulpo nada, su corazón principal deja de latir.",
+    "hook_fact": "Dos corazones branquiales y uno sistémico; el sistémico se detiene durante la natación a chorro (según estudios de los años 80).",
+    "claims": [
+      {"claim": "Los pulpos tienen tres corazones: dos branquiales y uno sistémico.", "source": "https://www.livescience.com/how-many-hearts-does-an-octopus-have", "kind": "evidence", "status": "unverified"},
+      {"claim": "El corazón sistémico se detiene brevemente durante la natación a chorro (Wells y Smith, J. Exp. Biol., 1987, que proponía presión del manto sobre venas y corazones branquiales). Cita sin URL verificada: localizar el artículo en jeb.biologists.org.", "source": "https://scienceblog.com/t-octopus-three-hearts-jet-swimming-systemic-heart-stops/ (secundaria; sustituir por J. Exp. Biol.)", "kind": "evidence", "status": "unverified"},
+      {"claim": "El mecanismo no está confirmado por imagen directa de todos los vasos; la versión popular exagera (no es apagado de todo el nado). Tratar el porqué como hipótesis.", "source": "https://scienceblog.com/t-octopus-three-hearts-jet-swimming-systemic-heart-stops/", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Silueta de pulpo con tres corazones iluminados, el central se apaga al activarse el chorro.",
+    "scores": {"sorpresa": 16, "visual": 15, "curiosidad": 14, "claridad": 12, "novedad": 2, "respaldo": 4},
+    "total": 63
+  }
+]
