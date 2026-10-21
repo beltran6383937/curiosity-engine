@@ -335,8 +335,8 @@ const Hook: React.FC<SceneProps> = ({ t, w, len }) => {
   const cross = k(t, mol + 0.35, 0.45);
   return (
     <AbsoluteFill>
-      <Stage cam={cam} look={[0.25, 0.45, 0.3]} sun={[-5, 8, 5]} rim={RIM} amb={0.3}>
-        <group scale={0.8}>
+      <Stage cam={cam} look={[0.05, 0.45, 0.3]} sun={[-5, 8, 5]} rim={RIM} amb={0.3}>
+        <group scale={0.74}>{/* margen al borde izquierdo para el hocico */}
           <Floor o={0.35} />
           <Wombat position={[-0.45, 0, 0]} rotation={[0, 0.5, 0]} />
           {POOS.map((q, i) => (
@@ -589,7 +589,7 @@ const NotSeen: React.FC<SceneProps> = ({ t, w }) => {
       </AbsoluteFill>
       <AbsoluteFill style={{ opacity: oB }}>
         {sc > 0 && (
-          <div style={card(70, MINT, sc)}>
+          <div style={card(70 + 245 * (1 - Math.min(1, sg)), MINT, sc)}>{/* centrada mientras está sola */}
             <div style={title(MINT)}>CÁLCULO</div>
             <svg width={450} height={540} style={{ position: "absolute", left: -4, top: -4 }}>
               <g transform="translate(225 300) scale(0.68)">
