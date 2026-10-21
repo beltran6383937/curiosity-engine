@@ -1,6 +1,6 @@
 {
  "date": "2026-10-21",
- "state": "PENDING",
+ "state": "NEEDS_ATTENTION",
  "episode": "2026-10-21",
  "steps": {
   "RESEARCHING": {
@@ -14,6 +14,30 @@
    "attempts": 1,
    "startedAt": "2026-10-21T19:08:34.746Z",
    "doneAt": "2026-10-21T19:24:06.147Z"
+  },
+  "VOICE": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T19:58:33.198Z",
+   "doneAt": "2026-10-21T20:13:11.799Z"
+  },
+  "RENDERING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T20:13:11.804Z",
+   "doneAt": "2026-10-21T20:20:00.826Z"
+  },
+  "QUALITY_CHECK": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-21T20:20:00.827Z",
+   "doneAt": "2026-10-21T20:20:07.250Z"
+  },
+  "VISUAL_REVIEW": {
+   "status": "failed",
+   "attempts": 3,
+   "startedAt": "2026-10-21T20:21:34.088Z",
+   "error": "SENTINEL rechaza (66): Fotograma prácticamente vacío: solo fondo y el subtítulo 'predicen' en gris tenue, con pie 'Esquema, no a escala' pero sin ningún esquema. Parece una escena sin renderizar o un hueco entre escenas. | El morro del wombat toca/queda recortado por el borde izquierdo del encuadre (x≈0). | La silueta del"
   }
  },
  "platforms": {
@@ -102,8 +126,32 @@
   {
    "at": "2026-10-21T19:54:51.102Z",
    "msg": "Reset manual (claude-code): la escena usaba Floor sin importarlo (ReferenceError en el render); import añadido, se rehace desde VOICE"
+  },
+  {
+   "at": "2026-10-21T20:13:11.799Z",
+   "msg": "VOICE ok"
+  },
+  {
+   "at": "2026-10-21T20:20:00.826Z",
+   "msg": "RENDERING ok"
+  },
+  {
+   "at": "2026-10-21T20:20:07.250Z",
+   "msg": "QUALITY_CHECK ok"
+  },
+  {
+   "at": "2026-10-21T20:21:04.194Z",
+   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (74): El wombat toca/queda recortado por el borde izquierdo del encuadre (morro en x≈0). | Barra 'INICIO/FINAL' con puntos casi invisibles (bajo contraste) y sin pie de 'Esquema, no a escala'; no se entiende que muestra la forma cúbica de las heces y ocupa solo una franja del lienzo. | Se muestra '×2 GROS"
+  },
+  {
+   "at": "2026-10-21T20:21:34.088Z",
+   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (72): El morro del wombat queda pegado/recortado por el borde izquierdo del encuadre (x≈0). | La silueta del esquema (oreja puntiaguda, patas rectangulares, cuerpo redondo) parece un cerdo/hámster y no el wombat 3D de la escena 1. | Barra INICIO/FINAL con puntos de muy bajo contraste, sin pie 'Esquema, no"
+  },
+  {
+   "at": "2026-10-21T20:21:55.800Z",
+   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (66): Fotograma prácticamente vacío: solo fondo y el subtítulo 'predicen' en gris tenue, con pie 'Esquema, no a escala' pero sin ningún esquema. Parece una escena sin renderizar o un hueco entre escenas. | El morro del wombat toca/queda recortado por el borde izquierdo del encuadre (x≈0). | La silueta del"
   }
  ],
  "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",
- "duration": 39.84
+ "duration": 42.5
 }
