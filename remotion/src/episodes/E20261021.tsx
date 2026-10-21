@@ -3,9 +3,9 @@
 // Frases 9-13: modelo matemático (MINT), nunca imagen real ni grabación del interior de un wombat.
 import React, { useMemo } from "react";
 import * as THREE from "three";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, random } from "remotion";
 import { RoundedBox } from "@react-three/drei";
-import { Reel, Stage, Clay, Floor, Tag, Stat, Source, k, mix, inOut, useSpring, SANS, type CurioProps, type SceneProps, type SceneDef } from "../kit";
+import { Reel, Stage, Clay, Tag, Stat, Source, k, mix, inOut, useSpring, useRock, SANS, type CurioProps, type SceneProps, type SceneDef } from "../kit";
 
 type V3 = [number, number, number];
 const OCHRE = "#e3a96b", WALL = "#c98478", STIFF = "#ff9a5c", MINT = "#7fe0c4", ROSE = "#ff7a6b", RIM = "#6fb8ff", INK = "#dfe6ff";
@@ -59,24 +59,227 @@ const WireBox: React.FC<{ s: number; r: number; c: string; o: number; position?:
   );
 };
 
-// Wombat de arcilla: cápsula achatada, cabeza ancha, hocico, orejas cónicas y patas cortas. La cabeza mira a -x.
-const Wombat: React.FC<{ position?: V3; rotation?: V3; s?: number; c?: string }> = ({ position, rotation, s = 1, c = FUR }) => (
-  <group position={position} rotation={rotation} scale={s}>
-    <mesh position={[0, 0.5, 0]} rotation={[0, 0, Math.PI / 2]} scale={[0.88, 1, 1.08]} castShadow><capsuleGeometry args={[0.45, 0.9, 8, 24]} /><Clay c={c} r={0.6} /></mesh>
-    <mesh position={[-0.85, 0.62, 0]} scale={[1.05, 0.9, 1.1]} castShadow><sphereGeometry args={[0.36, 32, 32]} /><Clay c={c} r={0.6} /></mesh>
-    <mesh position={[-1.13, 0.54, 0]} scale={[0.8, 0.7, 1.1]} castShadow><sphereGeometry args={[0.17, 24, 24]} /><Clay c="#6e4c34" r={0.6} /></mesh>
-    <mesh position={[-1.25, 0.6, 0]}><sphereGeometry args={[0.065, 16, 16]} /><Clay c="#22150e" r={0.3} /></mesh>
-    {[-1, 1].map((sd) => (
-      <React.Fragment key={sd}>
-        <mesh position={[-0.78, 0.97, sd * 0.19]} rotation={[sd * -0.25, 0, 0.25]} castShadow><coneGeometry args={[0.09, 0.2, 16]} /><Clay c={c} r={0.6} /></mesh>
-        <mesh position={[-1.14, 0.72, sd * 0.2]}><sphereGeometry args={[0.035, 12, 12]} /><Clay c="#0d0806" r={0.2} /></mesh>
-      </React.Fragment>
-    ))}
-    {[[-0.45, -0.28], [-0.45, 0.28], [0.45, -0.28], [0.45, 0.28]].map(([x, z], i) => (
-      <mesh key={i} position={[x, 0.17, z]} castShadow><capsuleGeometry args={[0.11, 0.12, 6, 12]} /><Clay c="#6e4c34" r={0.6} /></mesh>
-    ))}
-  </group>
-);
+// ---------- wombat de arcilla: una sola malla fundida (sin costuras) ----------
+// Campo de distancia = unión suave (smooth-min) de las bolas del storyboard. Una icoesfera densa se proyecta sobre esa
+// superficie: cada vértice baja desde fuera hacia dentro por su recta (origen en el eje del cuerpo) hasta tocarla.
+// Todo con three core; la cabeza mira a -x. Coordenadas locales sin escalar (el grupo aplica z × 0,9 y la instancia 0,85).
+type Ball = [number, number, number, number, number]; // x, y, z, radio, suavizado de la unión
+const BALLS: Ball[] = [
+  [0.55, 0.54, 0, 0.42, 0.16], // grupa
+  [0.1, 0.54, 0, 0.44, 0.16], // lomo
+  [-0.35, 0.5, 0, 0.38, 0.16], // pecho
+  [-0.62, 0.56, 0, 0.3, 0.16], // cuello y hombro: puente entre pecho y cabeza
+  [-0.84, 0.6, 0.1, 0.26, 0.12], // cabeza ancha (dos bolas)
+  [-0.84, 0.6, -0.1, 0.26, 0.12],
+  [-1.03, 0.51, 0, 0.17, 0.1], // hocico
+  [0.42, 0.15, 0.24, 0.13, 0.12], // patas cortas fundidas con el vientre
+  [0.42, 0.15, -0.24, 0.13, 0.12],
+  [-0.42, 0.15, 0.24, 0.13, 0.12],
+  [-0.42, 0.15, -0.24, 0.13, 0.12],
+];
+const wSdf = (x: number, y: number, z: number) => {
+  let d = 1e3;
+  for (const [bx, by, bz, r, kk] of BALLS) {
+    const dx = x - bx, dy = y - by, dz = z - bz;
+    const s = Math.sqrt(dx * dx + dy * dy + dz * dz) - r;
+    const h = Math.max(kk - Math.abs(d - s), 0) / kk;
+    d = Math.min(d, s) - h * h * kk * 0.25;
+  }
+  return d;
+};
+// Superficie exterior sobre la recta o + t·n, buscando desde t0 (fuera) hacia dentro
+const wSurf = (o: V3, n: V3, t0 = 1.3): V3 => {
+  let t = t0;
+  for (let i = 0; i < 96; i++) {
+    const d = wSdf(o[0] + n[0] * t, o[1] + n[1] * t, o[2] + n[2] * t);
+    if (d < 2e-4) break;
+    t -= d;
+    if (t <= 0) { t = 0; break; }
+  }
+  return [o[0] + n[0] * t, o[1] + n[1] * t, o[2] + n[2] * t];
+};
+const nrm = (x: number, y: number, z: number): V3 => { const l = Math.sqrt(x * x + y * y + z * z); return [x / l, y / l, z / l]; };
+// Icoesfera unitaria indexada (vértices compartidos: normales suaves, sin costura)
+const icoSphere = (detail: number) => {
+  const src = new THREE.IcosahedronGeometry(1, detail);
+  const pos = src.attributes.position;
+  const ids = new Map<string, number>(), verts: number[] = [], index: number[] = [];
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const key = `${Math.round(x * 1e4)},${Math.round(y * 1e4)},${Math.round(z * 1e4)}`;
+    let id = ids.get(key);
+    if (id === undefined) { id = verts.length / 3; ids.set(key, id); const l = Math.sqrt(x * x + y * y + z * z); verts.push(x / l, y / l, z / l); }
+    index.push(id);
+  }
+  src.dispose();
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
+  g.setIndex(index);
+  return g;
+};
+// Orígenes de las rectas sobre el eje del cuerpo (x de -0,72 a 0,48, siempre dentro del volumen)
+const WCX = -0.12, WHL = 0.6, WCY = 0.5;
+const buildWombat = () => {
+  const g = icoSphere(44);
+  const pos = g.attributes.position as THREE.BufferAttribute;
+  const cols = new Float32Array(pos.count * 3);
+  const cF = new THREE.Color(FUR), cTop = new THREE.Color("#74513a"), cDark = new THREE.Color("#5c3d29"), c = new THREE.Color();
+  const S = THREE.MathUtils.smoothstep;
+  for (let i = 0; i < pos.count; i++) {
+    const n: V3 = [pos.getX(i), pos.getY(i), pos.getZ(i)];
+    const [x, y, z] = wSurf([WCX + WHL * n[0], WCY, 0], n);
+    pos.setXYZ(i, x, y, z);
+    const snout = S(-x, 0.95, 1.12), feet = 1 - S(y, 0.06, 0.2), back = S(y, 0.78, 0.98) * 0.6;
+    c.copy(cF).lerp(cTop, back).lerp(cDark, Math.max(snout, feet));
+    cols[i * 3] = c.r; cols[i * 3 + 1] = c.g; cols[i * 3 + 2] = c.b;
+  }
+  g.setAttribute("color", new THREE.BufferAttribute(cols, 3));
+  g.computeVertexNormals();
+  return g;
+};
+const HEAD: V3 = [-0.84, 0.6, 0];
+const Wombat: React.FC<{ position?: V3; rotation?: V3; s?: number }> = ({ position, rotation, s = 1 }) => {
+  const m = useMemo(() => {
+    const geo = buildWombat();
+    const on = (o: V3, d: V3, push: number): V3 => { const p = wSurf(o, d, 1); return [p[0] + d[0] * push, p[1] + d[1] * push, p[2] + d[2] * push]; };
+    const head = (sd: number): V3 => [HEAD[0], HEAD[1], sd * 0.1];
+    return {
+      geo,
+      nose: on([-1.03, 0.51, 0], nrm(-1, 0.25, 0), 0), // centro en la superficie: hundida la mitad
+      ears: [1, -1].map((sd) => on(head(sd), nrm(0.2, 1, sd * 0.55), 0.015)), // hundidas > 40 %
+      eyes: [1, -1].map((sd) => on(head(sd), nrm(-0.62, 0.32, sd * 0.72), 0)), // hundidos la mitad
+    };
+  }, []);
+  return (
+    <group position={position} rotation={rotation} scale={s}>
+      <group scale={[1, 1, 0.9]}>
+        <mesh geometry={m.geo} castShadow receiveShadow><Clay c="#ffffff" r={0.6} vc /></mesh>
+        {m.ears.map((p, i) => {
+          const sd = i === 0 ? 1 : -1;
+          return (
+            <group key={i} position={p} rotation={[sd * 0.35, sd * 0.5, -0.12]}>
+              <mesh scale={[0.35, 1, 0.6]} castShadow><sphereGeometry args={[0.1, 28, 20]} /><Clay c="#7d583c" r={0.6} /></mesh>
+              <mesh position={[-0.022, -0.008, 0]} scale={[0.18, 0.7, 0.4]}><sphereGeometry args={[0.1, 20, 14]} /><Clay c="#5a3c28" r={0.7} /></mesh>
+            </group>
+          );
+        })}
+        <mesh position={m.nose} rotation={[0, 0, -0.245]} scale={[0.55, 0.6, 1.1]} castShadow>
+          <sphereGeometry args={[0.1, 32, 24]} />
+          <meshPhysicalMaterial color="#241610" roughness={0.35} clearcoat={0.8} clearcoatRoughness={0.2} />
+        </mesh>
+        {m.eyes.map((p, i) => (
+          <mesh key={i} position={p}><sphereGeometry args={[0.03, 16, 12]} /><meshPhysicalMaterial color="#0d0806" roughness={0.15} clearcoat={1} clearcoatRoughness={0.05} /></mesh>
+        ))}
+      </group>
+    </group>
+  );
+};
+
+// ---------- madriguera (escena 1) ----------
+const texCache = new Map<string, THREE.Texture>();
+const canvasTex = (key: string, draw: (g: CanvasRenderingContext2D, n: number) => void, srgb = false) => {
+  let t = texCache.get(key);
+  if (!t) {
+    const cv = document.createElement("canvas"); cv.width = cv.height = 256;
+    draw(cv.getContext("2d")!, 256);
+    t = new THREE.CanvasTexture(cv);
+    if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+    texCache.set(key, t);
+  }
+  return t;
+};
+const radialTex = (key: string, stops: [number, string][], srgb = false) => canvasTex(key, (g, n) => {
+  const gr = g.createRadialGradient(n / 2, n / 2, 0, n / 2, n / 2, n / 2);
+  stops.forEach(([o, c]) => gr.addColorStop(o, c));
+  g.fillStyle = gr; g.fillRect(0, 0, n, n);
+}, srgb);
+// Haz: arriba del lienzo = vértice del cono. Opacidad 0 en la parte alta (franja de subtítulos) y suave cerca del suelo.
+const beamTex = () => canvasTex("e1021-haz", (g, n) => {
+  const gr = g.createLinearGradient(0, 0, 0, n);
+  [[0, "#000"], [0.62, "#000"], [0.8, "#fff"], [0.92, "#fff"], [1, "#555"]].forEach(([o, c]) => gr.addColorStop(o as number, c as string));
+  g.fillStyle = gr; g.fillRect(0, 0, n, n);
+});
+// Pared de fondo: cilindro abierto (80 % de vuelta) con relieve determinista de tierra
+const buildWall = () => {
+  const g = new THREE.CylinderGeometry(6, 6, 6, 120, 30, true, Math.PI * 0.6, Math.PI * 0.8);
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i), z = p.getZ(i), a = Math.atan2(x, z);
+    const s = 1 + 0.035 * Math.sin(a * 23 + Math.sin(y * 1.7) * 2) * Math.cos(y * 3.1 + a * 7) + 0.018 * Math.sin(a * 61 + y * 5.3);
+    p.setXYZ(i, x * s, y, z * s);
+  }
+  g.computeVertexNormals();
+  return g;
+};
+// Raíces estáticas junto a la pared (la pared está en z = 2 - sqrt(36 - x²))
+const buildRoots = () => [-0.9, -0.15, 0.95, 1.9, 2.6].map((x, i) => {
+  const r = (s: string) => random(`e1021-raiz${i}${s}`);
+  const zw = 2 - Math.sqrt(36 - x * x) + 0.25, bot = mix(2.6, 2.8, r("b"));
+  const pts = Array.from({ length: 5 }, (_, j) => {
+    const f = j / 4;
+    return new THREE.Vector3(x + (r(`x${j}`) - 0.5) * 0.3 * f, mix(3.25, bot, f), zw + (r(`z${j}`) - 0.2) * 0.15 * f);
+  });
+  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 32, mix(0.015, 0.03, r("r")), 6, false);
+});
+// Boca del túnel: se apoya en la superficie real del montículo (rayos sobre su geometría) para no quedar enterrada.
+const MOUTH = { x: 1.0, y: 0.5 };
+const placeMouth = (mont: THREE.BufferGeometry) => {
+  const mesh = new THREE.Mesh(mont);
+  mesh.position.set(0.6, 0, -2.6); mesh.updateMatrixWorld(true);
+  const rc = new THREE.Raycaster();
+  const hit = (dx: number, dy: number) => {
+    rc.set(new THREE.Vector3(MOUTH.x + dx, MOUTH.y + dy, 6), new THREE.Vector3(0, 0, -1));
+    return rc.intersectObject(mesh, false)[0]?.point.z ?? -1.37;
+  };
+  const sx = (hit(0.5, 0) - hit(-0.5, 0)) / 1.0, sy = (hit(0, 0.4) - hit(0, -0.2)) / 0.6;
+  const samples: [number, number][] = [[0, 0], [-0.5, 0], [0.5, 0], [0, 0.45], [-0.4, 0.3], [0.4, 0.3], [-0.5, -0.3], [0.5, -0.3], [0, -0.3]];
+  const z0 = Math.max(...samples.map(([dx, dy]) => hit(dx, dy) - sx * dx - sy * dy)) + 0.03;
+  const cl = (v: number) => Math.max(-0.6, Math.min(0.6, v));
+  return { pos: [MOUTH.x, MOUTH.y, z0] as V3, rot: [cl(Math.atan(sy)), cl(-Math.atan(sx)), 0] as V3 };
+};
+// Haz de luz: vértice arriba a la izquierda, apuntando al lomo
+const beamPose = () => {
+  const A = new THREE.Vector3(-2.5, 4.5, 0.5), D = new THREE.Vector3(-0.2, 0, 0.3).sub(A).normalize();
+  const c = A.clone().addScaledVector(D, 2.5);
+  return { q: new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, -1, 0), D), pos: [c.x, c.y, c.z] as V3 };
+};
+const DIRT = { envMapIntensity: 0.35 } as const;
+// Terrón mate (sin barniz: solo las heces brillan y son casi cúbicas)
+const Clod: React.FC<{ i: number; p: [number, number] }> = ({ i, p }) => {
+  const g = useRock(`e1021-terron${i}`, 3, 0.35);
+  const r = (s: string) => random(`e1021-t${s}${i}`);
+  const s = mix(0.05, 0.14, r("s"));
+  return (
+    <mesh geometry={g} position={[p[0], s * 0.3, p[1]]} rotation={[r("a") * 3, r("b") * 6, r("c") * 0.5]} scale={[s, s * 0.75, s * mix(0.8, 1.2, r("z"))]} castShadow receiveShadow>
+      <meshStandardMaterial color={i % 2 ? "#5a3a26" : "#4a301f"} roughness={0.9} {...DIRT} />
+    </mesh>
+  );
+};
+// Mata de hierba estática (7-12 hojas)
+const Tuft: React.FC<{ i: number; p: [number, number] }> = ({ i, p }) => {
+  const n = 7 + Math.floor(random(`e1021-hn${i}`) * 6);
+  return (
+    <group position={[p[0], 0, p[1]]}>
+      {Array.from({ length: n }, (_, j) => {
+        const r = (s: string) => random(`e1021-h${s}${i}-${j}`);
+        const h = mix(0.25, 0.45, r("h")), a = r("a") * Math.PI * 2, d = r("d") * 0.07;
+        return (
+          <group key={j} position={[Math.cos(a) * d, 0, Math.sin(a) * d]} rotation={[mix(-0.35, 0.35, r("x")), r("y") * 3, mix(-0.35, 0.35, r("z"))]}>
+            <mesh position={[0, h / 2, 0]} castShadow><coneGeometry args={[0.012, h, 4]} /><meshStandardMaterial color={j % 2 ? "#5d6b3a" : "#7a7d45"} roughness={0.8} {...DIRT} /></mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+};
+const CLODS: [number, number][] = [[0.25, -1.05], [0.6, -0.95], [1.5, -0.9], [1.8, -1.15], [-1.15, 0.55], [-0.9, 1.75], [0.05, 2.1], [1.55, 0.35], [1.65, 2.0]];
+const TUFTS: [number, number][] = [[-1.25, -1.25], [2.15, -1.45], [1.95, 0.05], [-1.45, 1.3], [2.25, 1.55], [-0.45, -1.35]];
+// Primer plano 2D desenfocado (solo esquinas inferiores; el centro queda libre para Source)
+const FG_BLADES = (x0: number, x1: number, seed: string) => Array.from({ length: 6 }, (_, i) => {
+  const r = (s: string) => random(`${seed}${s}${i}`);
+  const x = mix(x0, x1, (i + r("o") * 0.6) / 6), tip = mix(1385, 1440, r("t")), lean = mix(-40, 40, r("l")), wd = mix(14, 24, r("w"));
+  return `M ${x.toFixed(0)} 1540 Q ${(x + lean * 0.4).toFixed(0)} ${((1540 + tip) / 2).toFixed(0)} ${(x + lean).toFixed(0)} ${tip.toFixed(0)} Q ${(x + wd + lean * 0.4).toFixed(0)} ${((1540 + tip) / 2).toFixed(0)} ${(x + wd).toFixed(0)} 1540 Z`;
+});
 
 // Malla de simulación del anillo (SVG, centrada en 0,0): nodos interior/exterior por columna, sectores rígidos más gruesos.
 const RingMesh: React.FC<{ Ri: number; thin: number; thick: number; cR: number; cT: number; n: number; Rc: number; o?: number }> = ({ Ri, thin, thick, cR, cT, n, Rc, o = 1 }) => {
