@@ -47,6 +47,15 @@ test("publica a las 07:00 en ambas redes y una segunda pasada no repite nada", a
   assert.ok(STEPS.every((s) => n[s] === 1));
 });
 
+test("TikTok en la bandeja queda como «inbox» (no publicado) y no se vuelve a subir", async () => {
+  const root = sandbox(); const { steps } = counter(); const calls = [];
+  const publishers = { ...pubs(calls), tiktok: async () => { calls.push("tt"); return { id: "B1", inbox: true }; } };
+  const opts = { root, date: "2026-10-21", now: at("2026-10-21T05:01:00Z"), steps, publishers };
+  await tick(opts); const run = await tick(opts);
+  assert.deepEqual(calls, ["ig", "tt"]);
+  assert.equal(run.platforms.tiktok.status, "inbox"); assert.equal(run.platforms.tiktok.publishedAt, undefined);
+});
+
 test("un paso que falla se reanuda sin repetir los anteriores y escala tras 3 intentos", async () => {
   const root = sandbox(); const { n, steps } = counter(); const alerts = [];
   steps.VOICE = async () => { n.VOICE = (n.VOICE ?? 0) + 1; throw new Error("motor de voz caído"); };

@@ -16,8 +16,9 @@ if [ -s data/alerts/pending.md ]; then
 fi
 if [ -s data/alerts/tiktok.md ]; then
   gh label create tiktok --color 000000 --description "Vídeo en la bandeja de TikTok: pegar texto y publicar" 2>/dev/null || true
-  gh issue create --label tiktok --title "TikTok listo en tu bandeja: $(date +%F)" --body-file data/alerts/tiktok.md
-  : > data/alerts/tiktok.md
+  # Si el aviso falla, el estado se guarda igual (así no se resube el vídeo) y el aviso queda para la siguiente pasada
+  if gh issue create --label tiktok --title "TikTok listo en tu bandeja: $(date +%F)" --body-file data/alerts/tiktok.md; then : > data/alerts/tiktok.md
+  else echo "::warning::no se pudo crear el aviso de TikTok; se reintenta en la siguiente pasada"; fi
 fi
 
 # Solo rutas que existen o que git conoce (borrados incluidos): un pathspec inexistente haría fallar el add entero

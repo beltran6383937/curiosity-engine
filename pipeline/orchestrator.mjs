@@ -37,6 +37,8 @@ export const saveRun = (root, run) => {
   fs.writeFileSync(f + ".tmp", JSON.stringify(run, null, 1)); // escritura atómica: un corte no deja el JSON a medias
   fs.renameSync(f + ".tmp", f);
 };
+// Estados finales de una plataforma: publicado, o entregado en la bandeja de TikTok (no se repite).
+const DONE = ["published", "inbox"];
 const note = (run, msg) => { run.log.push({ at: new Date().toISOString(), msg }); console.log(`[ATLAS] ${msg}`); };
 
 // steps: { NAME: async (run) => void } · publishers: { instagram: async (run) => {id, permalink}, ... } · alert: async (msg) => void
@@ -77,15 +79,16 @@ export async function tick({ root = ROOT, date, now = new Date(), steps, publish
 
   for (const p of PLATFORMS) {
     const ps = run.platforms[p];
-    if (!cfg.platforms[p]?.enabled) { if (ps.status !== "published") ps.status = "disabled"; continue; }
+    if (!cfg.platforms[p]?.enabled) { if (!DONE.includes(ps.status)) ps.status = "disabled"; continue; }
     if (ps.status === "disabled") ps.status = "pending"; // se reactivó en la config
-    if (ps.status === "published" || ps.attempts >= maxPublishAttempts) continue;
+    if (DONE.includes(ps.status) || ps.attempts >= maxPublishAttempts) continue;
     if (stopped(root, env)) { note(run, "STOP activado durante la publicación: no se publica"); run.state = "STOPPED"; saveRun(root, run); return run; }
     run.state = "PUBLISHING"; ps.attempts++; saveRun(root, run);
     try {
       const r = await publishers[p](run, ps); // el publicador guarda ps.containerId antes de publicar para no duplicar al reintentar
-      Object.assign(ps, { status: "published", ...r, publishedAt: new Date().toISOString() }); delete ps.error;
-      note(run, `${p} publicado: ${r.permalink ?? r.id}`);
+      // Borrador en la bandeja de TikTok: entregado, pero lo publica una persona (no se marca publicado ni se resube)
+      Object.assign(ps, r.inbox ? { status: "inbox", id: r.id, inboxAt: new Date().toISOString() } : { status: "published", ...r, publishedAt: new Date().toISOString() }); delete ps.error;
+      note(run, `${p} ${r.inbox ? "en la bandeja (falta publicarlo en la app)" : "publicado"}: ${r.permalink ?? r.id}`);
     } catch (e) {
       ps.status = "failed"; ps.error = redact(String(e?.message ?? e)).slice(0, 500);
       note(run, `${p} falló (${ps.attempts}/${maxPublishAttempts}): ${ps.error}`);
@@ -93,8 +96,8 @@ export async function tick({ root = ROOT, date, now = new Date(), steps, publish
     }
     saveRun(root, run);
   }
-  const all = PLATFORMS.every((p) => ["published", "disabled"].includes(run.platforms[p].status));
-  const exhausted = PLATFORMS.some((p) => cfg.platforms[p]?.enabled && run.platforms[p].status !== "published" && run.platforms[p].attempts >= maxPublishAttempts);
+  const all = PLATFORMS.every((p) => [...DONE, "disabled"].includes(run.platforms[p].status));
+  const exhausted = PLATFORMS.some((p) => cfg.platforms[p]?.enabled && !DONE.includes(run.platforms[p].status) && run.platforms[p].attempts >= maxPublishAttempts);
   run.state = all ? "PUBLISHED" : exhausted ? "NEEDS_ATTENTION" : run.state === "PUBLISHING" ? "PUBLISHING" : run.state; // agotado: lo recupera una persona
   saveRun(root, run);
   return run;
