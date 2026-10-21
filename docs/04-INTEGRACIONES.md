@@ -31,7 +31,7 @@
 
 ## Alertas
 
-Issue de GitHub con la etiqueta `alerta` (te llega por correo y a la app de GitHub). Solo en casos que importan: un paso que falla 3 veces, una publicación que falla 3 veces o que no haya vídeo listo a las 07:00.
+Issue de GitHub con la etiqueta `alerta` (te llega por correo y a la app de GitHub). Solo en casos que importan: un paso que falla 3 veces, una publicación que falla 3 veces o que no haya vídeo listo a la hora de publicar.
 
 ## Fuentes consultadas (20-10-2026)
 

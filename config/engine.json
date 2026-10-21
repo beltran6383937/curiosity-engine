@@ -1,6 +1,6 @@
 {
   "timezone": "Europe/Madrid",
-  "publish_time": "07:00",
+  "publish_time": "20:30",
   "start_time": "04:30",
   "platforms": {
     "instagram": { "enabled": false, "note": "Se activa tras la autorización OAuth de la cuenta de P&Q (docs/04-INTEGRACIONES.md)" },

@@ -27,13 +27,15 @@ test("la ventana de publicación sigue a publish_time", () => {
   assert.deepEqual(windowFor(["--window", "04:00-05:15"], {}), [240, 315]);
 });
 
-// Cron real de publish.yml ("57 3-10 * * *" UTC) cruzado con la ventana, en verano y en invierno
+// Cron real de publish.yml (horas UTC leídas del workflow) cruzado con la ventana, en verano y en invierno
+const [h0, h1] = fs.readFileSync(new URL("../.github/workflows/publish.yml", import.meta.url), "utf8").match(/cron: "57 (\d+)-(\d+) \* \* \*"/).slice(1).map(Number);
+const HOURS = Array.from({ length: h1 - h0 + 1 }, (_, i) => h0 + i);
 const passes = (day, publish_time) => {
   const [a, b] = windowFor(["--publish-window"], { publish_time });
-  return [3, 4, 5, 6, 7, 8, 9, 10].map((h) => madrid(new Date(`${day}T${String(h).padStart(2, "0")}:57:00Z`))).filter((m) => m.minutes >= a && m.minutes <= b).map((m) => m.minutes);
+  return HOURS.map((h) => madrid(new Date(`${day}T${String(h).padStart(2, "0")}:57:00Z`))).filter((m) => m.minutes >= a && m.minutes <= b).map((m) => m.minutes);
 };
 test("con el cron horario hay una pasada justo antes de la hora y reintentos después (verano e invierno)", () => {
-  for (const day of ["2026-10-21", "2026-11-10"]) for (const pt of ["07:00", "08:30"]) {
+  for (const day of ["2026-10-21", "2026-11-10"]) for (const pt of [JSON.parse(fs.readFileSync(new URL("../config/engine.json", import.meta.url), "utf8")).publish_time, "20:00", "21:00"]) {
     const p = Number(pt.slice(0, 2)) * 60 + Number(pt.slice(3)); const got = passes(day, pt);
     assert.equal(got.filter((x) => x < p && x >= p - 60).length, 1, `${day} ${pt}: una pasada previa`);
     assert.ok(got.filter((x) => x > p).length >= 2, `${day} ${pt}: al menos 2 reintentos`);

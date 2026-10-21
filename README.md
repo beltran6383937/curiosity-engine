@@ -18,7 +18,7 @@ pipeline/            atlas.mjs (CLI) · orchestrator.mjs (estados) · steps.mjs 
                      frames.mjs · qa.mjs · check-episode.mjs · publishers.mjs · connect.mjs · insights.mjs · dashboard.mjs
 config/engine.json   hora, plataformas, mezcla de temas, duración, umbral de calidad, presupuesto
 data/                runs/<fecha>.json (estado), insights, candidatos, STOP
-.github/workflows/   produce (04:30) · publish (07:00) · stop (botón de parada)
+.github/workflows/   produce (04:30) · publish (20:30) · stop (botón de parada)
 docs/                01-10
 tests/               node --test (orquestador, publicadores, calidad, comentarios, analítica)
 ```

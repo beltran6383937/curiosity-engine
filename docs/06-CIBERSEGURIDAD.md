@@ -31,7 +31,7 @@ El modelo lee páginas web no confiables (inyección de instrucciones) y escribe
 - Sin nombres, correos ni rutas personales en el código, la documentación o el historial. Los commits de los bots usan direcciones noreply.
 
 ## Visibilidad del vídeo antes de publicarlo
-La release `ep-<fecha>` y los artefactos de Actions (1 día de retención) son **públicos**: el vídeo del día se puede ver desde las 04:30 hasta su publicación a las 07:00. Se acepta porque el contenido es divulgativo y se publica igualmente. Si un día importa la exclusiva, la opción es guardar el MP4 cifrado o en un almacenamiento privado.
+La release `ep-<fecha>` y los artefactos de Actions (1 día de retención) son **públicos**: el vídeo del día se puede ver desde las 04:30 hasta su publicación a las 20:30. Se acepta porque el contenido es divulgativo y se publica igualmente. Si un día importa la exclusiva, la opción es guardar el MP4 cifrado o en un almacenamiento privado.
 
 ## Cadena de suministro
 - Versiones fijadas en `package.json` (Remotion 4.0.536, three 0.169.0, React 18.3.1) y `npm ci` con lockfile (`npm audit`: 0 vulnerabilidades, 21-10-2026).

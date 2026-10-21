@@ -173,7 +173,7 @@ jobs:
             if [ -d "incoming/state-${s%%:*}" ]; then node pipeline/collect.mjs "incoming/state-${s%%:*}" "$D" "${s#*:}"; break; fi
           done
           rm -rf incoming
-      - name: Subir el vídeo como release (lo recoge el job de las 07:00)
+      - name: Subir el vídeo como release (lo recoge el job de publicación)
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
           EP=$(node -e "const r=require('./data/runs/'+process.argv[1]+'.json');console.log(r.state==='READY'?r.episode:'')" "$D" 2>/dev/null || true)
