@@ -25,8 +25,9 @@ async function call(fetchFn, url, init = {}) {
 }
 
 // ---------- Instagram ----------
-// Flujo: contenedor REELS con subida reanudable → POST del MP4 a rupload.facebook.com → esperar FINISHED → media_publish.
-export async function publishInstagram({ video, caption, ps, save, env = process.env, fetchFn = fetch, pollMs = 5000, maxPolls = 120 }) {
+// Flujo: contenedor REELS con video_url pública (la release del repo) → esperar FINISHED → media_publish.
+// Con login de Instagram (graph.instagram.com) no existe la subida reanudable: Meta pide video_url (400 «video_url is required»).
+export async function publishInstagram({ videoUrl, caption, ps, save, env = process.env, fetchFn = fetch, pollMs = 5000, maxPolls = 120 }) {
   const token = env.IG_ACCESS_TOKEN, user = env.IG_USER_ID, ver = env.IG_API_VERSION ?? "v24.0";
   if (!token || !user) throw new Error("Instagram sin autorizar: faltan IG_ACCESS_TOKEN / IG_USER_ID (docs/04-INTEGRACIONES.md)");
   const G = `https://graph.instagram.com/${ver}`;
@@ -49,24 +50,20 @@ export async function publishInstagram({ video, caption, ps, save, env = process
       if (hit) return { id: hit.id, permalink: hit.permalink };
       throw new Error("contenedor PUBLISHED pero no se encuentra el post: revisar a mano antes de reintentar");
     }
-    if (["ERROR", "EXPIRED"].includes(st.status_code)) { delete ps.containerId; delete ps.uploaded; save(); }
+    if (["ERROR", "EXPIRED"].includes(st.status_code)) { delete ps.containerId; save(); }
   }
   if (!ps.containerId) {
     // Red de seguridad ante estado perdido (p. ej. un push fallido): si ya hay un post con esta caption, no se repite.
     const dup = await findByCaption();
     if (dup) return { id: dup.id, permalink: dup.permalink, note: "ya publicado (detectado por caption)" };
-    const c = await post(`${G}/${user}/media`, { media_type: "REELS", upload_type: "resumable", caption, share_to_feed: "true" });
+    if (!videoUrl) throw new Error("Instagram: falta la URL pública del vídeo");
+    const c = await post(`${G}/${user}/media`, { media_type: "REELS", video_url: videoUrl, caption, share_to_feed: "true" });
     ps.containerId = c.id; save();
-  }
-  if (!ps.uploaded) {
-    const bytes = fs.readFileSync(video);
-    await call(fetchFn, `https://rupload.facebook.com/ig-api-upload/${ver}/${ps.containerId}`, { method: "POST", headers: { Authorization: `OAuth ${token}`, offset: "0", file_size: String(bytes.length) }, body: bytes });
-    ps.uploaded = true; save();
   }
   for (let i = 0; i < maxPolls; i++) {
     const st = await call(fetchFn, `${G}/${ps.containerId}?${q({ fields: "status_code,status" })}`);
     if (st.status_code === "FINISHED") break;
-    if (["ERROR", "EXPIRED"].includes(st.status_code)) { delete ps.containerId; delete ps.uploaded; save(); throw new Error(`Instagram rechazó el vídeo: ${st.status ?? st.status_code}`); }
+    if (["ERROR", "EXPIRED"].includes(st.status_code)) { delete ps.containerId; save(); throw new Error(`Instagram rechazó el vídeo: ${st.status ?? st.status_code}`); }
     if (i === maxPolls - 1) throw new Error("Instagram no terminó de procesar el vídeo a tiempo");
     await sleep(pollMs);
   }

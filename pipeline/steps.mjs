@@ -101,7 +101,7 @@ export const realSteps = {
 
 const caption = (r, p) => JSON.parse(fs.readFileSync(epFile(r.episode), "utf8")).publication[p].caption;
 export const realPublishers = {
-  instagram: (r, ps) => publishInstagram({ video: path.join(ROOT, "work", r.episode, `${r.episode}.mp4`), caption: caption(r, "instagram"), ps, save: () => saveRun(ROOT, r) }),
+  instagram: (r, ps) => publishInstagram({ videoUrl: `https://github.com/${process.env.GITHUB_REPOSITORY ?? "beltran6383937/curiosity-engine"}/releases/download/ep-${r.date}/${r.episode}.mp4`, caption: caption(r, "instagram"), ps, save: () => saveRun(ROOT, r) }),
   tiktok: async (r, ps) => {
     const { privacy, mode } = loadConfig().platforms.tiktok;
     const res = await publishTikTok({ video: path.join(ROOT, "work", r.episode, `${r.episode}.mp4`), caption: caption(r, "tiktok"), ps, save: () => saveRun(ROOT, r), privacy, mode });

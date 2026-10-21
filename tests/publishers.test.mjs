@@ -16,8 +16,10 @@ const fakeIG = ({ failPublishOnce = false } = {}) => {
   const calls = []; let status = "IN_PROGRESS"; let published = 0; let failed = false;
   const fetchFn = async (url, init = {}) => {
     const u = url.split("?")[0]; calls.push(`${init.method ?? "GET"} ${u.replace(/.*\/(v24\.0)\//, "")}`);
-    if (u.endsWith("/1789/media") && init.method === "POST") return res({ id: "C1" });
-    if (u.includes("rupload")) { status = "FINISHED"; return res({ success: true }); }
+    if (u.endsWith("/1789/media") && init.method === "POST") {
+      if (!new URLSearchParams(init.body).get("video_url")?.startsWith("https://")) return res({ error: { code: 100, message: "The parameter video_url is required" } }, 400);
+      status = "FINISHED"; return res({ id: "C1" });
+    }
     if (u.endsWith("/C1")) return res({ status_code: published ? "PUBLISHED" : status });
     if (u.endsWith("/media_publish")) {
       if (failPublishOnce && !failed) { failed = true; published++; throw new Error("socket hang up"); } // publica pero se corta la respuesta
@@ -32,27 +34,27 @@ const fakeIG = ({ failPublishOnce = false } = {}) => {
 
 test("Instagram: contenedor → subida → FINISHED → publicar → enlace", async () => {
   const api = fakeIG(); const ps = {};
-  const r = await publishInstagram({ video, caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
+  const r = await publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
   assert.deepEqual(r, { id: "M1", permalink: "https://instagram.com/reel/M1" });
   assert.equal(api.published(), 1);
 });
 
 test("Instagram: si se corta tras publicar, el reintento NO publica otra vez", async () => {
   const api = fakeIG({ failPublishOnce: true }); const ps = {};
-  await assert.rejects(publishInstagram({ video, caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 }));
+  await assert.rejects(publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 }));
   assert.equal(ps.containerId, "C1");
-  const r = await publishInstagram({ video, caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
+  const r = await publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "Hola Venus", ps, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
   assert.equal(r.id, "M1");
   assert.equal(api.published(), 1);
 });
 
 test("Instagram: sin credenciales falla con un mensaje claro", async () => {
-  await assert.rejects(publishInstagram({ video, caption: "x", ps: {}, save: () => {}, env: {} }), /sin autorizar/);
+  await assert.rejects(publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "x", ps: {}, save: () => {}, env: {} }), /sin autorizar/);
 });
 
 test("los errores de la API no exponen el token", async () => {
   const fetchFn = async () => res({ error: { code: 190, message: "token caducado access_token=SECRETO123" } }, 401);
-  await assert.rejects(publishInstagram({ video, caption: "x", ps: {}, save: () => {}, env, fetchFn }), (e) => !e.message.includes("SECRETO123") && /401/.test(e.message));
+  await assert.rejects(publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "x", ps: {}, save: () => {}, env, fetchFn }), (e) => !e.message.includes("SECRETO123") && /401/.test(e.message));
 });
 
 test("TikTok: rechaza una privacidad que la cuenta no permite (cliente sin auditar)", async () => {
@@ -88,8 +90,8 @@ test("TikTok bandeja: init en /inbox sin texto ni creator_info → SEND_TO_USER_
 });
 
 test("Instagram: con el estado perdido (ps vacío) no repite un post que ya existe", async () => {
-  const api = fakeIG(); await publishInstagram({ video, caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
-  const r = await publishInstagram({ video, caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
+  const api = fakeIG(); await publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
+  const r = await publishInstagram({ videoUrl: "https://x.test/v.mp4", caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
   assert.equal(r.id, "M1"); assert.equal(api.published(), 1);
 });
 
