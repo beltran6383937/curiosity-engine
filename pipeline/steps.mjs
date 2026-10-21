@@ -108,7 +108,9 @@ export const realPublishers = {
     // Borrador en la bandeja de TikTok: la descripción le llega a Beltrán como issue «tiktok» (save-state.sh)
     if (res.inbox) {
       fs.mkdirSync(path.join(ROOT, "data/alerts"), { recursive: true });
-      fs.writeFileSync(path.join(ROOT, "data/alerts/tiktok.md"), `Vídeo del ${r.date} en tu bandeja de TikTok: abre la notificación, pega este texto y publica.\n\n${caption(r, "tiktok")}\n`);
+      // Se añade (no se pisa): si un aviso anterior no llegó a crearse, se conserva junto al nuevo.
+      // La bandeja no admite is_aigc: la etiqueta de IA (voz sintética) se marca a mano en la app.
+      fs.appendFileSync(path.join(ROOT, "data/alerts/tiktok.md"), `## Vídeo del ${r.date} en tu bandeja de TikTok\n\n1. Abre la notificación de TikTok.\n2. Pega este texto.\n3. En «Más opciones», activa **«Contenido generado por IA»** (la voz es sintética).\n4. Publica.\n\n${caption(r, "tiktok")}\n\n`);
     }
     return res;
   },
