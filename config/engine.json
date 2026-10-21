@@ -3,7 +3,7 @@
   "publish_time": "20:30",
   "start_time": "04:30",
   "platforms": {
-    "instagram": { "enabled": false, "note": "Se activa tras la autorización OAuth de la cuenta de P&Q (docs/04-INTEGRACIONES.md)" },
+    "instagram": { "enabled": true, "note": "Activado 21-10-2026 por el propietario" },
     "tiktok": { "enabled": false, "privacy": "SELF_ONLY", "note": "Sin auditoría de TikTok solo se permite privado" }
   },
   "mix": { "espacio": 0.30, "coches": 0.25, "animales": 0.25, "tecnologia_historia": 0.20 },
