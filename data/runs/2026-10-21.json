@@ -1,6 +1,6 @@
 {
  "date": "2026-10-21",
- "state": "READY",
+ "state": "PUBLISHING",
  "episode": "2026-10-21",
  "steps": {
   "RESEARCHING": {
@@ -42,12 +42,17 @@
  },
  "platforms": {
   "instagram": {
-   "status": "pending",
-   "attempts": 0
+   "status": "failed",
+   "attempts": 1,
+   "error": "400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"A_QfFYNOCguW5jFy_14ml-R\"}"
   },
   "tiktok": {
-   "status": "pending",
-   "attempts": 0
+   "status": "inbox",
+   "attempts": 1,
+   "publishId": "v_inbox_file~v2.7699226383176124438",
+   "uploaded": true,
+   "id": "v_inbox_file~v2.7699226383176124438",
+   "inboxAt": "2026-10-21T20:52:54.847Z"
   }
  },
  "log": [
@@ -190,6 +195,14 @@
   {
    "at": "2026-10-21T20:50:32.350Z",
    "msg": "VISUAL_REVIEW ok"
+  },
+  {
+   "at": "2026-10-21T20:51:45.621Z",
+   "msg": "instagram falló (1/3): 400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"A_QfFYNOCguW5jFy_14ml-R\"}"
+  },
+  {
+   "at": "2026-10-21T20:52:54.847Z",
+   "msg": "tiktok en la bandeja (falta publicarlo en la app): v_inbox_file~v2.7699226383176124438"
   }
  ],
  "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",
