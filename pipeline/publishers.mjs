@@ -79,7 +79,10 @@ export async function publishInstagram({ video, caption, ps, save, env = process
 // ---------- TikTok ----------
 // Sin auditoría: solo cuentas privadas y SELF_ONLY (403 unaudited_client_can_only_post_to_private_accounts).
 // is_aigc = true etiqueta el vídeo como generado con IA (voz sintética y animación por código).
-export async function publishTikTok({ video, caption, ps, save, env = process.env, fetchFn = fetch, privacy = "SELF_ONLY", pollMs = 5000, maxPolls = 120 }) {
+// mode "inbox" (scope video.upload): el vídeo llega a la bandeja de TikTok del creador y él lo publica con un toque.
+// Esa API no admite texto: la descripción se le entrega aparte (data/alerts/tiktok.md → issue «tiktok»).
+export async function publishTikTok({ video, caption, ps, save, env = process.env, fetchFn = fetch, privacy = "SELF_ONLY", mode = "direct", pollMs = 5000, maxPolls = 120 }) {
+  const inbox = mode === "inbox";
   const token = env.TIKTOK_ACCESS_TOKEN;
   if (!token) throw new Error("TikTok sin autorizar: falta TIKTOK_ACCESS_TOKEN (docs/04-INTEGRACIONES.md)");
   const T = "https://open.tiktokapis.com/v2/post/publish";
@@ -89,14 +92,17 @@ export async function publishTikTok({ video, caption, ps, save, env = process.en
   let uploadUrl;
   if (ps.publishId && !ps.uploaded) { delete ps.publishId; save(); }
   if (!ps.publishId) {
-    const info = await call(fetchFn, `${T}/creator_info/query/`, { method: "POST", headers: auth });
-    const opts = info.data?.privacy_level_options ?? [];
-    if (!opts.includes(privacy)) throw new Error(`TikTok no permite la privacidad ${privacy} en esta cuenta (opciones: ${opts.join(", ")})`);
+    if (!inbox) {
+      const info = await call(fetchFn, `${T}/creator_info/query/`, { method: "POST", headers: auth });
+      const opts = info.data?.privacy_level_options ?? [];
+      if (!opts.includes(privacy)) throw new Error(`TikTok no permite la privacidad ${privacy} en esta cuenta (opciones: ${opts.join(", ")})`);
+    }
     const size = fs.statSync(video).size; // < 64 MB: un solo trozo
     if (size > 64 * 1024 * 1024) throw new Error("vídeo > 64 MB: reducir bitrate");
-    const init = await call(fetchFn, `${T}/video/init/`, { method: "POST", headers: auth, body: JSON.stringify({
+    const source_info = { source: "FILE_UPLOAD", video_size: size, chunk_size: size, total_chunk_count: 1 };
+    const init = await call(fetchFn, `${T}${inbox ? "/inbox" : ""}/video/init/`, { method: "POST", headers: auth, body: JSON.stringify(inbox ? { source_info } : {
       post_info: { title: caption.slice(0, 2200), privacy_level: privacy, disable_duet: false, disable_stitch: false, disable_comment: false, video_cover_timestamp_ms: 1000, brand_content_toggle: false, brand_organic_toggle: true, is_aigc: true },
-      source_info: { source: "FILE_UPLOAD", video_size: size, chunk_size: size, total_chunk_count: 1 },
+      source_info,
     }) });
     ps.publishId = init.data.publish_id; uploadUrl = init.data.upload_url; save();
   }
@@ -110,6 +116,7 @@ export async function publishTikTok({ video, caption, ps, save, env = process.en
     const st = await call(fetchFn, `${T}/status/fetch/`, { method: "POST", headers: auth, body: JSON.stringify({ publish_id: ps.publishId }) });
     const s = st.data?.status;
     if (s === "PUBLISH_COMPLETE") return { id: (st.data.publicaly_available_post_id ?? [])[0] ?? ps.publishId, privacy };
+    if (inbox && s === "SEND_TO_USER_INBOX") return { id: ps.publishId, inbox: true };
     if (s === "FAILED") { delete ps.publishId; delete ps.uploaded; save(); throw new Error(`TikTok: ${st.data.fail_reason}`); }
     await sleep(pollMs);
   }

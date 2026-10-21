@@ -14,6 +14,11 @@ if [ -s data/alerts/pending.md ]; then
   gh issue create --label alerta --title "Curiosity Engine: $(head -n1 data/alerts/pending.md | sed 's/^- //' | cut -c1-90)" --body-file data/alerts/pending.md
   : > data/alerts/pending.md
 fi
+if [ -s data/alerts/tiktok.md ]; then
+  gh label create tiktok --color 000000 --description "Vídeo en la bandeja de TikTok: pegar texto y publicar" 2>/dev/null || true
+  gh issue create --label tiktok --title "TikTok listo en tu bandeja: $(date +%F)" --body-file data/alerts/tiktok.md
+  : > data/alerts/tiktok.md
+fi
 
 # Solo rutas que existen o que git conoce (borrados incluidos): un pathspec inexistente haría fallar el add entero
 paths=()

@@ -4,7 +4,7 @@
   "start_time": "04:30",
   "platforms": {
     "instagram": { "enabled": true, "note": "Activado 21-10-2026 por el propietario" },
-    "tiktok": { "enabled": false, "privacy": "SELF_ONLY", "note": "Sin auditoría de TikTok solo se permite privado" }
+    "tiktok": { "enabled": true, "mode": "inbox", "privacy": "SELF_ONLY", "note": "Activado 21-10-2026 por el propietario: borrador en la bandeja de TikTok (un toque en la app). Publicar directo en público exige la auditoría de TikTok" }
   },
   "mix": { "espacio": 0.30, "coches": 0.25, "animales": 0.25, "tecnologia_historia": 0.20 },
   "duration_s": { "min": 25, "max": 45 },

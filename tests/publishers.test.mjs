@@ -74,6 +74,19 @@ test("TikTok: init → PUT → PUBLISH_COMPLETE, con etiqueta de IA", async () =
   assert.equal(initBody.source_info.total_chunk_count, 1);
 });
 
+test("TikTok bandeja: init en /inbox sin texto ni creator_info → SEND_TO_USER_INBOX", async () => {
+  let initUrl, initBody, creator = 0;
+  const fetchFn = async (url, init = {}) => {
+    if (url.endsWith("/creator_info/query/")) { creator++; return res({ data: { privacy_level_options: [] }, error: { code: "ok" } }); }
+    if (url.endsWith("/video/init/")) { initUrl = url; initBody = JSON.parse(init.body); return res({ data: { publish_id: "B1", upload_url: "https://up.tiktok/x" }, error: { code: "ok" } }); }
+    if (url.startsWith("https://up.tiktok")) return res({});
+    if (url.endsWith("/status/fetch/")) return res({ data: { status: "SEND_TO_USER_INBOX" }, error: { code: "ok" } });
+  };
+  const r = await publishTikTok({ video, caption: "Venus", ps: {}, save: () => {}, env, fetchFn, mode: "inbox", pollMs: 0 });
+  assert.deepEqual(r, { id: "B1", inbox: true }); assert.match(initUrl, /\/inbox\/video\/init\/$/);
+  assert.equal(initBody.post_info, undefined); assert.equal(initBody.source_info.total_chunk_count, 1); assert.equal(creator, 0);
+});
+
 test("Instagram: con el estado perdido (ps vacío) no repite un post que ya existe", async () => {
   const api = fakeIG(); await publishInstagram({ video, caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });
   const r = await publishInstagram({ video, caption: "Hola Venus", ps: {}, save: () => {}, env, fetchFn: api.fetchFn, pollMs: 0 });

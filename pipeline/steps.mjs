@@ -102,7 +102,16 @@ export const realSteps = {
 const caption = (r, p) => JSON.parse(fs.readFileSync(epFile(r.episode), "utf8")).publication[p].caption;
 export const realPublishers = {
   instagram: (r, ps) => publishInstagram({ video: path.join(ROOT, "work", r.episode, `${r.episode}.mp4`), caption: caption(r, "instagram"), ps, save: () => saveRun(ROOT, r) }),
-  tiktok: (r, ps) => publishTikTok({ video: path.join(ROOT, "work", r.episode, `${r.episode}.mp4`), caption: caption(r, "tiktok"), ps, save: () => saveRun(ROOT, r), privacy: loadConfig().platforms.tiktok.privacy }),
+  tiktok: async (r, ps) => {
+    const { privacy, mode } = loadConfig().platforms.tiktok;
+    const res = await publishTikTok({ video: path.join(ROOT, "work", r.episode, `${r.episode}.mp4`), caption: caption(r, "tiktok"), ps, save: () => saveRun(ROOT, r), privacy, mode });
+    // Borrador en la bandeja de TikTok: la descripción le llega a Beltrán como issue «tiktok» (save-state.sh)
+    if (res.inbox) {
+      fs.mkdirSync(path.join(ROOT, "data/alerts"), { recursive: true });
+      fs.writeFileSync(path.join(ROOT, "data/alerts/tiktok.md"), `Vídeo del ${r.date} en tu bandeja de TikTok: abre la notificación, pega este texto y publica.\n\n${caption(r, "tiktok")}\n`);
+    }
+    return res;
+  },
 };
 
 // Aviso solo cuando importa. Se escribe en data/alerts/pending.md; un paso posterior del workflow (con su propio
