@@ -1,6 +1,6 @@
 {
  "date": "2026-10-21",
- "state": "PUBLISHING",
+ "state": "PUBLISHED",
  "episode": "2026-10-21",
  "steps": {
   "RESEARCHING": {
@@ -42,9 +42,13 @@
  },
  "platforms": {
   "instagram": {
-   "status": "failed",
-   "attempts": 2,
-   "error": "400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"Ayl0ndDU3snWkStHrVKP3i6\"}"
+   "status": "published",
+   "attempts": 3,
+   "containerId": "18148137334522590",
+   "mediaId": "18641333773037344",
+   "id": "18641333773037344",
+   "permalink": "https://www.instagram.com/reel/DexkDBzlGD4/",
+   "publishedAt": "2026-10-21T23:14:48.635Z"
   },
   "tiktok": {
    "status": "inbox",
@@ -207,6 +211,10 @@
   {
    "at": "2026-10-21T21:09:33.509Z",
    "msg": "instagram falló (2/3): 400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"Ayl0ndDU3snWkStHrVKP3i6\"}"
+  },
+  {
+   "at": "2026-10-21T23:14:48.635Z",
+   "msg": "instagram publicado: https://www.instagram.com/reel/DexkDBzlGD4/"
   }
  ],
  "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",
