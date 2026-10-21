@@ -43,8 +43,8 @@
  "platforms": {
   "instagram": {
    "status": "failed",
-   "attempts": 1,
-   "error": "400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"A_QfFYNOCguW5jFy_14ml-R\"}"
+   "attempts": 2,
+   "error": "400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"Ayl0ndDU3snWkStHrVKP3i6\"}"
   },
   "tiktok": {
    "status": "inbox",
@@ -203,6 +203,10 @@
   {
    "at": "2026-10-21T20:52:54.847Z",
    "msg": "tiktok en la bandeja (falta publicarlo en la app): v_inbox_file~v2.7699226383176124438"
+  },
+  {
+   "at": "2026-10-21T21:09:33.509Z",
+   "msg": "instagram falló (2/3): 400 https://graph.instagram.com/v24.0/17841415677675714/media: {\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"Ayl0ndDU3snWkStHrVKP3i6\"}"
   }
  ],
  "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",
