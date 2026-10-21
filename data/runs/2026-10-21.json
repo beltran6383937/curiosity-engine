@@ -1,6 +1,6 @@
 {
  "date": "2026-10-21",
- "state": "NEEDS_ATTENTION",
+ "state": "PENDING",
  "episode": "2026-10-21",
  "steps": {
   "RESEARCHING": {
@@ -14,18 +14,6 @@
    "attempts": 1,
    "startedAt": "2026-10-21T19:08:34.746Z",
    "doneAt": "2026-10-21T19:24:06.147Z"
-  },
-  "VOICE": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-21T19:27:52.714Z",
-   "doneAt": "2026-10-21T19:52:13.308Z"
-  },
-  "RENDERING": {
-   "status": "failed",
-   "attempts": 3,
-   "startedAt": "2026-10-21T19:52:38.513Z",
-   "error": "Command failed: node pipeline/render.mjs 2026-10-21"
   }
  },
  "platforms": {
@@ -110,6 +98,10 @@
   {
    "at": "2026-10-21T19:52:44.677Z",
    "msg": "RENDERING falló (3/3): Command failed: node pipeline/render.mjs 2026-10-21"
+  },
+  {
+   "at": "2026-10-21T19:54:51.102Z",
+   "msg": "Reset manual (claude-code): la escena usaba Floor sin importarlo (ReferenceError en el render); import añadido, se rehace desde VOICE"
   }
  ],
  "scriptHash": "66ea223b23d32634e5fc4801a0150c9dadd62f68005251e7e9aef23153dc68d0",

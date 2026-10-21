@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { AbsoluteFill, random } from "remotion";
 import { RoundedBox } from "@react-three/drei";
-import { Reel, Stage, Clay, Tag, Stat, Source, k, mix, inOut, useSpring, useRock, SANS, type CurioProps, type SceneProps, type SceneDef } from "../kit";
+import { Reel, Stage, Clay, Floor, Tag, Stat, Source, k, mix, inOut, useSpring, useRock, SANS, type CurioProps, type SceneProps, type SceneDef } from "../kit";
 
 type V3 = [number, number, number];
 const OCHRE = "#e3a96b", WALL = "#c98478", STIFF = "#ff9a5c", MINT = "#7fe0c4", ROSE = "#ff7a6b", RIM = "#6fb8ff", INK = "#dfe6ff";
