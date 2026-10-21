@@ -14,6 +14,8 @@ const BG = { top: "#07050a", mid: "#1a1210", glow: "#3a2618" };
 // Reparto de sectores de la pared: ilustrativo (no es un dato del estudio). Desfasado 11° para no sugerir
 // en qué posición caen las esquinas respecto a las zonas rígidas (los claims no lo precisan).
 const SECT = 8;
+// La silueta SVG llega al borde izquierdo (x≈0): se encoge un 85 % hacia el centro del encuadre.
+const FIT = "translate(540 960) scale(0.85) translate(-540 -960)";
 const OFF = (11 * Math.PI) / 180;
 
 // ---------- utilidades ----------
@@ -375,10 +377,12 @@ const Inside: React.FC<SceneProps> = ({ t, w, len }) => {
     <AbsoluteFill>
       <AbsoluteFill style={{ opacity: svgO }}>
         <svg width={1080} height={1920} style={{ position: "absolute" }}>
+          <g transform={FIT}>
           <path d={BODY} fill="#000000" fillOpacity={0.22} stroke={OCHRE} strokeOpacity={0.3} strokeWidth={5} strokeLinejoin="round" />
           <circle cx={205} cy={895} r={9} fill={OCHRE} fillOpacity={0.35} />
           <path d={GUT} pathLength={1} fill="none" stroke={WALL} strokeWidth={30} strokeLinecap="round" strokeDasharray="1 1" strokeDashoffset={1 - draw} />
           <path d={GUT} pathLength={1} fill="none" stroke={WALL_LIGHT} strokeOpacity={0.5} strokeWidth={9} strokeLinecap="round" strokeDasharray="1 1" strokeDashoffset={1 - draw} />
+          </g>
         </svg>
       </AbsoluteFill>
       <AbsoluteFill style={{ opacity: o3 }}>
@@ -560,7 +564,7 @@ const Model: React.FC<SceneProps> = ({ t, w }) => {
 // 11-12 · No observado: silueta a contraluz con visor vacío; después, cálculo frente a grabación.
 const NotSeen: React.FC<SceneProps> = ({ t, w }) => {
   const s12 = w(12, /./), dir = w(11, /directo/) - 0.2;
-  const cu = w(12, /cuentas/) - 0.15, gr = w(12, /grabación/) - 0.15;
+  const cu = s12 - 0.1, gr = w(12, /grabación/) - 0.15; // CÁLCULO entra con la frase: sin hueco vacío en «predicen»
   const sc = useSpring(t, cu, 14), sg = useSpring(t, gr, 14);
   const oA = k(t, 0, 0.5) * (1 - k(t, s12 - 0.2, 0.4));
   const pan = mix(-30, 30, k(t, 0, Math.max(1, s12), inOut));
@@ -574,9 +578,11 @@ const NotSeen: React.FC<SceneProps> = ({ t, w }) => {
       <AbsoluteFill style={{ opacity: oA, translate: `${pan}px 0` }}>
         <svg width={1080} height={1920} style={{ position: "absolute" }}>
           <defs><filter id="e1021-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation={7} /></filter></defs>
+          <g transform={FIT}>
           <path d={BODY} fill="none" stroke={RIM} strokeWidth={12} strokeOpacity={0.45} filter="url(#e1021-glow)" />
           <path d={BODY} fill="#0b0807" stroke={RIM} strokeWidth={3} strokeOpacity={0.85} strokeLinejoin="round" />
           <path d={GUT} fill="none" stroke={WALL} strokeOpacity={0.7} strokeWidth={14} strokeDasharray="18 14" strokeLinecap="round" />
+          </g>
           <path d={visor} fill="none" stroke="#ffffff" strokeOpacity={0.5 * k(t, dir, 0.4)} strokeWidth={5} strokeLinecap="round" />
         </svg>
         <Tag t={t} at={dir + 0.2} x={540} y={1290} text="No observado en vivo" c={ROSE} align="center" size={30} />
