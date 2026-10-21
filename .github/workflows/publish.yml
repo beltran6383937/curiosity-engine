@@ -1,0 +1,63 @@
+# Publicación a la hora publish_time de config/engine.json (07:00 Europe/Madrid por defecto).
+# Cron cada hora a :57 UTC (cubre 04:57-12:57 de Madrid en verano e invierno); madrid-gate --publish-window deja pasar
+# la previa a la hora configurada (wait-until espera al minuto exacto) y las de las 3 h siguientes, que reintentan lo
+# pendiente. Una pasada extra no repite nada (idempotente).
+# GitHub puede retrasar los cron unos minutos: la hora real queda registrada en data/runs/<fecha>.json.
+name: publish
+on:
+  schedule:
+    - cron: "57 3-10 * * *"
+  workflow_dispatch:
+concurrency: { group: curiosity-engine, cancel-in-progress: false }
+permissions: { contents: write, issues: write }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90   # hasta 60 min de espera + publicación
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { ref: main }
+      - id: gate
+        run: node pipeline/madrid-gate.mjs --publish-window ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }} >> "$GITHUB_OUTPUT"
+      - if: steps.gate.outputs.go == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with: { node-version: 24 }
+      - if: steps.gate.outputs.go == 'true'
+        name: Renovar tokens (pasan al siguiente paso por $GITHUB_ENV, enmascarados)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+        run: node pipeline/tokens.mjs
+      - if: steps.gate.outputs.go == 'true'
+        name: Traer el vídeo del día y publicar (solo si está READY)
+        # IG_ACCESS_TOKEN y TIKTOK_ACCESS_TOKEN llegan del paso anterior: no declararlos aquí (los taparía)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          D: ${{ steps.gate.outputs.date }}
+        run: |
+          # Se decide por lo producido, no por el estado global: PUBLISHED o STOPPED pueden tener trabajo pendiente
+          # (una red reactivada en la config, o STOP retirado). Lo que quede lo resuelve el orquestador.
+          ST=$(node -e "try{const r=require('./data/runs/'+process.argv[1]+'.json');console.log((r.steps?.VISUAL_REVIEW?.status==='done'?'OK':'NO')+' '+r.state+' '+(r.episode||'-'))}catch{console.log('NO NONE -')}" "$D")
+          read -r PRODUCED STATE EP <<< "$ST"
+          if [ "$STATE" = "NEEDS_ATTENTION" ]; then echo "$D espera a una persona (NEEDS_ATTENTION)"; exit 0; fi
+          if [ "$PRODUCED" != "OK" ]; then
+            echo "No hay vídeo listo para $D ($STATE)"
+            # Un solo aviso por día aunque haya varias pasadas: la marca se guarda en main con save-state
+            if [ ! -f "data/alerts/missing-$D" ]; then node -e "import('./pipeline/steps.mjs').then(m=>m.alert(process.argv[1]+': no hay vídeo listo para publicar a su hora (estado '+process.argv[2]+')'))" "$D" "$STATE"; mkdir -p data/alerts; touch "data/alerts/missing-$D"; fi
+            exit 0
+          fi
+          mkdir -p "work/$EP" && gh release download "ep-$D" -p "$EP.mp4" -D "work/$EP" --clobber
+          node pipeline/wait-until.mjs
+          # Última comprobación del botón de parada justo antes de publicar (puede haberse pulsado durante la espera)
+          git pull -q --ff-only origin main
+          node pipeline/atlas.mjs --date "$D" --publish-only
+      - if: always() && steps.gate.outputs.go == 'true'
+        name: Guardar estado (y alertas → issues)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: bash pipeline/save-state.sh "publish ${{ steps.gate.outputs.date }}" data

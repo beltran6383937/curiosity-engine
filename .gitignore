@@ -1,0 +1,8 @@
+node_modules/
+work/
+.env
+.env.*
+!.env.example
+out/
+*.log
+assets/hooks/hooks.md

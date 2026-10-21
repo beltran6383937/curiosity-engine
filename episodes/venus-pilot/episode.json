@@ -1,0 +1,51 @@
+{
+  "id": "venus-pilot",
+  "category": "espacio",
+  "title": "Venus: un giro dura más que su año",
+  "voice": "VoxCPM2 narrador (voz diseñada de la serie Curiosidades)",
+  "hooks": [
+    { "n": 69, "views": "1.4M", "template": "Why does [thing] [surprising comparison]?", "text": "¿Por qué Venus tarda más en girar sobre sí mismo que en dar la vuelta al Sol?", "chosen": true },
+    { "n": 20, "views": "9.9M", "template": "[Authority] have found a new [thing] and I'm going to show it to you.", "text": "La NASA tiene un dato de Venus que parece imposible, y te lo voy a enseñar." },
+    { "n": 35, "views": "4.9M", "template": "[Thing] doesn't actually look like this.", "text": "Un día en Venus no es así en realidad." }
+  ],
+  "lines": [
+    "¿Por qué Venus tarda más en girar sobre sí mismo que en dar la vuelta al Sol?",
+    "Suena a error, pero son datos de la NASA.",
+    "Girar una vez sobre sí mismo le lleva 243 días.",
+    "Dar la vuelta completa al Sol, solo 225.",
+    "Su año se acaba antes que un solo giro.",
+    "Pero cuidado: eso no es lo que dura un día allí.",
+    "Desde su superficie, de un amanecer al siguiente pasarían unos 117 días.",
+    "¿Por qué menos? Porque mientras gira, también avanza alrededor del Sol, y los dos movimientos se suman.",
+    "Y se suman por lo más raro de todo: Venus gira al revés que la Tierra y casi todos los planetas.",
+    "Así que allí el Sol sale por el oeste y se pone por el este.",
+    "Un planeta donde hasta el amanecer va al revés."
+  ],
+  "say": {
+    "2": "Girar una vez sobre sí mismo le lleva doscientos cuarenta y tres días.",
+    "3": "Dar la vuelta completa al Sol, solo doscientos veinticinco.",
+    "6": "Desde su superficie, de un amanecer al siguiente pasarían unos ciento diecisiete días."
+  },
+  "claims": [
+    { "claim": "Rotación sideral de Venus ≈ 243 días terrestres (−5832,6 h), retrógrada", "source": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html", "status": "verified" },
+    { "claim": "Periodo orbital de Venus = 224,701 días ≈ 225", "source": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html", "status": "verified" },
+    { "claim": "Día solar (amanecer a amanecer) = 2802 h ≈ 116,75 días ≈ 117", "source": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html", "status": "verified" },
+    { "claim": "Venus gira al revés que la Tierra y la mayoría de planetas; el Sol sale por el oeste", "source": "https://science.nasa.gov/venus/venus-facts/", "status": "verified" },
+    { "claim": "Con rotación retrógrada, 1/día solar = 1/243,02 + 1/224,70 → 116,75 días (los movimientos se suman)", "source": "cálculo propio con los datos de la NASA", "status": "verified" },
+    { "claim": "Urano también gira de forma retrógrada (por eso 'casi todos')", "source": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html", "status": "verified" }
+  ],
+  "keys": ["Venus", "243", "225", "117", "NASA", "año", "giro", "revés", "oeste", "este", "suman"],
+  "publication": {
+    "cta": null,
+    "cta_reason": "No hay recurso descargable creado para el piloto: sin CTA de palabra clave (regla: no prometer lo que no existe).",
+    "instagram": {
+      "caption": "En Venus, un solo giro dura más que todo su año 🪐\n\nGirar una vez sobre sí mismo le lleva 243 días terrestres. Dar la vuelta al Sol, 225. Pero un día allí (de amanecer a amanecer) dura unos 117, porque gira al revés y sus dos movimientos se suman.\n\nResultado: en Venus el Sol sale por el oeste.\n\n¿Qué planeta quieres que expliquemos mañana?\n\nDatos: NASA. Voz generada con IA.\n\n#venus #astronomia #curiosidades",
+      "ai_label": true
+    },
+    "tiktok": {
+      "caption": "Venus: su año dura menos que un solo giro 🪐 243 días para girar, 225 para dar la vuelta al Sol, y el Sol sale por el oeste. Datos de la NASA. #venus #astronomia #ciencia #curiosidades #espacio",
+      "ai_label": true
+    },
+    "cover": "fotograma del gancho: Venus iluminado con el texto de la pregunta"
+  }
+}

@@ -1,0 +1,8 @@
+# Versiones con las que se produjo el piloto (20-10-2026). torch en su versión CPU: el runner no tiene GPU
+# y la de CUDA pesa varios GB más.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1
+voxcpm==2.0.3
+soundfile==0.14.0
+numpy==2.5.4
+faster-whisper==1.2.1

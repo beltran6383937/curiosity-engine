@@ -1,0 +1,20 @@
+# BOTÓN DE PARADA: GitHub → Actions → "stop" → Run workflow. Crea (o quita) data/STOP.
+# Con STOP no se produce ni se publica nada; el histórico no se toca.
+# Grupo propio (no espera a una producción de 2 h); el job de publicación vuelve a leer main justo antes de publicar.
+name: stop
+on:
+  workflow_dispatch:
+    inputs:
+      action: { description: "stop = detener publicaciones · resume = reanudar", type: choice, options: [stop, resume], default: stop }
+concurrency: { group: curiosity-engine-stop, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  toggle:
+    runs-on: ubuntu-latest
+    env: { ACTION: "${{ inputs.action }}" }
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { ref: main }
+      - run: |
+          if [ "$ACTION" = "stop" ]; then date -u +"%FT%TZ detenido desde GitHub" > data/STOP; else rm -f data/STOP; fi
+          bash pipeline/save-state.sh "$ACTION: publicaciones" data/STOP

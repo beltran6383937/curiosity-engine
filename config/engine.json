@@ -1,0 +1,15 @@
+{
+  "timezone": "Europe/Madrid",
+  "publish_time": "07:00",
+  "start_time": "04:30",
+  "platforms": {
+    "instagram": { "enabled": false, "note": "Se activa tras la autorización OAuth de la cuenta de P&Q (docs/04-INTEGRACIONES.md)" },
+    "tiktok": { "enabled": false, "privacy": "SELF_ONLY", "note": "Sin auditoría de TikTok solo se permite privado" }
+  },
+  "mix": { "espacio": 0.30, "coches": 0.25, "animales": 0.25, "tecnologia_historia": 0.20 },
+  "duration_s": { "min": 25, "max": 45 },
+  "quality_threshold": 90,
+  "budget_eur": { "daily": 0, "monthly": 0 },
+  "voice": { "engine": "voxcpm2", "reference": "assets/voice/narrador.wav", "tempo": 1.0 },
+  "max_attempts": 3
+}

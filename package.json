@@ -1,0 +1,24 @@
+{
+  "name": "curiosity-engine",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CURIOSITY ENGINE: productora autónoma de vídeos de curiosidades (Remotion + agentes). Ver README.md",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio remotion/src/index.tsx",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "9.114.0",
+    "@react-three/fiber": "8.17.10",
+    "@remotion/bundler": "4.0.536",
+    "@remotion/cli": "4.0.536",
+    "@remotion/renderer": "4.0.536",
+    "@remotion/three": "4.0.536",
+    "@types/three": "0.169.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.536",
+    "three": "0.169.0"
+  }
+}

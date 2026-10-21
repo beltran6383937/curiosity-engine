@@ -1,0 +1,27 @@
+{
+ "episode": "venus-pilot",
+ "title": "Venus: un giro dura más que su año",
+ "scheduled": "NO PUBLICAR (piloto pendiente de revisión; la publicación autónoma empieza cuando las integraciones estén autorizadas)",
+ "timezone": "Europe/Madrid",
+ "instagram": {
+  "format": "REELS",
+  "share_to_feed": true,
+  "caption": "En Venus, un solo giro dura más que todo su año 🪐\n\nGirar una vez sobre sí mismo le lleva 243 días terrestres. Dar la vuelta al Sol, 225. Pero un día allí (de amanecer a amanecer) dura unos 117, porque gira al revés y sus dos movimientos se suman.\n\nResultado: en Venus el Sol sale por el oeste.\n\n¿Qué planeta quieres que expliquemos mañana?\n\nDatos: NASA. Voz generada con IA.\n\n#venus #astronomia #curiosidades",
+  "ai_disclosure": "en la caption (la API de Instagram no tiene campo de etiqueta IA)",
+  "cover": "fotograma del gancho: Venus iluminado con el texto de la pregunta",
+  "trial_reels": [
+   "La NASA tiene un dato de Venus que parece imposible, y te lo voy a enseñar.",
+   "Un día en Venus no es así en realidad."
+  ]
+ },
+ "tiktok": {
+  "privacy_level": "SELF_ONLY (cliente sin auditar)",
+  "is_aigc": true,
+  "title": "Venus: su año dura menos que un solo giro 🪐 243 días para girar, 225 para dar la vuelta al Sol, y el Sol sale por el oeste. Datos de la NASA. #venus #astronomia #ciencia #curiosidades #espacio",
+  "video_cover_timestamp_ms": 1000
+ },
+ "cta": null,
+ "cta_reason": "No hay recurso descargable creado para el piloto: sin CTA de palabra clave (regla: no prometer lo que no existe).",
+ "video": "output/pilot/curiosity-engine-pilot.mp4",
+ "thumbnail": "output/pilot/thumbnail.png"
+}
