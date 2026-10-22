@@ -22,7 +22,7 @@ const Dim: React.FC<{ o: number }> = ({ o }) => <rect x={-600} y={-600} width={2
 const Hook: React.FC<SceneProps> = ({ t }) => (
   <AbsoluteFill>
     <World>
-      <Cam x={mix(690, 700, k(t, 0, 4))} y={mix(820, 790, k(t, 0, 4))} z={mix(1.22, 1.34, k(t, 0, 5))}>
+      <Cam x={mix(600, 610, k(t, 0, 4))} y={mix(820, 790, k(t, 0, 4))} z={mix(1.22, 1.34, k(t, 0, 5))}>
         <Room t={t} />
         <Toolbox x={300} y={1560} />
         <Ladder x={LX} y={LY} />
@@ -31,13 +31,13 @@ const Hook: React.FC<SceneProps> = ({ t }) => (
     </World>
     <Label text="RECREACIÓN" t={t} at={-1} />
     <Chip t={t} at={-0.3} text="¿Cogerlo?" x={70} y={320} c={C.alerta} size={50} />
-    <Chip t={t} at={0.25} text="¿O dejarlo sonar?" x={1010} y={320} c={C.oro} size={50} align="right" />
+    <Chip t={t} at={0.25} text="¿O dejarlo sonar?" x={70} y={436} c={C.oro} size={50} />
   </AbsoluteFill>
 );
 
 // 1-2 · Opción uno: lo coge, suelta una mano, la escalera se mueve y cae (golpe sincronizado con «suelo»).
 const OptionOne: React.FC<SceneProps> = ({ t, w }) => {
-  const tA = w(1, /coges/), tMano = w(2, /mano/), tMueve = w(2, /mueve/), tSuelo = w(2, /suelo/);
+  const tA = w(1, /coges/), tSu = w(2, /Sueltas/), tMueve = w(2, /mueve/), tSuelo = w(2, /suelo/);
   const td = tMueve + 0.3;
   const wob = t < tMueve ? 0 : t < td ? Math.sin((t - tMueve) * 22) * 3.5 : 0;
   const tip = k(t, td, Math.max(0.2, tSuelo - td), (n) => n * n);
@@ -47,13 +47,13 @@ const OptionOne: React.FC<SceneProps> = ({ t, w }) => {
   const fp = k(t, td, Math.max(0.2, tSuelo - td), (n) => n * n);
   const hip: [number, number] = t < td ? hip0 : [mix(hip0[0], land[0], fp), mix(hip0[1], land[1], fp)];
   const bodyRot = t < td ? tilt : mix(0, -74, fp);
-  const pose = poseAt(t, [[0, POSE.work], [tA - 0.15, POSE.reach], [tMano, POSE.release], [td, POSE.fall]], 0.3);
+  const pose = poseAt(t, [[0, POSE.work], [tA - 0.15, POSE.reach], [tSu, POSE.release], [td, POSE.fall]], 0.3);
   const sh = shake(t, tSuelo, 0.7, 34);
   const cy = mix(800, 1400, k(t, td, Math.max(0.3, tSuelo - td + 0.2)));
   return (
     <AbsoluteFill>
       <World>
-        <Cam x={mix(700, 600, k(t, td, 0.8))} y={cy} z={mix(1.42, 1.1, k(t, td - 0.2, 0.9))} sh={sh}>
+        <Cam x={mix(630, 600, k(t, td, 0.8))} y={cy} z={mix(1.42, 1.1, k(t, td - 0.2, 0.9))} sh={sh}>
           <Room t={t} />
           <Toolbox x={300} y={1560} />
           <Ladder x={LX} y={LY} tilt={tilt} />
@@ -66,23 +66,24 @@ const OptionOne: React.FC<SceneProps> = ({ t, w }) => {
       </World>
       <Flash t={t} at={tSuelo} />
       <Label text="RECREACIÓN" t={t} at={-1} />
-      <BigNum t={t} at={0.05} n="1" label="Lo coges" c={C.alerta} />
-      <SourceNote t={t} at={w(2, /Sueltas/)} source="RD 1215/1997 · ANEXO II 4.2.3" text="En una escalera de mano, siempre un punto de apoyo y de sujeción seguros." until={w(2, /mueve/)} />
+      <BigNum t={t} at={0.05} n="1" label="Lo coges" c={C.alerta} until={tSu} />
+      <SourceNote t={t} at={tSu} source="RD 1215/1997 · ANEXO II 4.2.3" text="En una escalera de mano, siempre un punto de apoyo y de sujeción seguros." y={310} w={460} until={tMueve} />
     </AbsoluteFill>
   );
 };
 
 // 3 · Lo que cuesta: baja, obra parada y el cliente que se va.
 const Cost: React.FC<SceneProps> = ({ t, w }) => {
-  const tB = w(3, /baja/), tP = w(3, /parada/), tC = w(3, /cliente/), tO = w(3, /otro/);
+  const tP = w(3, /parada/), tC = w(3, /cliente/), tO = w(3, /otro/);
   return (
     <AbsoluteFill>
       <World>
-        <Cam x={560} y={1200} z={mix(1.0, 1.06, k(t, 0, 4))} r={mix(-1.5, 0, k(t, 0, 3))}>
+        <Cam x={560} y={1400} z={mix(1.04, 1.08, k(t, 0, 4))} r={mix(-1.5, 0, k(t, 0, 3))}>
           <Room t={t} />
           <Toolbox x={300} y={1560} open={0.3} />
-          <Ladder x={LX} y={LY} tilt={-78} />
-          <Dim o={0.72} />
+          <Dim o={0.6} />
+          <Ladder x={LX + 120} y={LY + 40} tilt={-88} />
+          <Worker x={560} y={1600} pose={POSE.fall} rot={-74} t={t} />
         </Cam>
       </World>
       <Label text="RECREACIÓN" t={t} at={-1} />
@@ -93,21 +94,21 @@ const Cost: React.FC<SceneProps> = ({ t, w }) => {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 10, marginTop: 18 }}>
           {Array.from({ length: 28 }, (_, i) => {
-            const x = k(t, tB + 0.25 + i * 0.045, 0.12);
+            const x = k(t, 0.2 + i * 0.02, 0.12);
             return (
-              <div key={i} style={{ height: 62, borderRadius: 10, background: i % 7 > 4 ? C.linoSombra : C.lino, display: "grid", placeItems: "center", position: "relative" }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" style={{ opacity: x, scale: `${mix(1.6, 1, x)}` }}><path d="M5 5L19 19M19 5L5 19" stroke={C.alerta} strokeWidth="3.4" strokeLinecap="round" /></svg>
+              <div key={i} style={{ height: 50, borderRadius: 10, background: i % 7 > 4 ? C.linoSombra : C.lino, display: "grid", placeItems: "center", position: "relative" }}>
+                <svg width="34" height="34" viewBox="0 0 24 24" style={{ opacity: x, scale: `${mix(1.6, 1, x)}` }}><path d="M5 5L19 19M19 5L5 19" stroke={C.alerta} strokeWidth="3.4" strokeLinecap="round" /></svg>
               </div>
             );
           })}
         </div>
       </Card>
-      <div style={{ position: "absolute", left: -100, right: -100, top: 860, height: 92, rotate: "-6deg", translate: `${mix(-1300, 0, k(t, tP - 0.15, 0.4))}px 0`,
+      <div style={{ position: "absolute", left: -100, right: -100, top: 690, height: 92, rotate: "-6deg", translate: `${mix(-1300, 0, k(t, tP - 0.15, 0.4))}px 0`,
         background: `repeating-linear-gradient(-45deg, ${C.aviso} 0 46px, ${C.noche} 46px 92px)`, display: "grid", placeItems: "center", boxShadow: "0 16px 40px rgba(0,0,0,0.5)" }}>
         <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 56, letterSpacing: "0.2em", color: C.noche, background: C.aviso, padding: "0 30px" }}>OBRA PARADA</div>
       </div>
-      <Bubble t={t} at={tC - 0.1} who="cliente" label="CLIENTE DE LA OBRA" text="¿Cuándo vuelves a terminar?" x={90} y={1010} w={760} />
-      <Bubble t={t} at={tO - 0.25} who="cliente" text="Vale. Buscaré a otro." x={90} y={1170} w={760} />
+      <Bubble t={t} at={tC - 0.1} who="cliente" label="CLIENTE DE LA OBRA" text="¿Cuándo vuelves a terminar?" x={90} y={830} w={760} />
+      <Bubble t={t} at={tO - 0.25} who="cliente" text="Vale. Buscaré a otro." x={90} y={975} w={760} />
     </AbsoluteFill>
   );
 };
@@ -190,13 +191,13 @@ const OptionThree: React.FC<SceneProps> = ({ t, w }) => {
 const Done: React.FC<SceneProps> = ({ t, w }) => {
   const tH = w(9, /hecho/), tAg = w(9, /agenda/);
   const down = k(t, 0.05, 0.7);
-  const floor: [number, number] = [420, 1336]; // junto a la pared: queda por encima de los subtítulos
+  const floor: [number, number] = [515, 1336]; // junto a la pared: queda por encima de los subtítulos
   const hip: [number, number] = [mix(HIP[0], floor[0], down), mix(HIP[1], floor[1], down) - Math.sin(down * Math.PI) * 40];
   const pose = poseAt(t, [[0, POSE.work], [0.05, POSE.idle], [tAg - 0.4, POSE.stand]], 0.4);
   return (
     <AbsoluteFill>
       <World>
-        <Cam x={560} y={mix(1130, 1160, k(t, 0, 3))} z={mix(0.88, 0.93, k(t, 0, 4))}>
+        <Cam x={620} y={mix(1260, 1290, k(t, 0, 3))} z={mix(0.9, 0.95, k(t, 0, 4))}>
           <Room t={t} lamp={k(t, tH - 0.3, 0.6)} />
           <Toolbox x={300} y={1560} open={0.2} />
           <Ladder x={LX} y={LY} />
@@ -214,7 +215,7 @@ const Done: React.FC<SceneProps> = ({ t, w }) => {
 const End: React.FC<SceneProps> = ({ t, w }) => (
   <AbsoluteFill>
     <EndCard t={t} at={0} text="Lo estamos montando *para instaladores.*" />
-    <CommentBox t={t} at={w(11, /Comenta/) - 0.5} keyword="LLAMADA" prompt="Te enseñamos la demo" y={1010} />
+    <CommentBox t={t} at={w(11, /Comenta/) - 0.5} keyword="LLAMADA" prompt="Te escribimos por privado con la demo" y={1010} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 1400, textAlign: "center", fontFamily: MONO, fontSize: 28, letterSpacing: "0.1em", color: C.lino, opacity: 0.85 * inout(t, 0.6, 99) }}>RECREACIÓN FICTICIA · VOZ GENERADA CON IA</div>
   </AbsoluteFill>
 );

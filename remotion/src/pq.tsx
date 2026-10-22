@@ -145,7 +145,7 @@ export const Grain: React.FC = () => {
 // ---------- tipografía e interfaz (HTML, coordenadas de pantalla) ----------
 /** Rótulo fijo de honestidad: «RECREACIÓN», «DEMO · DATOS FICTICIOS» (arriba a la izquierda, siempre legible) */
 export const Label: React.FC<{ text: string; t: number; at?: number; c?: string }> = ({ text, t, at = 0, c = C.lino }) => (
-  <div style={{ position: "absolute", left: 64, top: 230, opacity: k(t, at, 0.4) * 0.92, fontFamily: MONO, fontSize: 24, letterSpacing: "0.18em", color: c, border: `2px solid ${c}`, borderRadius: 8, padding: "8px 14px", background: "rgba(12,17,23,0.55)" }}>{text}</div>
+  <div style={{ position: "absolute", left: 64, top: 230, opacity: k(t, at, 0.4) * 0.92, fontFamily: MONO, fontSize: 24, letterSpacing: "0.18em", color: c, border: `2px solid ${c}`, borderRadius: 8, padding: "8px 14px", background: "rgba(12,17,23,0.9)" }}>{text}</div>
 );
 /** Número de opción gigante en serif (1, 2, 3…) con su etiqueta */
 export const BigNum: React.FC<{ t: number; at: number; n: string; label: string; c?: string; x?: number; y?: number; until?: number }> = ({ t, at, n, label, c = C.oro, x = 70, y = 300, until = Infinity }) => {
@@ -185,8 +185,8 @@ export const Headline: React.FC<{ t: number; at: number; text: string; x?: numbe
   );
 };
 /** Nota de fuente: la norma en mono dorada y el texto legible en móvil. Que no tape al personaje. */
-export const SourceNote: React.FC<{ t: number; at: number; source: string; text: string; y?: number; until?: number }> = ({ t, at, source, text, y = 1100, until = Infinity }) => (
-  <div style={{ position: "absolute", left: 70, right: 70, top: y, opacity: Math.min(k(t, at, 0.4), 1 - k(t, until - 0.3, 0.3)), translate: `0 ${mix(24, 0, k(t, at, 0.4))}px`, background: "rgba(17,24,32,0.94)", border: `2px solid ${C.pizarra}`, padding: "18px 26px", borderRadius: 22, boxShadow: "0 20px 60px rgba(0,0,0,0.45)" }}>
+export const SourceNote: React.FC<{ t: number; at: number; source: string; text: string; x?: number; y?: number; w?: number; until?: number }> = ({ t, at, source, text, x = 70, y = 1100, w = 940, until = Infinity }) => (
+  <div style={{ position: "absolute", left: x, width: w, boxSizing: "border-box", top: y, opacity: Math.min(k(t, at, 0.4), 1 - k(t, until - 0.3, 0.3)), translate: `0 ${mix(24, 0, k(t, at, 0.4))}px`, background: "rgba(17,24,32,0.94)", border: `2px solid ${C.pizarra}`, padding: "18px 26px", borderRadius: 22, boxShadow: "0 20px 60px rgba(0,0,0,0.45)" }}>
     <div style={{ fontFamily: MONO, fontSize: 24, letterSpacing: "0.12em", color: C.oro }}>{source}</div>
     <div style={{ fontFamily: SANS, fontSize: 34, lineHeight: 1.25, color: C.luz, marginTop: 6 }}>{text}</div>
   </div>

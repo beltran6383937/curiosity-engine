@@ -30,7 +30,7 @@ export type Pose = { lean: number; head: number; hN: P2; hF: P2; fN: P2; fF: P2 
 export const POSE: Record<"work" | "reach" | "release" | "fall" | "stand" | "phone" | "idle" | "walkA" | "walkB" | "crouch", Pose> = {
   work: { lean: -4, head: -28, hN: [105, -350], hF: [82, -338], fN: [12, 245], fF: [-12, 245] },
   reach: { lean: 8, head: 24, hN: [-58, -6], hF: [96, -344], fN: [12, 245], fF: [-12, 245] },
-  release: { lean: -16, head: -6, hN: [-150, -150], hF: [150, -250], fN: [44, 222], fF: [-12, 245] },
+  release: { lean: -16, head: 10, hN: [-150, -150], hF: [150, -250], fN: [44, 222], fF: [-12, 245] },
   fall: { lean: -32, head: 14, hN: [-170, -300], hF: [70, -390], fN: [100, 160], fF: [-40, 228] },
   stand: { lean: 3, head: 16, hN: [70, -150], hF: [52, -140], fN: [18, 245], fF: [-18, 245] },
   phone: { lean: 2, head: 6, hN: [40, -228], hF: [20, 30], fN: [18, 245], fF: [-18, 245] },
@@ -64,8 +64,8 @@ export const Worker: React.FC<{ x: number; y: number; s?: number; pose: Pose; ro
     <g transform={`translate(${x} ${y}) rotate(${r}) scale(${flip ? -s : s} ${s})`}>
       <Limb s={[-6, 0]} e={kF} h={fF} w={44} c={PANTS_D} />
       <Boot p={fF} c="#2A1E17" />
-      <Limb s={sh} e={eF} h={hF} w={40} c="#56646F" /> {/* contorno: sin él el brazo de atrás desaparece contra la pared oscura */}
-      <Limb s={sh} e={eF} h={hF} w={32} c={JACKET_D} />
+      <Limb s={sh} e={eF} h={hF} w={40} c="#141B22" /> {/* contorno oscuro: sin él el brazo de atrás desaparece contra la pared */}
+      <Limb s={sh} e={eF} h={hF} w={32} c="#35434E" />
       <circle cx={hF[0]} cy={hF[1]} r={15} fill={SKIN_D} />
       <g transform={`rotate(${pose.lean})`}>
         <path d="M -44 14 C -50 -60 -52 -140 -40 -186 Q 0 -204 40 -184 C 50 -130 50 -50 42 14 Z" fill={JACKET} />
