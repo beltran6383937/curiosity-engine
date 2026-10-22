@@ -3,8 +3,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { checkSpec, hookNumbers } from "../pipeline/check-episode.mjs";
-import { windowFor } from "../pipeline/madrid-gate.mjs";
-import { madrid } from "../pipeline/orchestrator.mjs";
+import os from "node:os";
+import path from "node:path";
+import { windowFor, started } from "../pipeline/madrid-gate.mjs";
+import { madrid, saveRun, loadRun } from "../pipeline/orchestrator.mjs";
 
 const pilot = () => JSON.parse(fs.readFileSync(new URL("../episodes/venus-pilot/episode.json", import.meta.url), "utf8"));
 
@@ -40,4 +42,26 @@ test("con el cron horario hay una pasada justo antes de la hora y reintentos des
     assert.equal(got.filter((x) => x < p && x >= p - 60).length, 1, `${day} ${pt}: una pasada previa`);
     assert.ok(got.filter((x) => x > p).length >= 2, `${day} ${pt}: al menos 2 reintentos`);
   }
+});
+
+// Cron real de produce.yml: con el cron de las 04:30 retrasado o perdido, alguna pasada de respaldo cae en la ventana
+const PROD = fs.readFileSync(new URL("../.github/workflows/produce.yml", import.meta.url), "utf8");
+const prodCrons = [...PROD.matchAll(/cron: "(\d+) (\d+) \* \* \*"/g)].map((m) => [Number(m[2]), Number(m[1])]);
+const [pa, pb] = windowFor(["--window", PROD.match(/--window (\S+)/)[1]], {});
+test("produce: si se pierde el cron de las 04:30 quedan al menos 3 pasadas de respaldo en la ventana (verano e invierno)", () => {
+  for (const day of ["2026-10-21", "2026-11-10"]) {
+    const ins = prodCrons.map(([h, mi]) => madrid(new Date(`${day}T${String(h).padStart(2, "0")}:${String(mi).padStart(2, "0")}:00Z`)).minutes).filter((x) => x >= pa && x <= pb);
+    assert.ok(ins.some((x) => x >= 240 && x <= 300), `${day}: una pasada a primera hora`);
+    assert.ok(ins.filter((x) => x > 300).length >= 3, `${day}: respaldos`);
+    assert.ok(Math.max(...ins) <= 18 * 60, `${day}: la última termina antes de publicar`);
+  }
+});
+
+test("--once: el día cuenta como empezado solo cuando la producción ha registrado algún paso", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ce-gate-"));
+  assert.equal(started(root, "2026-10-22"), false);
+  saveRun(root, { ...loadRun(root, "2026-10-22"), state: "NONE" });   // p. ej. un publish sin vídeo
+  assert.equal(started(root, "2026-10-22"), false);
+  const r = loadRun(root, "2026-10-22"); r.steps.RESEARCHING = { status: "running", attempts: 1 }; saveRun(root, r);
+  assert.equal(started(root, "2026-10-22"), true);
 });
