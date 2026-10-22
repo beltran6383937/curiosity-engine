@@ -1,6 +1,6 @@
 {
  "date": "2026-10-22",
- "state": "FAILED",
+ "state": "READY",
  "episode": "2026-10-22",
  "steps": {
   "RESEARCHING": {
@@ -20,6 +20,24 @@
    "attempts": 1,
    "startedAt": "2026-10-22T09:08:11.031Z",
    "doneAt": "2026-10-22T09:35:31.207Z"
+  },
+  "RENDERING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T10:17:28.177Z",
+   "doneAt": "2026-10-22T10:26:00.973Z"
+  },
+  "QUALITY_CHECK": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T10:26:00.975Z",
+   "doneAt": "2026-10-22T10:26:08.025Z"
+  },
+  "VISUAL_REVIEW": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T10:26:23.885Z",
+   "doneAt": "2026-10-22T10:26:52.821Z"
   }
  },
  "platforms": {
@@ -68,8 +86,21 @@
   {
    "at": "2026-10-22T10:11:55.609Z",
    "msg": "claude-code: escena corregida a mano según SENTINEL (contraste 72°, pies centrados, etiquetas sin apilar, marca sobre el neumático); se reanuda desde RENDERING"
+  },
+  {
+   "at": "2026-10-22T10:26:00.973Z",
+   "msg": "RENDERING ok"
+  },
+  {
+   "at": "2026-10-22T10:26:08.025Z",
+   "msg": "QUALITY_CHECK ok"
+  },
+  {
+   "at": "2026-10-22T10:26:52.821Z",
+   "msg": "VISUAL_REVIEW ok"
   }
  ],
  "scriptHash": "02d52ec6ab9887afe244a95aebea99f4d1c53919079342b197c1594168f0ef10",
- "duration": 45.06
+ "duration": 45.06,
+ "quality": 90
 }
