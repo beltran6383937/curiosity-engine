@@ -1,0 +1,89 @@
+{
+ "date": "2026-10-22",
+ "state": "NEEDS_ATTENTION",
+ "episode": "2026-10-22",
+ "steps": {
+  "RESEARCHING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T08:45:04.716Z",
+   "doneAt": "2026-10-22T08:49:15.890Z"
+  },
+  "SCRIPTING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T08:49:15.892Z",
+   "doneAt": "2026-10-22T09:04:40.760Z"
+  },
+  "VOICE": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T09:08:11.031Z",
+   "doneAt": "2026-10-22T09:35:31.207Z"
+  },
+  "RENDERING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T09:35:31.209Z",
+   "doneAt": "2026-10-22T09:44:31.809Z"
+  },
+  "QUALITY_CHECK": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T09:44:31.809Z",
+   "doneAt": "2026-10-22T09:44:38.894Z"
+  },
+  "VISUAL_REVIEW": {
+   "status": "failed",
+   "attempts": 3,
+   "startedAt": "2026-10-22T09:45:55.380Z",
+   "error": "SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (en fundido); ilegible en móvil. Si es el estado final, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pies con distinta ali"
+  }
+ },
+ "platforms": {
+  "instagram": {
+   "status": "pending",
+   "attempts": 0
+  },
+  "tiktok": {
+   "status": "pending",
+   "attempts": 0
+  }
+ },
+ "log": [
+  {
+   "at": "2026-10-22T08:49:15.890Z",
+   "msg": "RESEARCHING ok"
+  },
+  {
+   "at": "2026-10-22T09:04:40.760Z",
+   "msg": "SCRIPTING ok"
+  },
+  {
+   "at": "2026-10-22T09:35:31.207Z",
+   "msg": "VOICE ok"
+  },
+  {
+   "at": "2026-10-22T09:44:31.809Z",
+   "msg": "RENDERING ok"
+  },
+  {
+   "at": "2026-10-22T09:44:38.894Z",
+   "msg": "QUALITY_CHECK ok"
+  },
+  {
+   "at": "2026-10-22T09:45:29.524Z",
+   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (parece en fundido); ilegible en móvil. Si es el estado final de la línea, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pi"
+  },
+  {
+   "at": "2026-10-22T09:45:55.379Z",
+   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (en fundido); ilegible en móvil. Si es el estado final, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pies con distinta ali"
+  },
+  {
+   "at": "2026-10-22T09:46:15.810Z",
+   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (en fundido); ilegible en móvil. Si es el estado final, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pies con distinta ali"
+  }
+ ],
+ "scriptHash": "02d52ec6ab9887afe244a95aebea99f4d1c53919079342b197c1594168f0ef10",
+ "duration": 45.06
+}

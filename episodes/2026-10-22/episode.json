@@ -1,0 +1,48 @@
+{
+  "id": "2026-10-22",
+  "category": "coches",
+  "title": "Por qué las llantas parecen girar al revés en vídeo",
+  "hooks": [
+    { "n": 69, "views": "1.4M", "template": "Why does [thing] [surprising comparison]?", "text": "¿Por qué las llantas parecen girar al revés en vídeo?", "chosen": true },
+    { "n": 37, "views": "4.8M", "template": "Look at these [examples]: same exact [thing], the left one [gets the result], the other doesn't.", "text": "Mira estas dos llantas: la misma rueda, una parece avanzar y la otra retroceder.", "chosen": false },
+    { "n": 35, "views": "4.9M", "template": "[Thing] doesn't actually look like this.", "text": "Esa llanta no está girando así de verdad.", "chosen": false }
+  ],
+  "lines": [
+    "¿Por qué las llantas parecen girar al revés en vídeo?",
+    "El coche avanza, pero la rueda parece retroceder.",
+    "La culpa no es de la rueda.",
+    "En vídeo, es de la cámara, que graba fotos sueltas.",
+    "Supongamos 5 radios y vídeo a 24 fps. Es un cálculo, no una medición.",
+    "Si gira 72° por fotograma, cada radio ocupa el lugar del siguiente.",
+    "A 4,8 vueltas por segundo, la llanta parece quieta.",
+    "Si gira algo menos, parece que retrocede. Algo más, avanza despacio.",
+    "Pero en 1996, Purves y su equipo señalaron algo en PNAS.",
+    "Una ilusión parecida también se ve con luz continua.",
+    "Su causa no la damos por resuelta.",
+    "La rueda avanza. Lo que falla es cómo la vemos."
+  ],
+  "say": {
+    "4": "Supongamos cinco radios y vídeo a veinticuatro fotogramas por segundo. Es un cálculo, no una medición.",
+    "5": "Si gira setenta y dos grados por fotograma, cada radio ocupa el lugar del siguiente.",
+    "6": "A cuatro coma ocho vueltas por segundo, la llanta parece quieta.",
+    "8": "Pero en mil novecientos noventa y seis, Purves y su equipo señalaron algo en pe, ene, a, ese."
+  },
+  "claims": [
+    { "claim": "Purves, Paydarfar y Andrews (1996, PNAS 93(8):3693-3697) señalan que las ruedas en cine u otras presentaciones estroboscópicas a menudo parecen girar hacia atrás, y que una ilusión similar también se ve con luz continua", "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC39674", "status": "verified" },
+    { "claim": "Cálculo (no medición): con 5 radios idénticos y vídeo a 24 fps, una llanta que gira 72° por fotograma (4,8 rev/s, una de las velocidades que la congelan) parece quieta; algo menos de 72° por fotograma parece retroceder y algo más, avanzar despacio. Es aliasing temporal de la cámara", "source": "cálculo: 360°/5 = 72°; 72° × 24 fps = 1728°/s = 4,8 rev/s (verificado por veritas)", "status": "verified" }
+  ],
+  "keys": ["llantas", "revés", "vídeo", "retroceder", "cámara", "sueltas","5", "radios", "24", "fps", "cálculo", "72°", "lugar","4,8", "quieta", "retrocede", "despacio", "1996", "purves", "pnas", "luz", "continua", "resuelta"],
+  "publication": {
+    "cta": null,
+    "cta_reason": "No hay recurso descargable creado para este episodio: sin CTA de palabra clave (regla: no prometer lo que no existe).",
+    "instagram": {
+      "caption": "¿Por qué las llantas parecen girar al revés en vídeo? El coche avanza y la rueda retrocede 🚗\n\nEn vídeo, la cámara graba fotos sueltas. Con 5 radios y 24 fps, una llanta que gira 72° por fotograma parece quieta (4,8 vueltas por segundo); algo menos y parece retroceder, algo más y avanza despacio. Ojo: es un cálculo, no una medición.\n\nPurves, Paydarfar y Andrews (PNAS, 1996) señalaron que una ilusión parecida también se ve con luz continua. Su causa no la damos por resuelta.\n\nVoz generada con IA.\n\n#curiosidades #coches #ciencia",
+      "ai_label": true
+    },
+    "tiktok": {
+      "caption": "Tu coche avanza, pero la llanta parece ir hacia atrás en vídeo. La culpa no es de la rueda: la cámara graba fotos sueltas 🎥 Con 5 radios y 24 fps, a 4,8 vueltas por segundo parece quieta (cálculo, no medición). Una ilusión parecida se ve con luz continua (PNAS, 1996) y su causa no está resuelta. Voz generada con IA. #llantas #ilusionoptica #ciencia #curiosidades #coches",
+      "ai_label": true
+    },
+    "cover": "fotograma del gancho: primer plano de una llanta de coche con radios, con un leve desenfoque de giro, y el texto de la pregunta '¿Por qué las llantas parecen girar al revés en vídeo?'"
+  }
+}

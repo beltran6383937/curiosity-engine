@@ -1,0 +1,80 @@
+[
+  {
+    "id": "velocimetro-nunca-infra",
+    "category": "coches",
+    "title": "Tu velocímetro está obligado por norma a mentirte",
+    "hook": "La norma europea no permite que tu coche marque menos de lo que va, pero sí bastante más.",
+    "hook_fact": "UNECE R39: la velocidad indicada nunca puede ser menor que la real y puede superarla hasta 0,1 V + 4 km/h; a 100 km/h reales puede marcar entre 100 y 114.",
+    "claims": [
+      {"claim": "El Reglamento UNECE n.º 39 exige que la velocidad indicada no sea inferior a la real, con 0 ≤ (V1 − V2) ≤ 0,1·V2 + 4 km/h (V1 indicada, V2 real) en las velocidades de ensayo del apartado 5.2.5. Esta formulación procede de un documento de trabajo UNECE de 2000 (borrador de enmienda) y del texto consolidado en EUR-Lex; el texto vigente no se pudo abrir (403/vacío): confirmar redacción y tabla de velocidades en la versión actual.", "source": "https://digitallibrary.un.org/record/408980/files/%5BE_ECE_%5DTRANS_WP.29_GRSG_2000_5-EN.pdf ; https://eur-lex.europa.eu/eli/reg/2010/39(2)/oj/eng", "kind": "evidence", "status": "unverified"},
+      {"claim": "Ejemplo numérico: a 100 km/h reales el límite superior es 0,1·100 + 4 = 14, es decir, puede marcar 100-114 km/h. Es un cálculo aplicado a la fórmula, no una medición.", "source": "https://digitallibrary.un.org/record/408980/files/%5BE_ECE_%5DTRANS_WP.29_GRSG_2000_5-EN.pdf", "kind": "interpretation", "status": "unverified"},
+      {"claim": "Aviso: R39 regula el velocímetro, no el cuentakilómetros (odómetro). La precisión del odómetro es otro requisito; no mezclar en el guion sin fuente propia.", "source": "https://eur-lex.europa.eu/eli/reg/2010/39(2)/oj/eng", "kind": "interpretation", "status": "unverified"},
+      {"claim": "Por qué los fabricantes sesgan hacia arriba (tolerancias de neumático, desgaste, margen legal) es explicación habitual en prensa, no dato normativo. Tratar como hipótesis.", "source": "https://www.wapcar.my/news/your-speedometer-is-lying-to-you-here’s-why-26765 (secundaria)", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Velocímetro analógico con aguja en 114 y GPS en 100; barra que muestra la banda permitida creciendo con la velocidad.",
+    "scores": {"sorpresa": 20, "visual": 14, "curiosidad": 17, "claridad": 14, "novedad": 5, "respaldo": 7},
+    "total": 77
+  },
+  {
+    "id": "rueda-marcha-atras-video",
+    "category": "coches",
+    "title": "Por qué las llantas parecen girar al revés en vídeo",
+    "hook": "Tu coche va hacia delante, pero sus llantas giran hacia atrás en pantalla. La cámara no se ha roto.",
+    "hook_fact": "Es muestreo temporal: si entre fotograma y fotograma la llanta avanza algo menos que la separación entre radios, el ojo la ve retroceder. Un estudio en PNAS (1996) vio un efecto parecido con luz continua.",
+    "claims": [
+      {"claim": "Purves, Paydarfar y Andrews (1996), 'The wagon wheel illusion in movies and reality', PNAS 93(8):3693-3697: las ruedas en cine o presentación estroboscópica suelen verse girar hacia atrás, y una ilusión similar se da con luz continua.", "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC39674", "kind": "evidence", "status": "unverified"},
+      {"claim": "Ejemplo calculado (no medido): con 5 radios y vídeo a 24 fps, si la llanta gira 72° por fotograma (4,8 rev/s) parece quieta; algo menos o más, se ve avanzar o retroceder. Es aritmética propia a verificar antes de usar.", "source": "cálculo propio: 360°/5 = 72°; 72° × 24 fps = 1728°/s = 4,8 rev/s", "kind": "interpretation", "status": "unverified"},
+      {"claim": "La versión en luz continua (ver el efecto en persona) es discutida: Purves lo atribuye a una percepción por episodios; VanRullen y colaboradores lo plantean como percepto biestable que depende de la atención. Sin consenso.", "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC555984 ; https://journals.sagepub.com/doi/full/10.1068/p7516", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Llanta de 5 radios girando, con un reloj de fotogramas a 24 fps; se superpone el avance de 72° por fotograma y la llanta se congela.",
+    "scores": {"sorpresa": 19, "visual": 19, "curiosidad": 16, "claridad": 11, "novedad": 4, "respaldo": 8},
+    "total": 77
+  },
+  {
+    "id": "nitrogeno-neumaticos-mito",
+    "category": "coches",
+    "title": "Nitrógeno en las ruedas: funciona, pero casi no importa",
+    "hook": "Inflar con nitrógeno sí pierde menos presión que con aire. La diferencia en un año es de 1,3 psi.",
+    "hook_fact": "Consumer Reports, 12 meses, 31 modelos de neumático, inflados a 30 psi: aire perdió 3,5 psi de media, nitrógeno al 95 % perdió 2,2 psi.",
+    "claims": [
+      {"claim": "Prueba de Consumer Reports: 31 modelos de neumático (uno con aire y otro con nitrógeno al 95 %, límite del sistema de prueba), 30 psi iniciales, 12 meses a la intemperie. Pérdida media: 3,5 psi con aire, 2,2 psi con nitrógeno; diferencia 1,3 psi. Resultado medido.", "source": "https://www.consumerreports.org/cars/tire-buying-maintenance/should-you-use-nitrogen-in-car-tires-a6260003694/", "kind": "evidence", "status": "unverified"},
+      {"claim": "CR concluye que el beneficio es 'más teórico que práctico' y recomienda revisar la presión cada mes en frío. Es la conclusión de la revista, no una norma.", "source": "https://www.consumerreports.org/cars/tire-buying-maintenance/should-you-use-nitrogen-in-car-tires-a6260003694/", "kind": "interpretation", "status": "unverified"},
+      {"claim": "NHTSA habría hallado que el aire escapa más rápido y que el nitrógeno reduce la oxidación del caucho, con poco efecto en la resistencia a la rodadura; dato de segunda mano vía CR. Localizar el informe NHTSA original; el GAO-07-246R solo cita estudios en curso.", "source": "https://www.gao.gov/assets/gao-07-246r.pdf ; https://www.consumerreports.org/cars/tire-buying-maintenance/should-you-use-nitrogen-in-car-tires-a6260003694/", "kind": "evidence", "status": "unverified"},
+      {"claim": "Críticos señalan que en uso real (conducción, calor) la diferencia podría ser mayor; no está demostrado en esta prueba.", "source": "https://www.consumerreports.org/cars/tire-buying-maintenance/should-you-use-nitrogen-in-car-tires-a6260003694/", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Dos manómetros animados a 30 psi que bajan durante 12 meses: uno a 26,5, otro a 27,8, con la diferencia resaltada.",
+    "scores": {"sorpresa": 17, "visual": 12, "curiosidad": 15, "claridad": 14, "novedad": 3, "respaldo": 8},
+    "total": 69
+  },
+  {
+    "id": "etiqueta-neumaticos-ue",
+    "category": "coches",
+    "title": "La etiqueta del neumático: de la A a la E hay un 60 % más de resistencia",
+    "hook": "Dos neumáticos del mismo tamaño pueden diferir en cuánto cuesta hacerlos rodar. La UE lo mide y lo clasifica.",
+    "hook_fact": "Reglamento (UE) 2020/740, neumáticos C1: clase A de resistencia a la rodadura hasta 6,5 N/kN; clase E desde 10,6 N/kN.",
+    "claims": [
+      {"claim": "Anexo I, neumáticos C1, resistencia a la rodadura (RRC, N/kN): A ≤ 6,5; B 6,6-7,7; C 7,8-9,0; D 9,1-10,5; E ≥ 10,6. 10,6/6,5 ≈ 1,63, es decir, el umbral de E es un 63 % mayor que el de A (cálculo propio sobre umbrales, no sobre dos neumáticos reales).", "source": "https://legislation.gov.uk/eur/2020/740/annex/I?view=plain ; https://eur-lex.europa.eu/eli/reg/2020/740", "kind": "evidence", "status": "unverified"},
+      {"claim": "Agarre en mojado (índice G, C1): A ≥ 1,55; B 1,40-1,54; C 1,25-1,39; D 1,10-1,24; E ≤ 1,09.", "source": "https://legislation.gov.uk/eur/2020/740/annex/I?view=plain", "kind": "evidence", "status": "unverified"},
+      {"claim": "Verificación (Anexo VI): se ensaya un neumático; si no cumple la clase declarada, se ensayan tres más y se promedian.", "source": "https://legislation.gov.uk/eur/2020/740/annex/VI?view=plain", "kind": "evidence", "status": "unverified"},
+      {"claim": "No hay cifra oficial verificada de ahorro de combustible ni de metros de frenada por clase en las fuentes consultadas; no afirmarla sin fuente. Las clases proceden de ensayos de laboratorio, no de consumo en carretera.", "source": "https://energy-efficient-products.ec.europa.eu/tyre-labelling-evaluation-and-report_en", "kind": "interpretation", "status": "unverified"}
+    ],
+    "visual_idea": "Etiqueta UE animada con barras A-E; al pasar de A a E el neumático gira con una flecha de fricción que crece un 63 %.",
+    "scores": {"sorpresa": 16, "visual": 13, "curiosidad": 14, "claridad": 13, "novedad": 5, "respaldo": 8},
+    "total": 69
+  },
+  {
+    "id": "presion-frio-un-psi",
+    "category": "coches",
+    "title": "Por qué tus ruedas pierden presión una mañana fría sin pinchazo",
+    "hook": "Una noche fría puede bajar la presión de tus neumáticos casi 1 psi sin que escape nada de aire.",
+    "hook_fact": "Cálculo con la ley de Gay-Lussac: 10 °F (5,6 K) menos sobre ~293 K y ~47 psi absolutos dan ~0,9 psi menos.",
+    "claims": [
+      {"claim": "Ford y otras fuentes secundarias indican ~1 psi menos por cada 10 °F de descenso, por contracción del aire y no por fuga. No se halló página primaria de NHTSA con esta cifra.", "source": "https://www.ford.com/support/how-tos/tires-and-wheels/tire-replacement-and-maintenance/how-to-care-for-your-tires/", "kind": "evidence", "status": "unverified"},
+      {"claim": "Comprobación propia: 5,6 K / 293 K ≈ 1,9 %; con 32 psi manométricos (≈46,7 psi absolutos) da ≈ 0,9 psi. Es un modelo de gas ideal con volumen constante, no una medición.", "source": "cálculo propio (ley de Gay-Lussac)", "kind": "interpretation", "status": "unverified"},
+      {"claim": "Pérdida por permeación ~1 psi al mes: cifra repetida en fuentes secundarias, sin fuente primaria localizada. Evitar en el guion o buscar NHTSA/fabricante.", "source": "https://www.ford.com/support/how-tos/tires-and-wheels/tire-replacement-and-maintenance/how-to-care-for-your-tires/", "kind": "hypothesis", "status": "unverified"}
+    ],
+    "visual_idea": "Termómetro que cae 10 °F junto a un manómetro cuya aguja baja 1 psi, con moléculas de aire frenándose dentro del neumático.",
+    "scores": {"sorpresa": 15, "visual": 12, "curiosidad": 14, "claridad": 13, "novedad": 4, "respaldo": 4},
+    "total": 62
+  }
+]
