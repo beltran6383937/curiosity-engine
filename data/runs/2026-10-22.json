@@ -1,6 +1,6 @@
 {
  "date": "2026-10-22",
- "state": "NEEDS_ATTENTION",
+ "state": "FAILED",
  "episode": "2026-10-22",
  "steps": {
   "RESEARCHING": {
@@ -20,24 +20,6 @@
    "attempts": 1,
    "startedAt": "2026-10-22T09:08:11.031Z",
    "doneAt": "2026-10-22T09:35:31.207Z"
-  },
-  "RENDERING": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-22T09:35:31.209Z",
-   "doneAt": "2026-10-22T09:44:31.809Z"
-  },
-  "QUALITY_CHECK": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-22T09:44:31.809Z",
-   "doneAt": "2026-10-22T09:44:38.894Z"
-  },
-  "VISUAL_REVIEW": {
-   "status": "failed",
-   "attempts": 3,
-   "startedAt": "2026-10-22T09:45:55.380Z",
-   "error": "SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (en fundido); ilegible en móvil. Si es el estado final, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pies con distinta ali"
   }
  },
  "platforms": {
@@ -82,6 +64,10 @@
   {
    "at": "2026-10-22T09:46:15.810Z",
    "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (86): La línea '72° por fotograma • 24 fps' bajo 'VUELTAS/S' tiene contraste casi nulo (en fundido); ilegible en móvil. Si es el estado final, subir opacidad. | 'Esquema, no a escala' pasa a alinearse a la izquierda y queda pegada a la línea de fuente 'Purves et al., PNAS, 1996' (dos pies con distinta ali"
+  },
+  {
+   "at": "2026-10-22T10:11:55.609Z",
+   "msg": "claude-code: escena corregida a mano según SENTINEL (contraste 72°, pies centrados, etiquetas sin apilar, marca sobre el neumático); se reanuda desde RENDERING"
   }
  ],
  "scriptHash": "02d52ec6ab9887afe244a95aebea99f4d1c53919079342b197c1594168f0ef10",

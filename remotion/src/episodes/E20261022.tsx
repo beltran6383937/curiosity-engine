@@ -21,6 +21,7 @@ const filmedDeg = (n: number, step: number, n0 = 0, deg0 = 0) => deg0 + (n - n0)
 const realDeg = (t: number, step: number) => step * FILM * t;
 const apparent = (step: number) => ((((step + PITCH / 2) % PITCH) + PITCH) % PITCH) - PITCH / 2;
 const IDX = [0, 1, 2, 3, 4];
+const MARK_R = 0.9; // marca sobre el neumático (0,8–1 R), alineada con su radio sin taparlo
 
 // ---------- utilidades SVG ----------
 const pol = (cx: number, cy: number, r: number, a: number): [number, number] => [cx + r * Math.cos((a * Math.PI) / 180), cy + r * Math.sin((a * Math.PI) / 180)];
@@ -64,7 +65,7 @@ const NutSet: React.FC<{ cx: number; cy: number; R: number; deg: number; o: numb
       const [x, y] = pol(cx, cy, 0.095 * R, -90 + PITCH / 2 + i * PITCH);
       return <circle key={i} cx={x} cy={y} r={0.024 * R} fill={CHROME_D} stroke="#3a4150" strokeWidth={0.006 * R} />;
     })}
-    {mark && markO > 0 && <circle cx={cx} cy={cy - 0.7 * R} r={0.05 * R} fill={mark} opacity={markO} />}
+    {mark && markO > 0 && <circle cx={cx} cy={cy - MARK_R * R} r={0.05 * R} fill={mark} opacity={markO} />}
   </g>
 );
 const Rim: React.FC<{ id: string; cx: number; cy: number; R: number; deg?: number; mark?: string; markO?: number; blur?: Blur; hi?: number[]; hiC?: string; o?: number; shadow?: boolean }> = ({ id, cx, cy, R, deg = 0, mark, markO = 1, blur, hi, hiC = AMBER, o = 1, shadow = true }) => {
@@ -118,8 +119,9 @@ const Clock: React.FC<{ n: number; o: number; lab?: number }> = ({ n, o, lab = 0
 const Label: React.FC<{ x: number; y?: number; text: string; c: string; o?: number; size?: number }> = ({ x, y = 1190, text, c, o = 1, size = 28 }) => (
   <div style={{ position: "absolute", left: x, top: y, translate: "-50% 0", fontFamily: SANS, fontWeight: 800, fontSize: size, letterSpacing: 3, color: c, opacity: o, whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>{text}</div>
 );
+// Segundo pie, centrado y justo encima de Source (bottom 380): misma alineación, sin pisarse
 const Note: React.FC<{ t: number }> = ({ t }) => (
-  <div style={{ position: "absolute", left: 70, top: 1462, fontFamily: SANS, fontWeight: 600, fontSize: 24, color: INK, opacity: 0.55 * k(t, 0.3, 0.5) }}>Esquema, no a escala</div>
+  <div style={{ position: "absolute", left: 0, right: 0, bottom: 428, textAlign: "center", fontFamily: SANS, fontWeight: 600, fontSize: 24, color: INK, opacity: 0.55 * k(t, 0.3, 0.5) }}>Esquema, no a escala</div>
 );
 
 // ---------- 3D: llanta, coche y carretera ----------
@@ -376,8 +378,8 @@ const Step72: React.FC<SceneProps> = ({ t, w, len }) => {
   const [ax, ay] = pol(cx, cy, rA, A0), [bx, by] = pol(cx, cy, rA, A0 + PITCH);
   const tick = (a: number) => { const [x0, y0] = pol(cx, cy, R + 8, a), [x1, y1] = pol(cx, cy, R + 42, a); return `M ${x0} ${y0} L ${x1} ${y1}`; };
   const [lx, ly] = pol(cx, cy, R + 60, A0 + PITCH / 2);
-  const [gx, gy] = pol(cx, cy, 0.7 * R, -90 + prev);
-  const [nx, ny] = pol(cx, cy, 0.7 * R, A0 + PITCH);
+  const [gx, gy] = pol(cx, cy, MARK_R * R, -90 + prev);
+  const [nx, ny] = pol(cx, cy, MARK_R * R, A0 + PITCH);
   return (
     <AbsoluteFill>
       <Svg>
@@ -406,7 +408,7 @@ const Step72: React.FC<SceneProps> = ({ t, w, len }) => {
       </Svg>
       <Clock n={s} o={1} lab={1} />
       <Tag t={t} at={-1} x={70} y={540} text="Cálculo, no medición" c={MINT} size={30} />
-      <Label x={540} y={1460} text="FOTOGRAMA A FOTOGRAMA" c={INK} size={26} o={k(t, 0.1, 0.4) * fade} />
+      <Label x={540} y={1390} text="FOTOGRAMA A FOTOGRAMA" c={INK} size={26} o={k(t, 0.1, 0.4) * fade} />
       <Source t={t} at={0.3} text="Esquema, no a escala" />
     </AbsoluteFill>
   );
@@ -431,9 +433,9 @@ const Frozen: React.FC<SceneProps> = ({ t, f, w, len }) => {
       <Clock n={n} o={1} lab={1} />
       <Tag t={t} at={-1} x={70} y={540} text="Cálculo, no medición" c={MINT} size={30} />
       <Tag t={t} at={aQ} x={790} y={690} text="Parece quieta" c={AMBER} align="center" size={30} />
-      <AbsoluteFill style={{ translate: `0 ${mix(0, 160, out)}px`, opacity: 1 - out }}>
-        <Stat t={t} at={a48} from={4.8} to={4.8} decimals={1} sub="vueltas/s" y={1250} size={150} c={CHROME} />
-        {t >= a48 && <Label x={540} y={1455} text="72° por fotograma × 24 fps" c={MINT} size={26} o={k(t, a48 + 0.4, 0.4)} />}
+      <AbsoluteFill style={{ opacity: 1 - out }}>
+        <Stat t={t} at={a48} from={4.8} to={4.8} decimals={1} sub="vueltas/s" y={1230} size={150} c={CHROME} />
+        {t >= a48 && <Label x={540} y={1440} text="72° por fotograma × 24 fps" c={MINT} size={28} o={k(t, a48 + 0.15, 0.25)} />}
       </AbsoluteFill>
       <Source t={t} at={0.3} text="Esquema, no a escala" />
     </AbsoluteFill>
@@ -538,8 +540,9 @@ const Continuous: React.FC<SceneProps> = ({ t, w, len }) => {
       </Svg>
       <Tag t={t} at={aC} x={70} y={560} text="Luz continua" c={CYAN} size={30} />
       <div style={{ opacity: end }}>
-        <Tag t={t} at={aI + 0.2} x={540} y={1360} text="Ilusión parecida" c={ROSE} align="center" size={30} />
-        <Tag t={t} at={aCa + 0.2} x={540} y={1430} text="Causa sin resolver" c={INK} align="center" size={30} />
+        {/* lado a lado y por encima de los pies: nada apilado junto al borde inferior */}
+        <Tag t={t} at={aI + 0.2} x={290} y={1350} text="Ilusión parecida" c={ROSE} align="center" size={28} />
+        <Tag t={t} at={aCa + 0.2} x={790} y={1350} text="Causa sin resolver" c={INK} align="center" size={28} />
       </div>
       {q > 0 && (
         <div style={{ position: "absolute", left: 900, top: 760, translate: "-50% -50%", scale: `${q}`, opacity: 0.85 * end, fontFamily: SANS, fontWeight: 900, fontSize: 220, lineHeight: 1, color: INK }}>?</div>
