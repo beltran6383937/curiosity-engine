@@ -1,0 +1,43 @@
+{
+ "date": "2026-10-23",
+ "state": "RENDERING",
+ "episode": "2026-10-23",
+ "steps": {
+  "RESEARCHING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T20:38:38.678Z",
+   "doneAt": "2026-10-22T20:38:38.678Z"
+  },
+  "SCRIPTING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T20:38:38.678Z",
+   "doneAt": "2026-10-22T20:38:38.678Z"
+  },
+  "VOICE": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-22T20:38:38.678Z",
+   "doneAt": "2026-10-22T20:38:38.678Z"
+  }
+ },
+ "platforms": {
+  "instagram": {
+   "status": "pending",
+   "attempts": 0
+  },
+  "tiktok": {
+   "status": "pending",
+   "attempts": 0
+  }
+ },
+ "scriptHash": "ec955bb754f3d8b932f6301e2ca6e015862e36301bd23232e6e2e927f6b18a8d",
+ "duration": 36.66,
+ "log": [
+  {
+   "at": "2026-10-22T20:38:38.678Z",
+   "msg": "Primer episodio del P&Q AI Content Engine: idea, guion, storyboard, escena, voz (VoxCPM2 narrador) y música hechos en local por claude-code y revisados en fotogramas; el render, la QA, SENTINEL y la release los hace produce.yml"
+  }
+ ]
+}

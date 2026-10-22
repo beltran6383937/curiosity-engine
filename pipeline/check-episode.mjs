@@ -61,6 +61,13 @@ if (process.argv[1]?.endsWith("check-episode.mjs")) {
   const ep = JSON.parse(fs.readFileSync(path.join(ROOT, "episodes", id, "episode.json"), "utf8"));
   // --no-hooks: job "build", sin el banco de ganchos (es de pago y no sale del job "write", donde ya se comprobó)
   const errors = checkSpec(ep, process.argv.includes("--no-hooks") ? null : hookNumbers());
+  // P&Q AI Content Engine (desde el 23-10-2026): pilar de la mezcla y las 5 ideas puntuadas antes del guion
+  if (/^\d{4}-\d{2}-\d{2}$/.test(id) && id >= "2026-10-23") {
+    const mix = JSON.parse(fs.readFileSync(path.join(ROOT, "config/engine.json"), "utf8")).mix ?? {};
+    if (!(ep.category in mix)) errors.push(`category «${ep.category}» no es un pilar de config/engine.json (${Object.keys(mix).join(", ")})`);
+    if (!fs.existsSync(path.join(ROOT, "episodes", id, "ideas.md"))) errors.push("falta episodes/<id>/ideas.md (5 ideas × 3 ganchos puntuadas)");
+    if (!fs.existsSync(path.join(ROOT, "episodes", id, "storyboard.md"))) errors.push("falta episodes/<id>/storyboard.md");
+  }
   const scenes = fs.readdirSync(path.join(ROOT, "remotion/src/episodes")).filter((f) => fs.readFileSync(path.join(ROOT, "remotion/src/episodes", f), "utf8").includes(`export const id = "${id}"`));
   const scene = scenes[0];
   if (!scene) errors.push(`no hay escena con export const id = "${id}" en remotion/src/episodes`);

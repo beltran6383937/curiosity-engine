@@ -1,0 +1,52 @@
+{
+  "id": "2026-10-23",
+  "category": "problema_real",
+  "title": "¿Coger el teléfono subido a la escalera o dejarlo sonar?",
+  "series": null,
+  "hooks": [
+    { "n": 45, "views": "3.8M", "template": "[Option A] versus [option B], which one's actually worse for you?", "text": "Coger el teléfono subido a una escalera, o dejarlo sonar. ¿Qué te sale más caro?", "chosen": true },
+    { "n": 1, "views": "35.2M", "template": "He always [method A], and he only [method B]. Who do you think will [result]?", "text": "Este electricista coge el teléfono esté donde esté. Este otro deja que lo coja una IA. ¿Quién crees que pierde más?", "chosen": false },
+    { "n": 56, "views": "2.5M", "template": "Most people that struggle with [problem] are taught to [common advice]. Here's why it actually makes it worse.", "text": "A casi todos los instaladores les dicen que cojan siempre el teléfono. Por eso pierden más clientes.", "chosen": false }
+  ],
+  "lines": [
+    "Coger el teléfono subido a una escalera, o dejarlo sonar. ¿Qué te sale más caro?",
+    "Opción uno: lo coges.",
+    "Sueltas una mano, la escalera se mueve y te vas al suelo.",
+    "Semanas de baja, la obra parada y el cliente buscando a otro.",
+    "Opción dos: lo dejas sonar.",
+    "Era un cliente nuevo. Cuelga y llama al siguiente de Google.",
+    "Ese ya no vuelve.",
+    "Opción tres: que lo coja una IA mientras tú sigues arriba.",
+    "Pregunta qué necesita, le da cita y te lo resume por WhatsApp.",
+    "Bajas con el trabajo hecho y un cliente más en la agenda.",
+    "Lo estamos montando para instaladores.",
+    "Comenta LLAMADA y te enseñamos la demo."
+  ],
+  "say": {
+    "11": "Comenta llamada y te enseñamos la demo."
+  },
+  "claims": [
+    { "claim": "En España, el Real Decreto 1215/1997 (anexo II, apartado 4.2.3) exige que las escaleras de mano se usen de forma que los trabajadores tengan en todo momento un punto de apoyo y de sujeción seguros. En pantalla: «RD 1215/1997 · en escalera, siempre un apoyo y una sujeción seguros»", "source": "https://www.boe.es/buscar/act.php?id=BOE-A-1997-17824", "status": "verified" },
+    { "claim": "La escena de la caída, el cliente que llama y el resto de la historia son una recreación ficticia, rotulada en pantalla como «Recreación»; no se da ninguna cifra de accidentes ni de clientes perdidos", "source": "decisión editorial (sin datos inventados)", "status": "verified" },
+    { "claim": "La recepción con IA que contesta llamadas, da cita y resume por WhatsApp existe como DEMO de P&Q Field Operations (datos ficticios); la conexión con operadoras reales aún no está verificada. Por eso el guion dice «lo estamos montando» y la pantalla rotula «DEMO · datos ficticios»", "source": "vault PQ_FIELD_OPERATIONS/CURRENT_STATE.md (2026-10-15) y docs/VERDAD-PRODUCTO.md", "status": "verified" }
+  ],
+  "keys": ["escalera", "sonar", "caro", "uno", "coges", "suelo", "baja", "parada", "otro", "dos", "nuevo", "google", "vuelve", "tres", "ia", "arriba", "cita", "whatsapp", "agenda", "instaladores", "llamada", "demo"],
+  "publication": {
+    "cta": {
+      "keyword": "LLAMADA",
+      "promise": "enseñar la demo de la recepción con IA (por DM o Zoom)",
+      "resource_url": "https://pq-field-os-demo.onrender.com",
+      "resource_checked": true,
+      "delivery": "manual: Beltrán responde por DM a quien comente LLAMADA (CONNECT no está activo)"
+    },
+    "instagram": {
+      "caption": "Comenta LLAMADA y te enseñamos la demo: una IA que coge el teléfono mientras tú trabajas.\n\nSi eres electricista, fontanero o instalador de clima, conoces la escena. Suena el móvil subido a la escalera y solo hay dos opciones, y las dos salen caras.\n\nLa ley ya lo dice: en una escalera de mano, siempre un punto de apoyo y de sujeción seguros (RD 1215/1997).\n\nLa tercera opción es que la llamada la coja una IA, le dé cita al cliente y te lo resuma por WhatsApp. Lo estamos montando para empresas de instalaciones.\n\nRecreación ficticia. Demo con datos ficticios. Voz generada con IA.\n\n#electricistas #instaladores #fontaneros",
+      "ai_label": true
+    },
+    "tiktok": {
+      "caption": "Coger el teléfono en la escalera o dejarlo sonar: las dos salen caras 📞 La tercera opción es una IA que contesta, da cita y te lo resume por WhatsApp. Comenta LLAMADA y te enseñamos la demo. Recreación ficticia, voz generada con IA. #electricista #instalaciones #fontanero #autonomos #ia",
+      "ai_label": true
+    },
+    "cover": "fotograma del gancho: electricista subido a una escalera con el móvil sonando en el bolsillo y las dos opciones rotuladas"
+  }
+}

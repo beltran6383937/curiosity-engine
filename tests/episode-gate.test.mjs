@@ -5,7 +5,7 @@ import fs from "node:fs";
 import { checkSpec, hookNumbers } from "../pipeline/check-episode.mjs";
 import os from "node:os";
 import path from "node:path";
-import { windowFor, started } from "../pipeline/madrid-gate.mjs";
+import { windowFor, started, nextDay } from "../pipeline/madrid-gate.mjs";
 import { madrid, saveRun, loadRun } from "../pipeline/orchestrator.mjs";
 
 const pilot = () => JSON.parse(fs.readFileSync(new URL("../episodes/venus-pilot/episode.json", import.meta.url), "utf8"));
@@ -37,23 +37,23 @@ const passes = (day, publish_time) => {
   return HOURS.map((h) => madrid(new Date(`${day}T${String(h).padStart(2, "0")}:57:00Z`))).filter((m) => m.minutes >= a && m.minutes <= b).map((m) => m.minutes);
 };
 test("con el cron horario hay una pasada justo antes de la hora y reintentos después (verano e invierno)", () => {
-  for (const day of ["2026-10-21", "2026-11-10"]) for (const pt of [JSON.parse(fs.readFileSync(new URL("../config/engine.json", import.meta.url), "utf8")).publish_time, "20:00", "21:00"]) {
+  for (const day of ["2026-10-21", "2026-11-10"]) for (const pt of [JSON.parse(fs.readFileSync(new URL("../config/engine.json", import.meta.url), "utf8")).publish_time, "08:00", "09:00"]) {
     const p = Number(pt.slice(0, 2)) * 60 + Number(pt.slice(3)); const got = passes(day, pt);
     assert.equal(got.filter((x) => x < p && x >= p - 60).length, 1, `${day} ${pt}: una pasada previa`);
     assert.ok(got.filter((x) => x > p).length >= 2, `${day} ${pt}: al menos 2 reintentos`);
   }
 });
 
-// Cron real de produce.yml: con el cron de las 04:30 retrasado o perdido, alguna pasada de respaldo cae en la ventana
+// Cron real de produce.yml (vídeo de mañana): con la primera pasada retrasada o perdida, alguna de respaldo cae en la ventana
 const PROD = fs.readFileSync(new URL("../.github/workflows/produce.yml", import.meta.url), "utf8");
 const prodCrons = [...PROD.matchAll(/cron: "(\d+) (\d+) \* \* \*"/g)].map((m) => [Number(m[2]), Number(m[1])]);
 const [pa, pb] = windowFor(["--window", PROD.match(/--window (\S+)/)[1]], {});
-test("produce: si se pierde el cron de las 04:30 quedan al menos 3 pasadas de respaldo en la ventana (verano e invierno)", () => {
+test("produce: si se pierde la pasada de las 10:30 quedan al menos 3 de respaldo en la ventana (verano e invierno)", () => {
   for (const day of ["2026-10-21", "2026-11-10"]) {
     const ins = prodCrons.map(([h, mi]) => madrid(new Date(`${day}T${String(h).padStart(2, "0")}:${String(mi).padStart(2, "0")}:00Z`)).minutes).filter((x) => x >= pa && x <= pb);
-    assert.ok(ins.some((x) => x >= 240 && x <= 300), `${day}: una pasada a primera hora`);
-    assert.ok(ins.filter((x) => x > 300).length >= 3, `${day}: respaldos`);
-    assert.ok(Math.max(...ins) <= 18 * 60, `${day}: la última termina antes de publicar`);
+    assert.ok(ins.some((x) => x >= 600 && x <= 660), `${day}: una pasada a media mañana`);
+    assert.ok(ins.filter((x) => x > 660).length >= 3, `${day}: respaldos`);
+    assert.ok(Math.max(...ins) <= 21 * 60, `${day}: la última empieza antes de las 21:00`);
   }
 });
 
@@ -64,4 +64,11 @@ test("--once: el día cuenta como empezado solo cuando la producción ha registr
   assert.equal(started(root, "2026-10-22"), false);
   const r = loadRun(root, "2026-10-22"); r.steps.RESEARCHING = { status: "running", attempts: 1 }; saveRun(root, r);
   assert.equal(started(root, "2026-10-22"), true);
+});
+
+test("--next: el run de produce es el del día siguiente (también en fin de mes y cambio de hora)", () => {
+  assert.equal(nextDay("2026-10-22"), "2026-10-23");
+  assert.equal(nextDay("2026-10-31"), "2026-11-01");
+  assert.equal(nextDay("2026-10-24"), "2026-10-25");
+  assert.equal(nextDay("2026-12-31"), "2027-01-01");
 });

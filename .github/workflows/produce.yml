@@ -1,6 +1,7 @@
-# Producción diaria (04:30 Europe/Madrid). GitHub cron va en UTC y puede llegar horas tarde o saltarse una pasada
-# (22-10-2026: el de las 04:30 llegó a las 09:49 y no hubo vídeo). Por eso hay pasadas de respaldo hasta la tarde:
-# madrid-gate --once deja pasar la primera que caiga en la ventana y descarta las demás si hoy ya se empezó.
+# P&Q AI Content Engine: el vídeo de cada día se produce LA VÍSPERA (desde las 10:30 de Madrid) y publish.yml lo saca a
+# las 08:30 del día siguiente. GitHub cron va en UTC y puede llegar horas tarde o saltarse una pasada (22-10-2026: 5 h),
+# así que hay pasadas de respaldo hasta la tarde: madrid-gate --next --once deja pasar la primera que caiga en la ventana
+# y descarta las demás si el run de mañana ya empezó.
 #
 # Aislamiento (el modelo lee webs no confiables y su escena se compila con webpack):
 #   write  · Claude escribe guion y escena. Token de Claude, sin GITHUB_TOKEN útil, no ejecuta nada.
@@ -12,15 +13,15 @@
 name: produce
 on:
   schedule:
-    - cron: "30 2 * * *"
-    - cron: "30 3 * * *"
-    - cron: "30 6 * * *"
+    - cron: "30 8 * * *"
     - cron: "30 9 * * *"
-    - cron: "30 12 * * *"
+    - cron: "30 11 * * *"
+    - cron: "30 13 * * *"
     - cron: "30 15 * * *"
+    - cron: "30 17 * * *"
   workflow_dispatch:
     inputs:
-      date: { description: "Fecha YYYY-MM-DD (vacío = hoy en Madrid)", required: false }
+      date: { description: "Fecha del vídeo YYYY-MM-DD (vacío = mañana en Madrid)", required: false }
 concurrency: { group: curiosity-engine, cancel-in-progress: false }
 permissions: {}   # cada job pide lo suyo
 jobs:
@@ -33,10 +34,10 @@ jobs:
         with: { ref: main, persist-credentials: false }
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with: { node-version: 24 }
-      - name: ¿Toca hoy? (hora de Madrid y parada de emergencia)
+      - name: ¿Toca producir el vídeo de mañana? (hora de Madrid y parada de emergencia)
         id: gate
-        # De 04:00 a 18:00 de Madrid (la última pasada termina antes de la ventana de publicación, que abre a las 19:30).
-        run: node pipeline/madrid-gate.mjs --window 04:00-18:00 --once ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }} >> "$GITHUB_OUTPUT"
+        # De 10:00 a 21:00 de Madrid: el vídeo queda listo con margen antes de las 08:30 del día siguiente.
+        run: node pipeline/madrid-gate.mjs --window 10:00-21:00 --once --next ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }} >> "$GITHUB_OUTPUT"
       - name: Fecha del run
         id: d
         env: { INPUT_DATE: "${{ inputs.date }}", TODAY: "${{ steps.gate.outputs.date }}" }   # por env, nunca interpolado (inyección)

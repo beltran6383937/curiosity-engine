@@ -37,7 +37,7 @@ export function collect(src, date, dest, lastOwned) {
   const next = STEPS.find((s) => run.steps[s]?.status !== "done");
   if (next && ["READY", "PUBLISHING", "PUBLISHED"].includes(run.state)) run.state = next;
 
-  const want = [[`data/candidates/${date}.json`, MB], ["data/alerts/pending.md", MB]];
+  const want = [[`data/candidates/${date}.json`, MB], ["data/alerts/pending.md", MB], ["data/queue/ideas.md", MB]]; // la cola de ideas la mantiene NOVA
   if (ep) {
     want.push([`public/audio/${ep}.json`, MB], [`public/audio/${ep}.qa.json`, MB], [`public/audio/${ep}.mp3`, 10 * MB],
       [`public/music/${ep}.wav`, 30 * MB], [`work/${ep}/${ep}.mp4`, 64 * MB], [`work/${ep}/quality.json`, MB]);

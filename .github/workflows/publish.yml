@@ -1,12 +1,12 @@
-# Publicación a la hora publish_time de config/engine.json (20:30 Europe/Madrid: pico de TikTok a las 20:00 y de Reels de 21:00 a 23:00 en España).
-# Cron cada hora a :57 UTC (17-21 UTC: cubre 18:57-23:57 de Madrid en verano e invierno); madrid-gate --publish-window deja pasar
+# Publicación a la hora publish_time de config/engine.json (08:30 Europe/Madrid desde el 23-10-2026: el instalador mira
+# el móvil antes de salir a obra). Cron cada hora a :57 UTC (5-9 UTC: cubre 06:57-11:57 de Madrid en verano e invierno); madrid-gate --publish-window deja pasar
 # la previa a la hora configurada (wait-until espera al minuto exacto) y las de las 3 h siguientes, que reintentan lo
 # pendiente. Una pasada extra no repite nada (idempotente).
 # GitHub puede retrasar los cron unos minutos: la hora real queda registrada en data/runs/<fecha>.json.
 name: publish
 on:
   schedule:
-    - cron: "57 17-21 * * *"
+    - cron: "57 5-9 * * *"
   workflow_dispatch:
     inputs:
       date: { description: "Fecha YYYY-MM-DD (vacío = hoy en Madrid): publicar un vídeo de un día anterior", required: false }

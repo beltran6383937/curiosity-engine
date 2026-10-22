@@ -1,13 +1,16 @@
 {
+  "engine": "P&Q AI Content Engine",
+  "note": "Desde 22-10-2026 produce vídeos de P&Q para empresas de instalaciones (antes: curiosidades). Estrategia en docs/11-ESTRATEGIA-EDITORIAL.md y verdad de producto en docs/12-VERDAD-PRODUCTO.md",
   "timezone": "Europe/Madrid",
-  "publish_time": "20:30",
-  "start_time": "04:30",
+  "publish_time": "08:30",
+  "produce": { "ahead_days": 1, "window": "10:00-21:00", "note": "El vídeo de cada día se produce la víspera (produce.yml con madrid-gate --next)" },
   "platforms": {
     "instagram": { "enabled": true, "note": "Activado 21-10-2026 por el propietario" },
-    "tiktok": { "enabled": true, "mode": "inbox", "privacy": "SELF_ONLY", "note": "Activado 21-10-2026 por el propietario: borrador en la bandeja de TikTok (un toque en la app). Publicar directo en público exige la auditoría de TikTok" }
+    "tiktok": { "enabled": true, "mode": "inbox", "privacy": "SELF_ONLY", "note": "Borrador en la bandeja de TikTok: hay que terminar la publicación en la app (NO es automático). Publicar directo en público exige la auditoría de TikTok" }
   },
-  "mix": { "espacio": 0.30, "coches": 0.25, "animales": 0.25, "tecnologia_historia": 0.20 },
-  "duration_s": { "min": 25, "max": 45 },
+  "audience": "Empresas de instalaciones y técnicos desplazados en España: electricistas, fontaneros, climatización y aerotermia, mantenimiento",
+  "mix": { "problema_real": 0.30, "demo_sistema": 0.20, "ia_explicada": 0.15, "noticia_ia": 0.10, "comparativa": 0.10, "jarvis": 0.05, "debate": 0.05, "caso_sector": 0.05 },
+  "duration_s": { "min": 25, "max": 50 },
   "quality_threshold": 90,
   "budget_eur": { "daily": 0, "monthly": 0 },
   "voice": { "engine": "voxcpm2", "reference": "assets/voice/narrador.wav", "tempo": 1.0 },

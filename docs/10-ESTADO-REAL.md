@@ -1,4 +1,17 @@
-# 10 · Estado real (21-10-2026, madrugada)
+# 10 · Estado real
+
+## 22-10-2026 (noche) · pasa a ser el P&Q AI CONTENT ENGINE
+| Pieza | Estado | Evidencia / qué falta |
+|---|---|---|
+| Línea editorial de curiosidades | **Retirada** | Agentes, configuración y comprobaciones pasan a P&Q para instaladores (docs/11 y 12). Los episodios 21-10 y 22-10 quedan como histórico; el del 22-10 NO se publica |
+| Kit ilustrado P&Q (`remotion/src/pq.tsx`, `pqworld.tsx`) | Probado en local (Windows) | Fotogramas revisados uno a uno; render en el runner Linux: ver run del 23-10 |
+| Episodio 2026-10-23 (escalera o teléfono) | Producido en local (idea, guion, voz, música, escena) | Render, QA, SENTINEL y release en produce.yml |
+| Horario | Implementado | publish 08:30 Madrid (cron 5-9 UTC); produce la víspera desde las 10:30 (`madrid-gate --next`). Tests 59/59 |
+| Instagram | En producción (publica solo) | Primer post del motor nuevo: 23-10 08:30 |
+| TikTok | Borrador en la bandeja (NO automático) | Hay que terminar la publicación en la app; público directo exige la auditoría de TikTok |
+| CTA «Comenta LLAMADA» | Respuesta manual | CONNECT (DM automático) sigue sin App Review: contesta una persona |
+
+## Histórico (21-10-2026, madrugada)
 
 Escala: **implementado** → **probado con mocks** → **probado con API real** → **autorizado** → **en producción**.
 
