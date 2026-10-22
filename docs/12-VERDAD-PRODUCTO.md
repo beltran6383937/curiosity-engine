@@ -23,6 +23,7 @@ Se vende el resultado («no pierdes la llamada», «el presupuesto sale el mismo
 | Análisis de conversaciones de llamadas | IDEA (no lanzada) | No se menciona |
 
 Demo pública para el CTA: https://pq-field-os-demo.onrender.com (servidor gratuito: la primera carga puede tardar un minuto).
+Web de la empresa (va en el cierre de cada vídeo): https://perezandquintano.es (REAL, en línea desde el 17-10-2026).
 
 ## Prohibido en cualquier vídeo o caption
 - Clientes, testimonios, casos de éxito, logos de empresas, cifras de resultados o ahorros que no existan con prueba.

@@ -145,10 +145,10 @@ export const Grain: React.FC = () => {
 // ---------- tipografía e interfaz (HTML, coordenadas de pantalla) ----------
 /** Rótulo fijo de honestidad: «RECREACIÓN», «DEMO · DATOS FICTICIOS» (arriba a la izquierda, siempre legible) */
 export const Label: React.FC<{ text: string; t: number; at?: number; c?: string }> = ({ text, t, at = 0, c = C.lino }) => (
-  <div style={{ position: "absolute", left: 64, top: 150, opacity: k(t, at, 0.4) * 0.92, fontFamily: MONO, fontSize: 24, letterSpacing: "0.18em", color: c, border: `2px solid ${c}`, borderRadius: 8, padding: "8px 14px", background: "rgba(12,17,23,0.55)" }}>{text}</div>
+  <div style={{ position: "absolute", left: 64, top: 230, opacity: k(t, at, 0.4) * 0.92, fontFamily: MONO, fontSize: 24, letterSpacing: "0.18em", color: c, border: `2px solid ${c}`, borderRadius: 8, padding: "8px 14px", background: "rgba(12,17,23,0.55)" }}>{text}</div>
 );
 /** Número de opción gigante en serif (1, 2, 3…) con su etiqueta */
-export const BigNum: React.FC<{ t: number; at: number; n: string; label: string; c?: string; x?: number; y?: number; until?: number }> = ({ t, at, n, label, c = C.oro, x = 70, y = 210, until = Infinity }) => {
+export const BigNum: React.FC<{ t: number; at: number; n: string; label: string; c?: string; x?: number; y?: number; until?: number }> = ({ t, at, n, label, c = C.oro, x = 70, y = 300, until = Infinity }) => {
   const s = useSpring(t, at, 12);
   const o = Math.min(k(t, at, 0.2), 1 - k(t, until - 0.3, 0.3));
   if (o <= 0) return null;
@@ -184,9 +184,12 @@ export const Headline: React.FC<{ t: number; at: number; text: string; x?: numbe
     </div>
   );
 };
-/** Nota de fuente (pequeña, legible, con su norma o enlace corto) */
-export const SourceNote: React.FC<{ t: number; at: number; text: string; y?: number; until?: number }> = ({ t, at, text, y = 560, until = Infinity }) => (
-  <div style={{ position: "absolute", left: 70, right: 120, top: y, opacity: Math.min(k(t, at, 0.4), 1 - k(t, until - 0.3, 0.3)), fontFamily: MONO, fontSize: 26, lineHeight: 1.35, color: C.lino, background: "rgba(12,17,23,0.7)", borderLeft: `4px solid ${C.oro}`, padding: "14px 20px", borderRadius: 6 }}>{text}</div>
+/** Nota de fuente: la norma en mono dorada y el texto legible en móvil. Que no tape al personaje. */
+export const SourceNote: React.FC<{ t: number; at: number; source: string; text: string; y?: number; until?: number }> = ({ t, at, source, text, y = 1100, until = Infinity }) => (
+  <div style={{ position: "absolute", left: 70, right: 70, top: y, opacity: Math.min(k(t, at, 0.4), 1 - k(t, until - 0.3, 0.3)), translate: `0 ${mix(24, 0, k(t, at, 0.4))}px`, background: "rgba(17,24,32,0.94)", border: `2px solid ${C.pizarra}`, padding: "18px 26px", borderRadius: 22, boxShadow: "0 20px 60px rgba(0,0,0,0.45)" }}>
+    <div style={{ fontFamily: MONO, fontSize: 24, letterSpacing: "0.12em", color: C.oro }}>{source}</div>
+    <div style={{ fontFamily: SANS, fontSize: 34, lineHeight: 1.25, color: C.luz, marginTop: 6 }}>{text}</div>
+  </div>
 );
 /** Tarjeta base de interfaz (sale con muelle desde abajo) */
 export const Card: React.FC<{ t: number; at: number; x: number; y: number; w: number; children: React.ReactNode; dark?: boolean; until?: number; from?: "up" | "down" | "left" | "right"; style?: React.CSSProperties }> = ({ t, at, x, y, w, children, dark, until = Infinity, from = "down", style }) => {
@@ -237,14 +240,13 @@ export const Bubble: React.FC<{ t: number; at: number; text: string; who: "clien
   const s = useSpring(t, at, 16);
   const o = Math.min(k(t, at, 0.15), 1 - k(t, until - 0.25, 0.25));
   if (o <= 0) return null;
-  const n = Math.ceil(k(t, at + 0.1, Math.max(0.35, text.length * 0.022), Easing.linear) * text.length);
   const right = who !== "cliente";
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, display: "flex", flexDirection: "column", alignItems: right ? "flex-end" : "flex-start", opacity: o, scale: `${mix(0.85, 1, s)}`, transformOrigin: right ? "right bottom" : "left bottom" }}>
       {label && <div style={{ fontFamily: MONO, fontSize: 22, color: right ? C.oro : C.linoSombra, marginBottom: 6, letterSpacing: "0.1em" }}>{label}</div>}
       <div style={{ maxWidth: w * 0.88, fontFamily: SANS, fontSize: 36, lineHeight: 1.25, padding: "18px 26px", borderRadius: 28, borderBottomRightRadius: right ? 6 : 28, borderBottomLeftRadius: right ? 28 : 6,
         background: who === "ia" ? C.oro : who === "yo" ? "#DCF3D8" : C.luz, color: C.noche, boxShadow: "0 14px 40px rgba(0,0,0,0.3)" }}>
-        {text.slice(0, n)}<span style={{ opacity: 0 }}>{text.slice(n)}</span>
+        {text}
       </div>
     </div>
   );
@@ -322,9 +324,9 @@ export const Tap: React.FC<{ t: number; at: number; x: number; y: number }> = ({
 export const CommentBox: React.FC<{ t: number; at: number; keyword: string; prompt?: string; y?: number }> = ({ t, at, keyword, prompt = "Añade un comentario…", y = 1080 }) => {
   const s = useSpring(t, at, 15);
   if (s <= 0) return null;
-  const n = Math.floor(k(t, at + 0.4, Math.max(0.6, keyword.length * 0.08), Easing.linear) * keyword.length);
+  const n = Math.ceil(k(t, at + 0.25, Math.max(0.35, keyword.length * 0.05), Easing.linear) * keyword.length);
   const caret = Math.floor(t * 2.5) % 2 === 0;
-  const sent = k(t, at + 0.6 + keyword.length * 0.08, 0.3);
+  const sent = k(t, at + 0.35 + keyword.length * 0.05, 0.3);
   return (
     <div style={{ position: "absolute", left: 110, right: 110, top: y, scale: `${s}`, background: C.luz, borderRadius: 36, padding: "30px 40px", fontFamily: SANS, boxShadow: "0 30px 80px rgba(0,0,0,0.5)" }}>
       <div style={{ fontSize: 30, fontWeight: 650, color: C.noche, textAlign: "center", marginBottom: 20 }}>Comentarios</div>

@@ -1,6 +1,6 @@
 {
  "date": "2026-10-23",
- "state": "NEEDS_ATTENTION",
+ "state": "RENDERING",
  "episode": "2026-10-23",
  "steps": {
   "RESEARCHING": {
@@ -20,24 +20,6 @@
    "attempts": 1,
    "startedAt": "2026-10-22T20:38:38.678Z",
    "doneAt": "2026-10-22T20:38:38.678Z"
-  },
-  "RENDERING": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-22T20:52:48.693Z",
-   "doneAt": "2026-10-22T20:54:54.649Z"
-  },
-  "QUALITY_CHECK": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-22T20:54:54.651Z",
-   "doneAt": "2026-10-22T20:54:58.785Z"
-  },
-  "VISUAL_REVIEW": {
-   "status": "failed",
-   "attempts": 3,
-   "startedAt": "2026-10-22T20:56:22.982Z",
-   "error": "SENTINEL rechaza (84): La caja de texto «RD 1215/1997 · …» tapa la cabeza del instalador y la mano que sujeta la lámpara queda flotando sin brazo (personaje deformado). Además es texto pequeño en monoespaciada, poco legible en móvil. | El contador «0» suelto entre los dos botones del gancho no se entiende en el primer fot"
   }
  },
  "platforms": {
@@ -76,6 +58,10 @@
   {
    "at": "2026-10-22T20:56:49.894Z",
    "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (84): La caja de texto «RD 1215/1997 · …» tapa la cabeza del instalador y la mano que sujeta la lámpara queda flotando sin brazo (personaje deformado). Además es texto pequeño en monoespaciada, poco legible en móvil. | El contador «0» suelto entre los dos botones del gancho no se entiende en el primer fot"
+  },
+  {
+   "at": "2026-10-22T21:10:20.574Z",
+   "msg": "claude-code: correcciones de SENTINEL (84) aplicadas en kit y escena; se reanuda desde RENDERING"
   }
  ]
 }

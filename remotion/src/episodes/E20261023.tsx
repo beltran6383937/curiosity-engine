@@ -30,9 +30,8 @@ const Hook: React.FC<SceneProps> = ({ t }) => (
       </Cam>
     </World>
     <Label text="RECREACIÓN" t={t} at={-1} />
-    <Chip t={t} at={-0.3} text="¿Cogerlo?" x={70} y={250} c={C.alerta} size={46} />
-    <div style={{ position: "absolute", left: 0, right: 0, top: 262, textAlign: "center", fontFamily: "'Instrument Serif', serif", fontStyle: "italic", fontSize: 64, color: C.lino, opacity: k(t, 0.15, 0.3) }}>o</div>
-    <Chip t={t} at={0.25} text="¿Dejarlo sonar?" x={1010} y={250} c={C.oro} size={46} align="right" />
+    <Chip t={t} at={-0.3} text="¿Cogerlo?" x={70} y={320} c={C.alerta} size={50} />
+    <Chip t={t} at={0.25} text="¿O dejarlo sonar?" x={1010} y={320} c={C.oro} size={50} align="right" />
   </AbsoluteFill>
 );
 
@@ -68,7 +67,7 @@ const OptionOne: React.FC<SceneProps> = ({ t, w }) => {
       <Flash t={t} at={tSuelo} />
       <Label text="RECREACIÓN" t={t} at={-1} />
       <BigNum t={t} at={0.05} n="1" label="Lo coges" c={C.alerta} />
-      <SourceNote t={t} at={w(2, /Sueltas/)} text="RD 1215/1997 · En una escalera de mano, siempre un punto de apoyo y de sujeción seguros." y={500} />
+      <SourceNote t={t} at={w(2, /Sueltas/)} source="RD 1215/1997 · ANEXO II 4.2.3" text="En una escalera de mano, siempre un punto de apoyo y de sujeción seguros." until={w(2, /mueve/)} />
     </AbsoluteFill>
   );
 };
@@ -83,11 +82,11 @@ const Cost: React.FC<SceneProps> = ({ t, w }) => {
           <Room t={t} />
           <Toolbox x={300} y={1560} open={0.3} />
           <Ladder x={LX} y={LY} tilt={-78} />
-          <Dim o={0.55} />
+          <Dim o={0.72} />
         </Cam>
       </World>
       <Label text="RECREACIÓN" t={t} at={-1} />
-      <Card t={t} at={tB - 0.1} x={110} y={240} w={860}>
+      <Card t={t} at={0.05} x={110} y={320} w={860}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
           <div style={{ fontFamily: MONO, fontSize: 24, letterSpacing: "0.16em", color: C.alerta }}>PARTE DE BAJA</div>
           <div style={{ fontFamily: MONO, fontSize: 22, color: C.pizarraClaro }}>SIN PODER TRABAJAR</div>
@@ -130,7 +129,7 @@ const OptionTwo: React.FC<SceneProps> = ({ t, w }) => {
       </World>
       <Label text="RECREACIÓN" t={t} at={-1} />
       <BigNum t={t} at={0.05} n="2" label="Lo dejas sonar" c={C.oro} />
-      <Toast t={t} at={tS + 0.15} app="Teléfono" title="Llamada perdida" body="Número desconocido" y={470} c={C.alerta} />
+      <Toast t={t} at={tS + 0.15} app="Teléfono" title="Llamada perdida" body="Número desconocido" y={570} w={520} c={C.alerta} />
     </AbsoluteFill>
   );
 };
@@ -143,19 +142,19 @@ const NewClient: React.FC<SceneProps> = ({ t, w }) => {
   return (
     <AbsoluteFill>
       <World>
-        <Cam x={540} y={mix(1000, 960, k(t, 0, 4))} z={mix(1.04, 1.1, k(t, 0, 5))}>
+        <Cam x={540} y={mix(830, 800, k(t, 0, 4))} z={mix(1.04, 1.1, k(t, 0, 5))}>
           <Kitchen t={t}>
             <Client x={540} y={1300} s={1.42} pose={pose} t={t} glow={1} />
           </Kitchen>
         </Cam>
       </World>
       <Label text="RECREACIÓN" t={t} at={-1} />
-      <CallCard t={t} at={-0.2} x={170} y={250} w={740} name="Electricidad Martín" state={t < tCu ? "llamando" : "colgada"} sub="Negocio ficticio" until={tG} />
-      <Chip t={t} at={tN - 0.1} text="Cliente nuevo" x={540} y={520} align="center" c={C.oro} solid until={tG} />
-      <ResultList t={t} at={tG - 0.2} y={210} query="electricista cerca" tap={1} tapAt={tap} gone={0} goneAt={tV - 0.3}
+      <CallCard t={t} at={-0.2} x={170} y={320} w={740} name="Electricidad Martín" state={t < tCu ? "llamando" : "colgada"} sub="Negocio ficticio" until={tG} />
+      <Chip t={t} at={tN - 0.1} text="Cliente nuevo" x={540} y={560} align="center" c={C.oro} solid until={tG} />
+      <ResultList t={t} at={tG - 0.2} y={300} query="electricista cerca" tap={1} tapAt={tap} gone={0} goneAt={tV - 0.9} until={tV - 0.05}
         items={[{ name: "Electricidad Martín", sub: "No contesta" }, { name: "Instalaciones Vega", sub: "Abierto ahora" }, { name: "Electro Norte", sub: "Abierto ahora" }]} />
-      <Tap t={t} at={tap} x={890} y={210 + 92 + 125 + 62} />
-      <Chip t={t} at={tV - 0.1} text="Cita con otro instalador" x={540} y={1180} align="center" c={C.alerta} />
+      <Tap t={t} at={tap} x={890} y={300 + 92 + 125 + 62} />
+      <Chip t={t} at={tV + 0.1} text="Cita con otro instalador" x={540} y={340} align="center" c={C.alerta} solid />
     </AbsoluteFill>
   );
 };
@@ -182,7 +181,7 @@ const OptionThree: React.FC<SceneProps> = ({ t, w }) => {
       <Bubble t={t} at={tP - 0.05} who="cliente" label="CLIENTE" text="Se me ha ido la luz en la cocina." x={90} y={620} w={860} until={tCi} />
       <Bubble t={t} at={tP + 0.75} who="ia" label="IA" text="¿Le va bien mañana a las 10:00?" x={130} y={800} w={860} until={tCi} />
       <AgendaCard t={t} at={tCi - 0.1} x={150} y={680} w={780} day="MAÑANA" time="10:00" title="Cocina sin luz" who="Marta · cliente ficticia" />
-      <Toast t={t} at={tW - 0.1} app="WhatsApp" title="Resumen de la llamada" body="Marta · cocina sin luz · mañana 10:00 · dirección guardada" y={250} c={C.ok} icon={<ChatGlyph />} />
+      <Toast t={t} at={tW - 0.1} app="WhatsApp" title="Resumen de la llamada" body="Marta · cocina sin luz · mañana 10:00 · dirección guardada" y={320} c={C.ok} icon={<ChatGlyph />} />
     </AbsoluteFill>
   );
 };
@@ -205,8 +204,8 @@ const Done: React.FC<SceneProps> = ({ t, w }) => {
         </Cam>
       </World>
       <Label text="DEMO · DATOS FICTICIOS" t={t} at={-1} c={C.oro} />
-      <Chip t={t} at={tH - 0.1} text="Trabajo hecho" x={540} y={250} align="center" c={C.oro} solid />
-      <AgendaCard t={t} at={tAg - 0.15} x={150} y={370} w={780} day="MAÑANA" time="10:00" title="Cocina sin luz" who="Cliente nuevo · ficticio" tag="+1 CLIENTE EN LA AGENDA" />
+      <Chip t={t} at={tH - 0.1} text="Trabajo hecho" x={540} y={320} align="center" c={C.oro} solid />
+      <AgendaCard t={t} at={tAg - 0.15} x={150} y={440} w={780} day="MAÑANA" time="10:00" title="Cocina sin luz" who="Cliente nuevo · ficticio" tag="+1 CLIENTE EN LA AGENDA" />
     </AbsoluteFill>
   );
 };
@@ -215,8 +214,8 @@ const Done: React.FC<SceneProps> = ({ t, w }) => {
 const End: React.FC<SceneProps> = ({ t, w }) => (
   <AbsoluteFill>
     <EndCard t={t} at={0} text="Lo estamos montando *para instaladores.*" />
-    <CommentBox t={t} at={w(11, /Comenta/) - 0.1} keyword="LLAMADA" prompt="Te enseñamos la demo" y={1010} />
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1420, textAlign: "center", fontFamily: MONO, fontSize: 22, letterSpacing: "0.1em", color: C.lino, opacity: 0.55 * inout(t, 0.6, 99) }}>RECREACIÓN FICTICIA · VOZ GENERADA CON IA</div>
+    <CommentBox t={t} at={w(11, /Comenta/) - 0.5} keyword="LLAMADA" prompt="Te enseñamos la demo" y={1010} />
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1400, textAlign: "center", fontFamily: MONO, fontSize: 28, letterSpacing: "0.1em", color: C.lino, opacity: 0.85 * inout(t, 0.6, 99) }}>RECREACIÓN FICTICIA · VOZ GENERADA CON IA</div>
   </AbsoluteFill>
 );
 

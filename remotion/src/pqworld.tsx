@@ -64,6 +64,7 @@ export const Worker: React.FC<{ x: number; y: number; s?: number; pose: Pose; ro
     <g transform={`translate(${x} ${y}) rotate(${r}) scale(${flip ? -s : s} ${s})`}>
       <Limb s={[-6, 0]} e={kF} h={fF} w={44} c={PANTS_D} />
       <Boot p={fF} c="#2A1E17" />
+      <Limb s={sh} e={eF} h={hF} w={40} c="#56646F" /> {/* contorno: sin él el brazo de atrás desaparece contra la pared oscura */}
       <Limb s={sh} e={eF} h={hF} w={32} c={JACKET_D} />
       <circle cx={hF[0]} cy={hF[1]} r={15} fill={SKIN_D} />
       <g transform={`rotate(${pose.lean})`}>
