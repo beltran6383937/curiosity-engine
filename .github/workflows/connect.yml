@@ -1,0 +1,34 @@
+# CONNECT: cada 15 min responde por DM a quien comente la palabra clave del CTA (pipeline/connect.mjs).
+# Con connect.mode = off (config/engine.json) termina tras el checkout. Respeta data/STOP.
+# Grupo propio: no espera a una producción de 2 h; el registro (data/connect.json) solo lo toca este workflow.
+# Si falla, abre como mucho un issue «alerta» al día (marca data/alerts/connect-<fecha>).
+name: connect
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+concurrency: { group: curiosity-engine-connect, cancel-in-progress: false }
+permissions: { contents: write, issues: write }
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { ref: main }
+      - id: gate
+        run: node -e "const m=(require('./config/engine.json').connect||{}).mode;console.log('go='+(m==='test'||m==='live'))" >> "$GITHUB_OUTPUT"
+      - if: steps.gate.outputs.go == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with: { node-version: 24 }
+      - if: steps.gate.outputs.go == 'true'
+        name: Responder comentarios
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          CONNECT_HMAC_KEY: ${{ secrets.CONNECT_HMAC_KEY }}
+        run: node pipeline/connect.mjs
+      - if: always() && steps.gate.outputs.go == 'true'
+        name: Guardar registro (y alertas → issues)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: bash pipeline/save-state.sh "connect" data/connect.json

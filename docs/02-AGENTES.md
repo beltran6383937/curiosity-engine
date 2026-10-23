@@ -16,7 +16,7 @@ Los 14 agentes son **subagentes nativos de Claude Code** definidos en `.claude/a
 | CUT | Edición y render | script (job build) | escena + audio → MP4 | `pipeline/render.mjs` |
 | SENTINEL | Calidad (veto) | Read + su informe | MP4 + fotogramas → `quality.json` | `pipeline/qa.mjs` (técnico) + revisión visual con Claude |
 | PUBLISHER | Distribución | script (job publish) | MP4 READY → enlaces reales | `pipeline/publishers.mjs` |
-| CONNECT | Comentarios/DM | script (sin modelo) | comentarios con palabra clave → respuesta privada | `pipeline/connect.mjs`, **desactivado** hasta App Review |
+| CONNECT | Comentarios/DM | script (sin modelo) | comentarios con palabra clave → DM con la info de P&Q + respuesta pública | `pipeline/connect.mjs` + `connect.yml` (cada 15 min), `connect.mode: off` hasta App Review |
 | INSIGHT | Analítica | script | métricas API → `data/insights.json` | `pipeline/insights.mjs` |
 
 ## Coordinación

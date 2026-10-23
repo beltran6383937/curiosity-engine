@@ -14,5 +14,15 @@
   "quality_threshold": 90,
   "budget_eur": { "daily": 0, "monthly": 0 },
   "voice": { "engine": "voxcpm2", "reference": "assets/voice/narrador.wav", "tempo": 1.0 },
-  "max_attempts": 3
+  "max_attempts": 3,
+  "connect": {
+    "mode": "off",
+    "note": "DM automático a quien comente la palabra clave del CTA (pipeline/connect.mjs, workflow connect.yml cada 15 min). off · test (solo responde a las cuentas de testers: para grabar el vídeo de App Review) · live (tras aprobar Meta el acceso avanzado). {url} = resource_url del CTA del episodio, {keyword} = su palabra clave",
+    "testers": [],
+    "window_days": 6,
+    "reel_days": 90,
+    "max_per_run": 50,
+    "dm": "¡Hola! 👋 Aquí tienes la demo de la recepción con IA que has pedido:\n{url}\n\nEntra como «Dirección» (es una empresa inventada, con datos ficticios) y prueba una llamada en «Llamadas». La primera vez puede tardar un minuto en abrir.\n\nSomos Pérez & Quintano, socio tecnológico de empresas de instalaciones: webs que captan clientes, automatización de tareas repetitivas y, lo que estamos montando ahora, una IA que coge el teléfono, da cita y te lo resume por WhatsApp.\n\nTodo sobre nosotros: https://perezandquintano.es\n\n¿Lo vemos aplicado a tu empresa en una videollamada de 15 minutos? Contesta a este mensaje con el día y si te va mejor mañana o tarde.\n\nMensaje automático por tu comentario «{keyword}». Si respondes, te contesta Beltrán, en persona.",
+    "public_replies": ["¡Te lo acabamos de mandar por privado! 📩", "Enviado por privado, mira tus mensajes 📩", "¡Listo! Lo tienes en tus mensajes 📩"]
+  }
 }

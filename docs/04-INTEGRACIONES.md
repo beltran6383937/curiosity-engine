@@ -16,6 +16,32 @@
    `gh secret set IG_ACCESS_TOKEN -R <repo>` (lo pega en la terminal, oculto) y `gh secret set IG_USER_ID -R <repo>`.
 4. Activa `platforms.instagram.enabled: true` en `config/engine.json`.
 
+### CONNECT: DM automático por palabra clave (Private Replies)
+
+- **Flujo** (`pipeline/connect.mjs`, workflow `connect.yml` cada 15 min): lee los comentarios de los últimos 6 días
+  (plazo de Meta: 7) en los Reels con CTA de los últimos 90 días (`GET /{media}/comments`, paginado) → a quien escribe la palabra clave le manda `connect.dm` por privado
+  (`POST /{ig-user-id}/messages` con `recipient.comment_id`) → contesta en público con una frase corta rotada.
+- **Garantías**: un DM por persona y recurso; nunca a la propia cuenta; Meta solo admite un private reply por comentario
+  y en 7 días (un reintento no duplica); registro público solo con huellas HMAC (`CONNECT_HMAC_KEY`); token caducado,
+  límites o 3 fallos seguidos → para la pasada sin dar por perdido a nadie y abre como mucho un issue «alerta» al día; respeta `data/STOP`.
+- **Modos** (`connect.mode` en `config/engine.json`): `off` · `test` (solo `connect.testers`) · `live`.
+
+#### Activarlo (lo haces tú; Meta no deja hacerlo por API)
+
+1. **Secreto de huellas** (una vez): `node -e "process.stdout.write(require('crypto').randomBytes(32).toString('hex'))" | gh secret set CONNECT_HMAC_KEY -R beltran6383937/curiosity-engine`
+2. **Instagram, en el móvil**: Configuración → Mensajes y respuestas a historias → Controles de mensajes → Herramientas conectadas → **Permitir acceso a los mensajes**.
+3. **Permisos en la app** «PQ Curiosity Engine» (developers.facebook.com → Casos de uso → Instagram → Personalizar): añadir
+   `instagram_business_manage_comments` e `instagram_business_manage_messages`. **Regenerar el token** en «Generate access tokens»
+   (el actual solo tiene basic + content_publish) y guardarlo: `gh secret set IG_ACCESS_TOKEN -R beltran6383937/curiosity-engine`.
+4. **Prueba en modo test**: crear o usar una cuenta de Instagram secundaria, darle rol de tester en la app (Roles de la app → Instagram Testers,
+   y aceptar la invitación en Instagram → Configuración → Apps y sitios web), poner su usuario en `connect.testers` y `connect.mode: "test"`.
+   Comentar LLAMADA en un Reel desde esa cuenta y comprobar el DM y la respuesta pública (o lanzar `connect` a mano en Actions).
+5. **Verificación del negocio** en Meta Business (Configuración del negocio → Centro de seguridad): datos fiscales de P&Q.
+6. **App Review** (Revisión de la app → Permisos y funciones): pedir **acceso avanzado** para los dos permisos. Para cada uno: para qué
+   se usa («responder por privado, una vez, a quien comenta una palabra clave pidiendo la demo») y un **vídeo de pantalla** del paso 4
+   de principio a fin. La app necesita icono, categoría, URL de política de privacidad (perezandquintano.es) e instrucciones de borrado de datos.
+7. Aprobado → `connect.mode: "live"`, vaciar `testers` y actualizar `docs/12-VERDAD-PRODUCTO.md` (hoy prohíbe prometer respuestas automáticas).
+
 ## TikTok: Content Posting API
 
 - **Flujo**: `creator_info/query` → `video/init` (`FILE_UPLOAD`, un trozo si pesa menos de 64 MB, `is_aigc: true`) → `PUT upload_url` → `status/fetch` hasta `PUBLISH_COMPLETE`.

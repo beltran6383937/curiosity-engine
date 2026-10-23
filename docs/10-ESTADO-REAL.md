@@ -9,7 +9,7 @@
 | Horario | Implementado | publish 08:30 Madrid (cron 5-9 UTC); produce la víspera desde las 10:30 (`madrid-gate --next`). Tests 59/59 |
 | Instagram | En producción (publica solo) | Primer post del motor nuevo: 23-10 08:30 |
 | TikTok | Borrador en la bandeja (NO automático) | Hay que terminar la publicación en la app; público directo exige la auditoría de TikTok |
-| CTA «Comenta LLAMADA» | Respuesta manual | CONNECT (DM automático) sigue sin App Review: contesta una persona |
+| CTA «Comenta LLAMADA» | Respuesta manual | 23-10: CONNECT reescrito (DM completo + respuesta pública, workflow `connect.yml` cada 15 min, tests). `connect.mode: off` hasta los pasos de docs/04 (secreto, permisos, token nuevo, App Review). Hasta entonces contesta una persona |
 
 ## Histórico (21-10-2026, madrugada)
 
