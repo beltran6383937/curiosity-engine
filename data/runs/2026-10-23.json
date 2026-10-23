@@ -1,6 +1,6 @@
 {
  "date": "2026-10-23",
- "state": "READY",
+ "state": "PUBLISHED",
  "episode": "2026-10-23",
  "steps": {
   "RESEARCHING": {
@@ -42,12 +42,21 @@
  },
  "platforms": {
   "instagram": {
-   "status": "pending",
-   "attempts": 0
+   "status": "published",
+   "attempts": 1,
+   "containerId": "18148571374522590",
+   "mediaId": "18176776825453369",
+   "id": "18176776825453369",
+   "permalink": "https://www.instagram.com/reel/De1HqppD-PM/",
+   "publishedAt": "2026-10-23T08:23:44.549Z"
   },
   "tiktok": {
-   "status": "pending",
-   "attempts": 0
+   "status": "inbox",
+   "attempts": 1,
+   "publishId": "v_inbox_file~v2.7699775656369768470",
+   "uploaded": true,
+   "id": "v_inbox_file~v2.7699775656369768470",
+   "inboxAt": "2026-10-23T08:24:14.374Z"
   }
  },
  "scriptHash": "ec955bb754f3d8b932f6301e2ca6e015862e36301bd23232e6e2e927f6b18a8d",
@@ -116,6 +125,14 @@
   {
    "at": "2026-10-22T21:41:52.916Z",
    "msg": "VISUAL_REVIEW ok"
+  },
+  {
+   "at": "2026-10-23T08:23:44.549Z",
+   "msg": "instagram publicado: https://www.instagram.com/reel/De1HqppD-PM/"
+  },
+  {
+   "at": "2026-10-23T08:24:14.374Z",
+   "msg": "tiktok en la bandeja (falta publicarlo en la app): v_inbox_file~v2.7699775656369768470"
   }
  ],
  "quality": 90
