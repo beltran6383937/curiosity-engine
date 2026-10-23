@@ -48,7 +48,7 @@ test("el DM de la config: recurso y palabra clave, se identifica como automátic
   assert.match(m, /example\.com\/demo/); assert.match(m, /«LLAMADA»/); assert.match(m, /automático/); assert.match(m, /perezandquintano\.es/);
   assert.ok(!/\{(url|keyword)\}/.test(m)); assert.ok(Buffer.byteLength(m) <= 1000, `${Buffer.byteLength(m)} bytes`);
   assert.ok(/datos ficticios/.test(m) && !/precio|€/i.test(m)); // verdad de producto: demo rotulada, sin precios
-  assert.equal(cfg.mode, "off"); // no se activa sin App Review (o en test con testers)
+  assert.ok(cfg.mode === "off" || (cfg.mode === "test" && cfg.testers.length > 0)); // live solo tras App Review (cambio consciente de este test)
   assert.equal(publicReply("x", cfg.public_replies), publicReply("x", cfg.public_replies));
   assert.ok(cfg.public_replies.every((r) => !matches(r, cta.keyword))); // la respuesta pública no se responde a sí misma
 });

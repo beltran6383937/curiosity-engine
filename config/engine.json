@@ -16,9 +16,9 @@
   "voice": { "engine": "voxcpm2", "reference": "assets/voice/narrador.wav", "tempo": 1.0 },
   "max_attempts": 3,
   "connect": {
-    "mode": "off",
+    "mode": "test",
     "note": "DM automático a quien comente la palabra clave del CTA (pipeline/connect.mjs, workflow connect.yml cada 15 min). off · test (solo responde a las cuentas de testers: para grabar el vídeo de App Review) · live (tras aprobar Meta el acceso avanzado). {url} = resource_url del CTA del episodio, {keyword} = su palabra clave",
-    "testers": [],
+    "testers": ["beltranperezzz"],
     "window_days": 6,
     "reel_days": 90,
     "max_per_run": 50,
