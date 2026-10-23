@@ -1,0 +1,21 @@
+# Ideas 2026-10-24 (NOVA + HOOK)
+
+Pilar: **demo_sistema** (20 % del mix, aún sin publicar; ayer problema_real). Sin `data/insights.json` ni `data/catalog.json`: las notas son juicio de NOVA, no métricas.
+Puntuación 1-10: originalidad · relevancia comercial · retención · utilidad · viabilidad (total /50). Ganchos solo de `assets/hooks/hooks.md`.
+
+| # | Idea (pilar) | Gancho A | Gancho B | Gancho C | O | C | R | U | V | Total |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | **El parte que se escribe a las 22:00** (demo_sistema): una fontanera cierra el parte desde el móvil en la puerta del cliente; otro técnico lo rellena de noche en la cocina | #01 «Ella cierra el parte en la puerta del cliente. Él lo escribe a las 22:00 en la cocina. ¿Quién crees que cena antes?» | #08 «Deja de rellenar partes de noche. A las 22:00 ya no te acuerdas de qué material pusiste.» | #75 «No arranques la furgoneta hasta que el parte esté cerrado.» | 6 | 8 | 8 | 8 | 8 | **38** |
+| 2 | El hueco de las 11:00 (demo_sistema): un cliente cancela, la agenda detecta el hueco y propone cubrirlo | #46 «Esto es lo que quieres ver cuando un cliente te cancela la de las 11:00.» | #17 «¿Cuántas veces se te queda una furgoneta parada por una cancelación? ¿Una a la semana? ¿Tres? ¿Ni lo sabes?» | #28 «¿Desde cuándo una agenda hace esto? Cancelan la de las 11:00 y te propone cómo llenar el hueco.» | 7 | 9 | 7 | 6 | 7 | 36 |
+| 3 | El presupuesto que nadie persigue (demo_sistema): se envía y hay silencio; el sistema hace el seguimiento | #04 «No contesta, se le recuerda. Sigue sin contestar, se le vuelve a preguntar. Dice que no, se cierra y lo sabes.» | #56 «Cuando un presupuesto no contesta, casi todos esperan a que llame el cliente. Te cuento por qué eso lo enfría.» | #08 «Deja de mandar presupuestos y quedarte esperando. Muchas veces el silencio es solo que nadie ha vuelto a preguntar.» | 4 | 9 | 6 | 7 | 8 | 34 |
+| 4 | El contrato de mantenimiento que se pierde en la libreta (demo_sistema + caso_sector): la demo avisa de las revisiones que caducan | #52 «Si llevas mantenimientos de clima o aerotermia, mira ahora mismo cuándo caduca cada uno.» | #38 «Solo hay 2 tipos de contrato de mantenimiento: los que se renuevan y los que se pierden en una libreta.» | #54 «Hay una fecha que se te escapa en cada contrato de mantenimiento: la de la próxima revisión.» | 8 | 7 | 6 | 8 | 5 | 34 |
+| 5 | Primer día en una obra a 200 km (demo_sistema): la orden de trabajo reúne dirección, contacto y material en una pantalla | #46 «Esto es lo que quieres ver cuando te toca una obra a 200 km.» | #71 «Nunca salgas a una obra a 200 km sin estas 3 cosas en una pantalla: dirección, contacto y material.» | #18 «Soy técnico, mañana tengo una obra a 200 km, y esto es todo lo que sé de ella.» | 8 | 6 | 7 | 7 | 7 | 35 |
+
+**Elegida: 1**, gancho **#01** (mayor total, 38). Contrasta dos escenas visuales y acaba en pregunta; solo usa «parte del técnico en el móvil», que docs/12 admite como DEMO. Cambia de tema respecto a ayer (llamadas).
+Reserva: idea 2 con #28 (sin «ella sola», rótulo DEMO). La 3 se solapa con «El presupuesto que llega tarde» de la cola. La 4 queda aparcada: HAWKING solo respalda con fuente (RITE, BOE-A-2007-15820) empresa mantenedora habilitada, contrato obligatorio a partir de 70 kW, programa preventivo y registro de operaciones; las periodicidades de clima y aerotermia (tabla 3.1 de la IT 3) no están verificadas.
+
+## Revisión de VERITAS (idea 1)
+- Recreación (fontanera, técnico, cocina, puerta, 22:00): **verified** con condiciones: rótulo `RECREACIÓN · personajes ficticios` en todos los planos de la historia, sin cifras, sin marcas ni logos, técnico retratado con respeto, y el parte se cierra a pie, nunca conduciendo.
+- Parte del técnico en el móvil como DEMO (docs/12): **verified**; rótulo `DEMO · DATOS FICTICIOS`, «lo estamos montando» / «te enseñamos la demo».
+- Foto, materiales y firma del cliente en la demo: **no verificado**. No se afirman ni se dibujan como función; la pantalla del móvil será captura real de la demo o ilustración genérica sin campos concretos.
+- CTA: la demo pública devolvió HTTP 503 en 7 intentos, así que `resource_checked` no puede ser `true`. Hasta comprobarla, el CTA debe ser la videollamada (también recurso real según docs/11) o esperar a un nuevo chequeo. Pendiente para la fase de guion.

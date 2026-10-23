@@ -1,0 +1,68 @@
+[
+  {
+    "id": "parte-22h",
+    "category": "demo_sistema",
+    "title": "El parte que se escribe a las 22:00",
+    "hooks": [
+      {"n": 1, "text": "Ella cierra el parte en la puerta del cliente. Él lo escribe a las 22:00 en la cocina. ¿Quién crees que cena antes?", "chosen": true},
+      {"n": 8, "text": "Deja de rellenar partes de noche. A las 22:00 ya no te acuerdas de qué material pusiste.", "chosen": false},
+      {"n": 75, "text": "No arranques la furgoneta hasta que el parte esté cerrado.", "chosen": false}
+    ],
+    "scores": {"originalidad": 6, "comercial": 8, "retencion": 8, "utilidad": 8, "viabilidad": 8},
+    "total": 38,
+    "chosen": true
+  },
+  {
+    "id": "hueco-11h",
+    "category": "demo_sistema",
+    "title": "El hueco de las 11:00",
+    "hooks": [
+      {"n": 46, "text": "Esto es lo que quieres ver cuando un cliente te cancela la de las 11:00.", "chosen": false},
+      {"n": 17, "text": "¿Cuántas veces se te queda una furgoneta parada por una cancelación? ¿Una a la semana? ¿Tres? ¿Ni lo sabes?", "chosen": false},
+      {"n": 28, "text": "¿Desde cuándo una agenda hace esto? Cancelan la de las 11:00 y te propone cómo llenar el hueco.", "chosen": false}
+    ],
+    "scores": {"originalidad": 7, "comercial": 9, "retencion": 7, "utilidad": 6, "viabilidad": 7},
+    "total": 36,
+    "chosen": false
+  },
+  {
+    "id": "obra-200km",
+    "category": "demo_sistema",
+    "title": "Primer día en una obra a 200 km",
+    "hooks": [
+      {"n": 46, "text": "Esto es lo que quieres ver cuando te toca una obra a 200 km.", "chosen": false},
+      {"n": 71, "text": "Nunca salgas a una obra a 200 km sin estas 3 cosas en una pantalla: dirección, contacto y material.", "chosen": false},
+      {"n": 18, "text": "Soy técnico, mañana tengo una obra a 200 km, y esto es todo lo que sé de ella.", "chosen": false}
+    ],
+    "scores": {"originalidad": 8, "comercial": 6, "retencion": 7, "utilidad": 7, "viabilidad": 7},
+    "total": 35,
+    "chosen": false
+  },
+  {
+    "id": "presupuesto-sin-seguimiento",
+    "category": "demo_sistema",
+    "title": "El presupuesto que nadie persigue",
+    "hooks": [
+      {"n": 4, "text": "No contesta, se le recuerda. Sigue sin contestar, se le vuelve a preguntar. Dice que no, se cierra y lo sabes.", "chosen": false},
+      {"n": 56, "text": "Cuando un presupuesto no contesta, casi todos esperan a que llame el cliente. Te cuento por qué eso lo enfría.", "chosen": false},
+      {"n": 8, "text": "Deja de mandar presupuestos y quedarte esperando. Muchas veces el silencio es solo que nadie ha vuelto a preguntar.", "chosen": false}
+    ],
+    "scores": {"originalidad": 4, "comercial": 9, "retencion": 6, "utilidad": 7, "viabilidad": 8},
+    "total": 34,
+    "chosen": false
+  },
+  {
+    "id": "mantenimiento-libreta",
+    "category": "demo_sistema",
+    "title": "El contrato de mantenimiento que se pierde en la libreta",
+    "hooks": [
+      {"n": 52, "text": "Si llevas mantenimientos de clima o aerotermia, mira ahora mismo cuándo caduca cada uno.", "chosen": false},
+      {"n": 38, "text": "Solo hay 2 tipos de contrato de mantenimiento: los que se renuevan y los que se pierden en una libreta.", "chosen": false},
+      {"n": 54, "text": "Hay una fecha que se te escapa en cada contrato de mantenimiento: la de la próxima revisión.", "chosen": false}
+    ],
+    "scores": {"originalidad": 8, "comercial": 7, "retencion": 6, "utilidad": 8, "viabilidad": 5},
+    "total": 34,
+    "chosen": false,
+    "note": "RITE (BOE-A-2007-15820): solo respaldado empresa mantenedora habilitada, contrato obligatorio desde 70 kW, programa preventivo y registro de operaciones; periodicidades de la tabla 3.1 sin verificar"
+  }
+]
