@@ -1,166 +1,148 @@
 {
- "date": "2026-10-24",
- "state": "NEEDS_ATTENTION",
- "episode": "2026-10-24",
- "steps": {
-  "RESEARCHING": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-23T13:45:18.253Z",
-   "doneAt": "2026-10-23T13:49:04.476Z"
+  "date": "2026-10-24",
+  "state": "FAILED",
+  "episode": "2026-10-24",
+  "steps": {
+    "RESEARCHING": {
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-10-23T13:45:18.253Z",
+      "doneAt": "2026-10-23T13:49:04.476Z"
+    },
+    "SCRIPTING": {
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-10-23T17:54:28.109Z",
+      "doneAt": "2026-10-23T17:58:16.300Z"
+    },
+    "VOICE": {
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-10-23T18:43:06.545Z",
+      "doneAt": "2026-10-23T18:48:53.981Z"
+    }
   },
-  "SCRIPTING": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-23T17:54:28.109Z",
-   "doneAt": "2026-10-23T17:58:16.300Z"
+  "platforms": {
+    "instagram": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "tiktok": {
+      "status": "pending",
+      "attempts": 0
+    }
   },
-  "VOICE": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-23T18:43:06.545Z",
-   "doneAt": "2026-10-23T18:48:53.981Z"
-  },
-  "RENDERING": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-24T09:20:09.021Z",
-   "doneAt": "2026-10-24T09:22:17.194Z"
-  },
-  "QUALITY_CHECK": {
-   "status": "done",
-   "attempts": 1,
-   "startedAt": "2026-10-24T09:22:17.196Z",
-   "doneAt": "2026-10-24T09:22:21.891Z"
-  },
-  "VISUAL_REVIEW": {
-   "status": "failed",
-   "attempts": 3,
-   "startedAt": "2026-10-24T09:23:30.605Z",
-   "error": "SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
-  }
- },
- "platforms": {
-  "instagram": {
-   "status": "pending",
-   "attempts": 0
-  },
-  "tiktok": {
-   "status": "pending",
-   "attempts": 0
-  }
- },
- "log": [
-  {
-   "at": "2026-10-23T13:49:04.476Z",
-   "msg": "RESEARCHING ok"
-  },
-  {
-   "at": "2026-10-23T14:16:09.805Z",
-   "msg": "SCRIPTING falló (1/3): el guion no pasa la comprobación: ✖ 2026-10-24\n - no hay escena con export const id = \"2026-10-24\" en remotion/src/episodes\n"
-  },
-  {
-   "at": "2026-10-23T14:16:30.803Z",
-   "msg": "SCRIPTING falló (2/3): Command failed: claude -p Eres ATLAS. Episodio 2026-10-24: usa hook (guion con el gancho elegido de assets/hooks/hooks.md), veritas (revisión del guion y de docs/12-VERDAD-PRODUCTO.md), vision (storyboard.md) y motion (remotion/src/episodes/E20261024.tsx con el kit ../pq y ../pqworld, referencia E20261023.tsx, export const id = \"2026-10-24\" y export default; solo imports de paquetes y de ../ del proyecto, nada de loaders ni require dinámico). Completa publication (nova). Cumple las reglas de pip"
-  },
-  {
-   "at": "2026-10-23T14:16:32.143Z",
-   "msg": "SCRIPTING falló (3/3): Command failed: claude -p Eres ATLAS. Episodio 2026-10-24: usa hook (guion con el gancho elegido de assets/hooks/hooks.md), veritas (revisión del guion y de docs/12-VERDAD-PRODUCTO.md), vision (storyboard.md) y motion (remotion/src/episodes/E20261024.tsx con el kit ../pq y ../pqworld, referencia E20261023.tsx, export const id = \"2026-10-24\" y export default; solo imports de paquetes y de ../ del proyecto, nada de loaders ni require dinámico). Completa publication (nova). Cumple las reglas de pip"
-  },
-  {
-   "at": "2026-10-23T17:54:04.578Z",
-   "by": "claude-code",
-   "msg": "reintento manual: SCRIPTING falló por límite de sesión de Claude (no por el guion)"
-  },
-  {
-   "at": "2026-10-23T17:58:16.300Z",
-   "msg": "SCRIPTING ok"
-  },
-  {
-   "at": "2026-10-23T18:48:53.981Z",
-   "msg": "VOICE ok"
-  },
-  {
-   "at": "2026-10-23T18:51:36.231Z",
-   "msg": "RENDERING ok"
-  },
-  {
-   "at": "2026-10-23T18:51:41.545Z",
-   "msg": "QUALITY_CHECK ok"
-  },
-  {
-   "at": "2026-10-23T18:52:43.179Z",
-   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (66): El primer fotograma muestra dos escenas apiladas (exterior arriba, cocina abajo) con furgoneta cortada en el borde; el gancho no se lee a la primera y parece un fallo de transición/layout. | Personaje dentro de un recuadro/ventana con la pierna cortada por el marco; escena poco legible y la pose no "
-  },
-  {
-   "at": "2026-10-23T18:53:10.441Z",
-   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (66): El primer fotograma muestra dos escenas apiladas (exterior arriba, cocina abajo) con la furgoneta cortada en el borde; el gancho no se lee a la primera y parece un fallo de layout. El subtítulo «Ella cierra» tapa la cabeza del personaje de abajo. | Personaje dentro de un recuadro/ventana con la pier"
-  },
-  {
-   "at": "2026-10-23T18:53:41.005Z",
-   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (64): El primer fotograma apila dos escenas (exterior arriba, cocina abajo) con la furgoneta cortada en el borde izquierdo; el gancho no se lee a la primera. El subtítulo «Ella cierra» tapa la cabeza del personaje de la cocina. | Personaje dentro de un recuadro/ventana con la pierna cortada por el marco; "
-  },
-  {
-   "at": "2026-10-24T09:00:46.328Z",
-   "msg": "RENDERING ok"
-  },
-  {
-   "at": "2026-10-24T09:00:52.700Z",
-   "msg": "QUALITY_CHECK ok"
-  },
-  {
-   "at": "2026-10-24T09:02:01.812Z",
-   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (72): Primer fotograma: pantalla partida sin ningún texto de gancho (solo «En la puerta» y el subtítulo «Ella cierra»); la pregunta «¿Quién cena antes?» no se ve. El subtítulo tapa la cara/torso del técnico de la mitad inferior. | Subtítulo «Él termina la» tapa las piernas y la caja de herramientas; el pe"
-  },
-  {
-   "at": "2026-10-24T09:02:36.655Z",
-   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (68): Primer fotograma: pantalla partida (puerta arriba, cocina abajo) sin texto de gancho; solo «En la puerta» y el subtítulo «Ella cierra». El gancho no se cuenta en el primer fotograma. El subtítulo tapa la cara y el torso del técnico de la mitad inferior. | El subtítulo «Él termina la» tapa las pierna"
-  },
-  {
-   "at": "2026-10-24T09:03:09.785Z",
-   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (68): Primer fotograma: pantalla partida (puerta arriba, cocina abajo) con solo «En la puerta» y el subtítulo «Ella cierra». No cuenta el gancho (la pregunta «¿Quién cena antes?» / el contraste 22:00). El subtítulo tapa la cara y el torso del técnico de la mitad inferior. | El subtítulo «Él termina la» ta"
-  },
-  {
-   "at": "2026-10-24T09:12:36.468Z",
-   "msg": "RENDERING ok"
-  },
-  {
-   "at": "2026-10-24T09:12:42.772Z",
-   "msg": "QUALITY_CHECK ok"
-  },
-  {
-   "at": "2026-10-24T09:13:44.007Z",
-   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (74): La tarjeta «Parte» flotante tapa el torso y la cabeza de la técnica (solo se ven las piernas): personaje decapitado/ilegible justo en el plano que explica la solución. La tarjeta no está sobre un móvil, y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta "
-  },
-  {
-   "at": "2026-10-24T09:14:23.868Z",
-   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (74): La tarjeta «Parte» tapa cabeza y torso de la técnica (solo se ven las piernas) justo en el plano que explica la solución. La tarjeta no está sobre un móvil y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta con el check oculta al personaje. Además el rót"
-  },
-  {
-   "at": "2026-10-24T09:14:53.721Z",
-   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (74): La tarjeta «Parte» tapa cabeza y torso de la técnica (solo se ven las piernas) justo en el plano que explica la solución. La tarjeta no está sobre un móvil y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta con el check oculta al personaje. Además el rót"
-  },
-  {
-   "at": "2026-10-24T09:22:17.194Z",
-   "msg": "RENDERING ok"
-  },
-  {
-   "at": "2026-10-24T09:22:21.891Z",
-   "msg": "QUALITY_CHECK ok"
-  },
-  {
-   "at": "2026-10-24T09:23:08.898Z",
-   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
-  },
-  {
-   "at": "2026-10-24T09:23:30.604Z",
-   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
-  },
-  {
-   "at": "2026-10-24T09:23:56.174Z",
-   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
-  }
- ],
- "scriptHash": "6ba2277ef4e67f2ed5d868d21cc8499de46c7006f734101f8e3377b3236c5f5f",
- "duration": 37.42
+  "log": [
+    {
+      "at": "2026-10-23T13:49:04.476Z",
+      "msg": "RESEARCHING ok"
+    },
+    {
+      "at": "2026-10-23T14:16:09.805Z",
+      "msg": "SCRIPTING falló (1/3): el guion no pasa la comprobación: ✖ 2026-10-24\n - no hay escena con export const id = \"2026-10-24\" en remotion/src/episodes\n"
+    },
+    {
+      "at": "2026-10-23T14:16:30.803Z",
+      "msg": "SCRIPTING falló (2/3): Command failed: claude -p Eres ATLAS. Episodio 2026-10-24: usa hook (guion con el gancho elegido de assets/hooks/hooks.md), veritas (revisión del guion y de docs/12-VERDAD-PRODUCTO.md), vision (storyboard.md) y motion (remotion/src/episodes/E20261024.tsx con el kit ../pq y ../pqworld, referencia E20261023.tsx, export const id = \"2026-10-24\" y export default; solo imports de paquetes y de ../ del proyecto, nada de loaders ni require dinámico). Completa publication (nova). Cumple las reglas de pip"
+    },
+    {
+      "at": "2026-10-23T14:16:32.143Z",
+      "msg": "SCRIPTING falló (3/3): Command failed: claude -p Eres ATLAS. Episodio 2026-10-24: usa hook (guion con el gancho elegido de assets/hooks/hooks.md), veritas (revisión del guion y de docs/12-VERDAD-PRODUCTO.md), vision (storyboard.md) y motion (remotion/src/episodes/E20261024.tsx con el kit ../pq y ../pqworld, referencia E20261023.tsx, export const id = \"2026-10-24\" y export default; solo imports de paquetes y de ../ del proyecto, nada de loaders ni require dinámico). Completa publication (nova). Cumple las reglas de pip"
+    },
+    {
+      "at": "2026-10-23T17:54:04.578Z",
+      "by": "claude-code",
+      "msg": "reintento manual: SCRIPTING falló por límite de sesión de Claude (no por el guion)"
+    },
+    {
+      "at": "2026-10-23T17:58:16.300Z",
+      "msg": "SCRIPTING ok"
+    },
+    {
+      "at": "2026-10-23T18:48:53.981Z",
+      "msg": "VOICE ok"
+    },
+    {
+      "at": "2026-10-23T18:51:36.231Z",
+      "msg": "RENDERING ok"
+    },
+    {
+      "at": "2026-10-23T18:51:41.545Z",
+      "msg": "QUALITY_CHECK ok"
+    },
+    {
+      "at": "2026-10-23T18:52:43.179Z",
+      "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (66): El primer fotograma muestra dos escenas apiladas (exterior arriba, cocina abajo) con furgoneta cortada en el borde; el gancho no se lee a la primera y parece un fallo de transición/layout. | Personaje dentro de un recuadro/ventana con la pierna cortada por el marco; escena poco legible y la pose no "
+    },
+    {
+      "at": "2026-10-23T18:53:10.441Z",
+      "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (66): El primer fotograma muestra dos escenas apiladas (exterior arriba, cocina abajo) con la furgoneta cortada en el borde; el gancho no se lee a la primera y parece un fallo de layout. El subtítulo «Ella cierra» tapa la cabeza del personaje de abajo. | Personaje dentro de un recuadro/ventana con la pier"
+    },
+    {
+      "at": "2026-10-23T18:53:41.005Z",
+      "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (64): El primer fotograma apila dos escenas (exterior arriba, cocina abajo) con la furgoneta cortada en el borde izquierdo; el gancho no se lee a la primera. El subtítulo «Ella cierra» tapa la cabeza del personaje de la cocina. | Personaje dentro de un recuadro/ventana con la pierna cortada por el marco; "
+    },
+    {
+      "at": "2026-10-24T09:00:46.328Z",
+      "msg": "RENDERING ok"
+    },
+    {
+      "at": "2026-10-24T09:00:52.700Z",
+      "msg": "QUALITY_CHECK ok"
+    },
+    {
+      "at": "2026-10-24T09:02:01.812Z",
+      "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (72): Primer fotograma: pantalla partida sin ningún texto de gancho (solo «En la puerta» y el subtítulo «Ella cierra»); la pregunta «¿Quién cena antes?» no se ve. El subtítulo tapa la cara/torso del técnico de la mitad inferior. | Subtítulo «Él termina la» tapa las piernas y la caja de herramientas; el pe"
+    },
+    {
+      "at": "2026-10-24T09:02:36.655Z",
+      "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (68): Primer fotograma: pantalla partida (puerta arriba, cocina abajo) sin texto de gancho; solo «En la puerta» y el subtítulo «Ella cierra». El gancho no se cuenta en el primer fotograma. El subtítulo tapa la cara y el torso del técnico de la mitad inferior. | El subtítulo «Él termina la» tapa las pierna"
+    },
+    {
+      "at": "2026-10-24T09:03:09.785Z",
+      "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (68): Primer fotograma: pantalla partida (puerta arriba, cocina abajo) con solo «En la puerta» y el subtítulo «Ella cierra». No cuenta el gancho (la pregunta «¿Quién cena antes?» / el contraste 22:00). El subtítulo tapa la cara y el torso del técnico de la mitad inferior. | El subtítulo «Él termina la» ta"
+    },
+    {
+      "at": "2026-10-24T09:12:36.468Z",
+      "msg": "RENDERING ok"
+    },
+    {
+      "at": "2026-10-24T09:12:42.772Z",
+      "msg": "QUALITY_CHECK ok"
+    },
+    {
+      "at": "2026-10-24T09:13:44.007Z",
+      "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (74): La tarjeta «Parte» flotante tapa el torso y la cabeza de la técnica (solo se ven las piernas): personaje decapitado/ilegible justo en el plano que explica la solución. La tarjeta no está sobre un móvil, y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta "
+    },
+    {
+      "at": "2026-10-24T09:14:23.868Z",
+      "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (74): La tarjeta «Parte» tapa cabeza y torso de la técnica (solo se ven las piernas) justo en el plano que explica la solución. La tarjeta no está sobre un móvil y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta con el check oculta al personaje. Además el rót"
+    },
+    {
+      "at": "2026-10-24T09:14:53.721Z",
+      "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (74): La tarjeta «Parte» tapa cabeza y torso de la técnica (solo se ven las piernas) justo en el plano que explica la solución. La tarjeta no está sobre un móvil y queda un hueco vacío en su parte inferior mientras se rellena. | Igual que en 23.8: la tarjeta con el check oculta al personaje. Además el rót"
+    },
+    {
+      "at": "2026-10-24T09:22:17.194Z",
+      "msg": "RENDERING ok"
+    },
+    {
+      "at": "2026-10-24T09:22:21.891Z",
+      "msg": "QUALITY_CHECK ok"
+    },
+    {
+      "at": "2026-10-24T09:23:08.898Z",
+      "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
+    },
+    {
+      "at": "2026-10-24T09:23:30.604Z",
+      "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
+    },
+    {
+      "at": "2026-10-24T09:23:56.174Z",
+      "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (72): BLOQUEO: la tarjeta «Parte» tapa los rótulos «RECREACIÓN · personajes ficticios» y «DEMO · DATOS FICTICIOS» (se leen cortados: «RECREACIÓN», «DATO»). Los rótulos obligatorios deben verse completos en todo momento. | BLOQUEO (mismo fallo que a 17.7): la tarjeta «Parte» sigue tapando ambos rótulos de "
+    }
+  ],
+  "scriptHash": "6ba2277ef4e67f2ed5d868d21cc8499de46c7006f734101f8e3377b3236c5f5f",
+  "duration": 37.42
 }

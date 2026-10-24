@@ -334,7 +334,7 @@ const DoorPhone: React.FC<SceneProps> = ({ t, w }) => {
         </Cam>
       </World>
       <Labels t={t} demo />
-      <PartCard t={t} at={tM + 0.1} fill={fill} y={170} />
+      <PartCard t={t} at={tM + 0.1} fill={fill} x={610} y={380} w={410} />
     </AbsoluteFill>
   );
 };
@@ -356,7 +356,7 @@ const ClosePie: React.FC<SceneProps> = ({ t, w }) => {
         </Cam>
       </World>
       <Labels t={t} demo />
-      <PartCard t={t} at={-1} fill={1} check={k(t, tC, 0.25)} until={tA - 0.1} y={170} />
+      <PartCard t={t} at={-1} fill={1} check={k(t, tC, 0.25)} until={tA - 0.1} x={610} y={380} w={410} />
       <Chip t={t} at={tP - 0.05} text="A pie · furgoneta parada" x={540} y={1180} align="center" c={C.lino} size={42} />
     </AbsoluteFill>
   );
