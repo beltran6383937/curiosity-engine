@@ -134,8 +134,7 @@ const NightWindowSky: React.FC = () => <rect x={-400} y={-400} width={1880} heig
 
 // 0 · Gancho: pantalla partida desde el fotograma 0. Arriba ella en la puerta; abajo él en la cocina a las 22:00.
 const Hook: React.FC<SceneProps> = ({ t, w }) => {
-  const tC = w(0, /^cena/);
-  const dim = k(t, tC - 0.1, 0.4);
+  const dim = k(t, 0, 0.3);
   const her = poseAt(t, [[0, POSE.stand], [0.15, POSE.phone]], 0.5);
   const him = poseAt(t, [[0, WRITE], [3, TIRED]], 1.2);
   return (
@@ -167,7 +166,7 @@ const Hook: React.FC<SceneProps> = ({ t, w }) => {
       <Labels t={t} />
       <Chip t={t} at={0.3} text="En la puerta" x={70} y={560} c={C.oro} size={44} />
       <Chip t={t} at={0.8} text="22:00 · en la cocina" x={70} y={1090} c={C.lino} size={44} />
-      <Headline t={t} at={tC - 0.05} text="¿Quién *cena* antes?" y={896} size={84} align="center" x={80} w={920} />
+      <Headline t={t} at={0} text="¿Quién *cena* antes?" y={896} size={84} align="center" x={80} w={920} />
     </AbsoluteFill>
   );
 };
@@ -450,6 +449,6 @@ const Ep: React.FC<CurioProps> = (p) => {
     { at: W(6, /móvil/), s: "pop", v: 0.25 }, { at: W(7, /Rellena/) + 0.3, s: "tick", v: 0.18 }, { at: W(7, /Rellena/) + 0.8, s: "tick", v: 0.18 }, { at: W(7, /Rellena/) + 1.3, s: "tick", v: 0.18 },
     { at: W(8, /cierra/), s: "ding", v: 0.3 }, { at: W(9, /cerrado/), s: "ding", v: 0.2 }, { at: W(10, /Ese/), s: "pop", v: 0.25 }, { at: W(11, /Comenta/), s: "pop", v: 0.3 },
   ];
-  return <PQReel {...p} scenes={scenes} keys={KEYS} sfx={sfx} music={`music/${id}.wav`} captionsUntil={(p.lines[11]?.start ?? 999) - 0.15} />;
+  return <PQReel {...p} scenes={scenes} keys={KEYS} sfx={sfx} music={`music/${id}.wav`} captionsY={1660} captionsUntil={(p.lines[11]?.start ?? 999) - 0.15} />;
 };
 export default Ep;
