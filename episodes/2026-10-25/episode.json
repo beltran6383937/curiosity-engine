@@ -1,0 +1,58 @@
+{
+  "id": "2026-10-25",
+  "category": "ia_explicada",
+  "title": "Tres preguntas que haría un buen recepcionista",
+  "series": null,
+  "hooks": [
+    { "n": 55, "views": "2.5M", "template": "Do you also [common mistake] like this? Next time, use any of these [#] techniques.", "text": "¿Tú también apuntas los avisos así? La próxima vez, haz estas 3 preguntas.", "chosen": true },
+    { "n": 26, "views": "7.0M", "template": "If you have [annoying problem], and despite trying to [fix #1] or [fix #2] it doesn't seem to get much better, here's what's likely going on and how you can fix it.", "text": "Si los avisos te llegan a medias y ni con libreta ni con contestador mejora, te cuento qué pasa.", "chosen": false },
+    { "n": 89, "views": "558K", "template": "Do you have [problem] that causes [symptom] when you do things like [activity]? Here's what that's telling you and how you can fix it.", "text": "¿Llegas a la obra sin saber qué te vas a encontrar? Eso es que faltan 3 preguntas.", "chosen": false }
+  ],
+  "lines": [
+    "¿Tú también apuntas los avisos así? La próxima vez, haz estas 3 preguntas.",
+    "Te llaman: «No tengo agua caliente». Y apuntas eso, sin más.",
+    "Al día siguiente no sabes qué te vas a encontrar, ni dónde es exactamente.",
+    "Vuelves a llamar, no lo coge, y pierdes la mañana dando vueltas.",
+    "Pregunta 1: qué pasa. ¿No arranca, o arranca y no calienta?",
+    "Pregunta 2: dónde. Dirección, piso y dónde tiene la caldera.",
+    "Pregunta 3: cuándo corre prisa. ¿Lo necesita hoy o puede esperar a mañana?",
+    "Así llegas sabiendo dónde vas y qué llevar en la furgoneta.",
+    "Lo estamos montando: una recepción con IA que hace esas 3 preguntas.",
+    "Las apunta y propone cita. La confirmas tú.",
+    "Comenta LLAMADA y te enseñamos la demo."
+  ],
+  "say": {
+    "0": "¿Tú también apuntas los avisos así? La próxima vez, haz estas tres preguntas.",
+    "4": "Pregunta uno: qué pasa. ¿No arranca, o arranca y no calienta?",
+    "5": "Pregunta dos: dónde. Dirección, piso y dónde tiene la caldera.",
+    "6": "Pregunta tres: cuándo corre prisa. ¿Lo necesita hoy o puede esperar a mañana?",
+    "8": "Lo estamos montando: una recepción con IA que hace esas tres preguntas.",
+    "10": "Comenta llamada y te enseñamos la demo."
+  },
+  "keys": ["avisos", "preguntas", "agua", "caliente", "apuntas", "encontrar", "dónde", "mañana", "vueltas", "pasa", "arranca", "calienta", "dirección", "piso", "caldera", "prisa", "hoy", "furgoneta", "montando", "ia", "propone", "cita", "confirmas", "llamada", "demo"],
+  "claims": [
+    { "claim": "La historia (llamada de un cliente sin agua caliente o con la caldera sin arrancar, taller, personajes) es una recreación ficticia, rotulada «RECREACIÓN · personajes ficticios» en todos los planos de la historia; sin cifras, marcas, logos, matrículas, teléfonos ni direcciones reales, y sin mencionar olor a gas ni dar instrucciones técnicas o de seguridad", "source": "docs/11-ESTRATEGIA-EDITORIAL.md (Honestidad) · docs/12-VERDAD-PRODUCTO.md (Prohibido) · revisión VERITAS 2026-10-24", "status": "verified" },
+    { "claim": "Las tres preguntas (qué pasa, dónde, cuándo corre prisa) son un criterio de oficio, no una estadística, estudio ni norma; no se presentan con «según expertos» ni con cifras", "source": "criterio editorial sin dato externo · revisión VERITAS 2026-10-24", "status": "verified" },
+    { "claim": "La recepción con IA que contesta llamadas, pregunta y propone cita existe solo como DEMO de P&Q Field Operations (datos ficticios), rotulada «DEMO · DATOS FICTICIOS»; la voz dice «lo estamos montando» o «te enseñamos la demo», dice «propone cita» (la confirma una persona) y nunca «ya contesta tus llamadas», «nuestros clientes», «100 % automático» ni la presenta como servicio en marcha", "source": "docs/12-VERDAD-PRODUCTO.md (tabla de capacidades, revisión 22-10-2026) · web perezandquintano.es · revisión VERITAS 2026-10-24", "status": "verified" },
+    { "claim": "No se afirma ni se dibuja clasificación automática de urgencia (la IA pregunta y anota, no etiqueta), derivación a persona, WhatsApp, número propio ni conexión con operadoras, ni análisis de conversaciones, porque no están en docs/12 como DEMO o están planificados", "source": "docs/12-VERDAD-PRODUCTO.md · revisión VERITAS 2026-10-24", "status": "verified" },
+    { "claim": "El CTA es comentar una palabra clave y recibir una videollamada para enseñar la demo; el recurso es la web https://perezandquintano.es (carga y ofrece reunión breve por videollamada). La demo pública devolvió HTTP 503 en 4 intentos el 2026-10-24, por lo que no se usa como recurso. Responde una persona por DM: sin «al momento» ni «automáticamente»", "source": "https://perezandquintano.es (abierta 2026-10-24) · docs/11-ESTRATEGIA-EDITORIAL.md (CTA) · revisión VERITAS 2026-10-24", "status": "verified" }
+  ],
+  "publication": {
+    "cta": {
+      "keyword": "LLAMADA",
+      "promise": "enseñar la demo de la recepción con IA en una videollamada",
+      "resource_url": "https://perezandquintano.es",
+      "resource_checked": true,
+      "delivery": "manual: Beltrán responde por DM a quien comente LLAMADA (CONNECT no está activo)"
+    },
+    "instagram": {
+      "caption": "Comenta LLAMADA y te enseñamos la demo, en videollamada, de una recepción con IA para empresas de instalaciones.\n\nTe llaman: «No tengo agua caliente». Y apuntas eso, sin más. Al día siguiente no sabes qué te vas a encontrar ni dónde es. Si eres electricista, fontanero o instalador de clima, conoces la escena.\n\nTres preguntas que haría un buen recepcionista al coger un aviso:\n1. Qué pasa.\n2. Dónde: dirección, piso y dónde está el equipo.\n3. Cuándo corre prisa: hoy o mañana.\n\nAsí llegas sabiendo adónde vas y qué cargar en la furgoneta. Te sirve igual con libreta, con una hoja pegada en el taller o con quien coja el teléfono.\n\nLo estamos montando: una recepción con IA que hace esas tres preguntas, las apunta y propone cita. La confirma una persona.\n\nRecreación ficticia. Demo con datos ficticios. Voz generada con IA.\n\n#instaladores #fontaneros #climatizacion",
+      "ai_label": true
+    },
+    "tiktok": {
+      "caption": "¿Apuntas los avisos así? «No tengo agua caliente» y ya. Haz estas 3 preguntas: qué pasa, dónde y cuándo corre prisa. Lo estamos montando con IA: pregunta, apunta y propone cita. Comenta LLAMADA y te enseñamos la demo. Recreación ficticia, demo con datos ficticios, voz generada con IA. #fontanero #instalador #climatizacion #electricista",
+      "ai_label": true
+    },
+    "cover": "fotograma del gancho: libreta sobre la caja de herramientas con «agua caliente» a lápiz y las tarjetas 1·2·3 cayendo, con el titular «¿Tú también apuntas los avisos así?» y el rótulo «RECREACIÓN · personajes ficticios»"
+  }
+}

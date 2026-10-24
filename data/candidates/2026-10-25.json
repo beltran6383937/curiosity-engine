@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tres-preguntas-recepcionista",
+    "category": "ia_explicada",
+    "title": "Tres preguntas que haría un buen recepcionista",
+    "hooks": [
+      {"n": 55, "text": "¿Tú también apuntas los avisos así? La próxima vez, haz estas 3 preguntas.", "chosen": true},
+      {"n": 26, "text": "Si los avisos te llegan a medias y ni con libreta ni con contestador mejora, te cuento qué pasa.", "chosen": false},
+      {"n": 89, "text": "¿Llegas a la obra sin saber qué te vas a encontrar? Eso es que faltan 3 preguntas.", "chosen": false}
+    ],
+    "scores": {"originalidad": 7, "comercial": 8, "retencion": 8, "utilidad": 9, "viabilidad": 8},
+    "total": 40,
+    "chosen": true
+  },
+  {
+    "id": "no-dejarle-a-la-ia",
+    "category": "ia_explicada",
+    "title": "Lo que NO le dejarías hacer a una IA en tu empresa",
+    "hooks": [
+      {"n": 56, "text": "Al que no da abasto con el teléfono le dicen que la IA lo conteste todo. Y lo empeora.", "chosen": false},
+      {"n": 8, "text": "Deja de pedirle a la IA que dé precios por teléfono. Sin ver la obra, falla.", "chosen": false},
+      {"n": 64, "text": "Cuidado con la IA que lo promete todo por teléfono. Mira esto antes de ponerla.", "chosen": false}
+    ],
+    "scores": {"originalidad": 7, "comercial": 8, "retencion": 7, "utilidad": 9, "viabilidad": 8},
+    "total": 39,
+    "chosen": false
+  },
+  {
+    "id": "ia-o-regla",
+    "category": "ia_explicada",
+    "title": "¿Tu tarea necesita IA o solo una regla?",
+    "hooks": [
+      {"n": 91, "text": "La forma más rápida de saber si necesitas IA no es probar mil aplicaciones. Es una pregunta.", "chosen": false},
+      {"n": 75, "text": "No metas IA en tu empresa hasta que te hagas esta pregunta.", "chosen": false},
+      {"n": 83, "text": "Va contra tu instinto decirle que no a la IA cuando todo el mundo habla de ella.", "chosen": false}
+    ],
+    "scores": {"originalidad": 7, "comercial": 6, "retencion": 6, "utilidad": 8, "viabilidad": 9},
+    "total": 36,
+    "chosen": false
+  },
+  {
+    "id": "agente-furgoneta",
+    "category": "ia_explicada",
+    "title": "Qué es un agente de IA, explicado con una furgoneta",
+    "hooks": [
+      {"n": 35, "text": "Un agente de IA no se parece a esto. Se parece más a tu furgoneta.", "chosen": false},
+      {"n": 27, "text": "Así se explica un agente de IA con una furgoneta.", "chosen": false},
+      {"n": 69, "text": "¿Por qué un agente de IA funciona igual que tu furgoneta?", "chosen": false}
+    ],
+    "scores": {"originalidad": 6, "comercial": 6, "retencion": 7, "utilidad": 8, "viabilidad": 8},
+    "total": 35,
+    "chosen": false
+  },
+  {
+    "id": "ia-dice-que-es-ia",
+    "category": "ia_explicada",
+    "title": "Si una IA coge el teléfono, ¿tiene que decir que es una IA?",
+    "hooks": [
+      {"n": 52, "text": "Si tienes cualquier tipo de IA cogiendo llamadas, haz que se presente como IA hoy mismo.", "chosen": false},
+      {"n": 33, "text": "Así compruebas si la IA que coge tu teléfono se está haciendo pasar por persona.", "chosen": false},
+      {"n": 71, "text": "Nunca pongas una IA a coger el teléfono si no hace estas 2 cosas.", "chosen": false}
+    ],
+    "scores": {"originalidad": 8, "comercial": 6, "retencion": 6, "utilidad": 8, "viabilidad": 6},
+    "total": 34,
+    "chosen": false,
+    "note": "Art. 50 del Reglamento (UE) 2024/1689 no verificado en fuente primaria (EUR-Lex no abrió); solo fuentes secundarias. No publicar hasta verificarlo"
+  }
+]

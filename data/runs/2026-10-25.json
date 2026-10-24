@@ -1,0 +1,89 @@
+{
+ "date": "2026-10-25",
+ "state": "NEEDS_ATTENTION",
+ "episode": "2026-10-25",
+ "steps": {
+  "RESEARCHING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-24T12:53:39.440Z",
+   "doneAt": "2026-10-24T12:57:30.277Z"
+  },
+  "SCRIPTING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-24T12:57:30.279Z",
+   "doneAt": "2026-10-24T13:10:56.014Z"
+  },
+  "VOICE": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-24T13:13:38.661Z",
+   "doneAt": "2026-10-24T13:39:38.893Z"
+  },
+  "RENDERING": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-24T13:39:38.895Z",
+   "doneAt": "2026-10-24T13:43:38.489Z"
+  },
+  "QUALITY_CHECK": {
+   "status": "done",
+   "attempts": 1,
+   "startedAt": "2026-10-24T13:43:38.490Z",
+   "doneAt": "2026-10-24T13:43:46.029Z"
+  },
+  "VISUAL_REVIEW": {
+   "status": "failed",
+   "attempts": 3,
+   "startedAt": "2026-10-24T13:45:07.415Z",
+   "error": "SENTINEL rechaza (78): El primer fotograma sí cuenta el gancho («¿Tú también apuntas los avisos así?» + libreta con «agua caliente»). El subtítulo «¿Tú también» repite el titular y compite con él; la hoja cortada de la esquina inferior derecha no aporta nada. | La tarjeta «Clienta · Llamada entrante» está casi transparent"
+  }
+ },
+ "platforms": {
+  "instagram": {
+   "status": "pending",
+   "attempts": 0
+  },
+  "tiktok": {
+   "status": "pending",
+   "attempts": 0
+  }
+ },
+ "log": [
+  {
+   "at": "2026-10-24T12:57:30.277Z",
+   "msg": "RESEARCHING ok"
+  },
+  {
+   "at": "2026-10-24T13:10:56.014Z",
+   "msg": "SCRIPTING ok"
+  },
+  {
+   "at": "2026-10-24T13:39:38.893Z",
+   "msg": "VOICE ok"
+  },
+  {
+   "at": "2026-10-24T13:43:38.489Z",
+   "msg": "RENDERING ok"
+  },
+  {
+   "at": "2026-10-24T13:43:46.029Z",
+   "msg": "QUALITY_CHECK ok"
+  },
+  {
+   "at": "2026-10-24T13:44:48.622Z",
+   "msg": "VISUAL_REVIEW falló (1/3): SENTINEL rechaza (80): El subtítulo «Pregunta 3» tapa la cara de la clienta (ojos y boca) y la tarjeta «3 Cuándo corre prisa» tapa las pestañas «Hoy / Mañana», que son el dato de la pregunta. Los rótulos «Hoy» y «Mañana» quedan cortados. | El subtítulo «Pregunta 1» está encima de las tuberías de la caldera y la clienta qu"
+  },
+  {
+   "at": "2026-10-24T13:45:07.414Z",
+   "msg": "VISUAL_REVIEW falló (2/3): SENTINEL rechaza (80): El subtítulo «Pregunta 3» tapa la cara de la clienta (ojos y boca) y la tarjeta «3 Cuándo corre prisa» tapa las pestañas «Hoy / Mañana», que son el dato de la pregunta. Los rótulos «Hoy» y «Mañana» quedan cortados. | El subtítulo «Pregunta 1» está encima de las tuberías de la caldera y la clienta qu"
+  },
+  {
+   "at": "2026-10-24T13:45:37.315Z",
+   "msg": "VISUAL_REVIEW falló (3/3): SENTINEL rechaza (78): El primer fotograma sí cuenta el gancho («¿Tú también apuntas los avisos así?» + libreta con «agua caliente»). El subtítulo «¿Tú también» repite el titular y compite con él; la hoja cortada de la esquina inferior derecha no aporta nada. | La tarjeta «Clienta · Llamada entrante» está casi transparent"
+  }
+ ],
+ "scriptHash": "deea71b652bc2ab8f9535512ffe08de9c3964239e1a6ba1280e8de4accbeaa2c",
+ "duration": 42.58
+}
