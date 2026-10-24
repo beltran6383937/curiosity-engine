@@ -150,7 +150,7 @@ const Hook: React.FC<SceneProps> = ({ t, w }) => {
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 960, height: 960, overflow: "hidden" }}>
         <World style={{ translate: "0 -480px" }}>
-          <Cam x={540} y={mix(1010, 1000, k(t, 0, 3))} z={1.0}>
+          <Cam x={540} y={mix(1210, 1200, k(t, 0, 3))} z={1.0}>
             <NightKitchen t={t}>
               <Notebook x={560} y={1166} open={1} />
               <Worker x={470} y={1130} pose={him} t={t} />
@@ -334,7 +334,7 @@ const DoorPhone: React.FC<SceneProps> = ({ t, w }) => {
         </Cam>
       </World>
       <Labels t={t} demo />
-      <PartCard t={t} at={tM + 0.1} fill={fill} x={610} y={380} w={410} />
+      <PartCard t={t} at={tM + 0.1} fill={fill} x={600} y={380} w={340} />
     </AbsoluteFill>
   );
 };
@@ -356,7 +356,7 @@ const ClosePie: React.FC<SceneProps> = ({ t, w }) => {
         </Cam>
       </World>
       <Labels t={t} demo />
-      <PartCard t={t} at={-1} fill={1} check={k(t, tC, 0.25)} until={tA - 0.1} x={610} y={380} w={410} />
+      <PartCard t={t} at={-1} fill={1} check={k(t, tC, 0.25)} until={tA - 0.1} x={600} y={380} w={340} />
       <Chip t={t} at={tP - 0.05} text="A pie · furgoneta parada" x={540} y={1180} align="center" c={C.lino} size={42} />
     </AbsoluteFill>
   );
@@ -449,6 +449,6 @@ const Ep: React.FC<CurioProps> = (p) => {
     { at: W(6, /móvil/), s: "pop", v: 0.25 }, { at: W(7, /Rellena/) + 0.3, s: "tick", v: 0.18 }, { at: W(7, /Rellena/) + 0.8, s: "tick", v: 0.18 }, { at: W(7, /Rellena/) + 1.3, s: "tick", v: 0.18 },
     { at: W(8, /cierra/), s: "ding", v: 0.3 }, { at: W(9, /cerrado/), s: "ding", v: 0.2 }, { at: W(10, /Ese/), s: "pop", v: 0.25 }, { at: W(11, /Comenta/), s: "pop", v: 0.3 },
   ];
-  return <PQReel {...p} scenes={scenes} keys={KEYS} sfx={sfx} music={`music/${id}.wav`} captionsY={1660} captionsUntil={(p.lines[11]?.start ?? 999) - 0.15} />;
+  return <PQReel {...p} scenes={scenes} keys={KEYS} sfx={sfx} music={`music/${id}.wav`} captionsY={1420} captionsUntil={(p.lines[11]?.start ?? 999) - 0.15} />;
 };
 export default Ep;
