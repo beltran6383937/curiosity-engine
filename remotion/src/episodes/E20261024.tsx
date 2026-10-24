@@ -4,7 +4,7 @@
 // (cabecera, fecha, barras sin etiquetas y check) rotulada «DEMO · DATOS FICTICIOS». Sin cifras, fotos, firmas ni envíos.
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { PQReel, World, Cam, Par, Glow, Impact, Label, Chip, Headline, Bubble, Card, EndCard, CommentBox,
+import { PQReel, World, Cam, Par, Glow, Label, Chip, Headline, Bubble, Card, EndCard, CommentBox,
   C, MONO, SANS, k, mix, inout, type CurioProps, type SceneProps, type SceneDef } from "../pq";
 import { Room, Kitchen, Street, Worker, Toolbox, POSE, blendPose, poseAt, type Pose } from "../pqworld";
 
@@ -280,15 +280,6 @@ const KitchenForget: React.FC<SceneProps> = ({ t, w }) => {
           <NightKitchen t={t}>
             <Notebook x={560} y={1166} open={1} />
             <Worker x={470} y={1130} pose={pose} t={t} />
-            {[0, 1, 2].map((i) => {
-              const f = k(t, tA + i * 0.35, 0.7);
-              return (
-                <g key={i} opacity={mix(0.5, 0, f)} style={{ filter: `blur(${f * 14}px)` }} transform={`translate(${430 + i * 120} ${600 - i * 26 - f * 20})`}>
-                  <path d="M 0 140 L 0 40 Q 0 0 38 0 Q 76 0 76 40 L 76 140 Z" fill={C.lino} />
-                  <circle cx={58} cy={80} r={5} fill={C.oroOscuro} />
-                </g>
-              );
-            })}
           </NightKitchen>
         </Cam>
       </World>
@@ -352,7 +343,6 @@ const ClosePie: React.FC<SceneProps> = ({ t, w }) => {
           <Porch t={t} sink={0.6} />
           <Toolbox x={mix(640, 330, away)} y={1392 + away * 100} s={0.7} />
           <She x={mix(520, 330, away)} y={1235} pose={pose} t={t} flip={away > 0} phoneInHand={t < tA - 0.1} screen={1} />
-          <Impact x={558} y={985} t={t} at={tC} c={C.oro} size={95} />
         </Cam>
       </World>
       <Labels t={t} demo />
