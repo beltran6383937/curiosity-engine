@@ -1,0 +1,5 @@
+es1: timbre de cand1-a.wav + (acento castellano de España, de Madrid, pronuncia la zeta y la ce como en España, nada de acento latinoamericano, vacilón e irónico)
+es2: timbre de cand1-a.wav + (Castilian Spanish accent from Madrid, Spain, European Spanish pronunciation, not Latin American, playful and ironic)
+es3: diseño desde cero, descripción en español con acento castellano muy marcado + rasgos de cand1
+es4: diseño desde cero, descripción en inglés con acento de España + rasgos de cand1
+es5: NO generada (25-10 12:31: el equipo se quedó sin memoria; SysInfoCap ocupaba 6,4 GB)

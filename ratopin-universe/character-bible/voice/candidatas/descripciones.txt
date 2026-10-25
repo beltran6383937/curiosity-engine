@@ -1,0 +1,4 @@
+cand1: Chico español de veinte años, voz masculina joven, natural y cercana, con un punto nasal de personaje de dibujos animados, vacilón e irónico, habla como si contara una anécdota graciosa a sus colegas, relajado y con sonrisa en la voz
+cand2: Chaval español de diecinueve años, voz juvenil aguda y vivaracha, pícaro y muy gracioso, tono de personaje de serie de animación sin ser infantil, expresivo, se le escapa la risa
+cand3: Joven español de veintiún años, voz masculina algo ronca y cansada, sarcástico y seco, humor irónico de colega, pausas con intención, muy natural y espontáneo
+cand4: Chico de dieciocho años de España, voz masculina joven con chispa y descaro, rápido y travieso, gracioso como un amigo contando una situación absurda, nada de locutor

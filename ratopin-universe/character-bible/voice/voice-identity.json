@@ -1,0 +1,31 @@
+{
+  "character": "Ratopín",
+  "version": "v1",
+  "status": "APROBADA por Beltrán el 2026-10-25 (es3: acento de España)",
+  "engine": "voxcpm2",
+  "model": "openbmb/VoxCPM2",
+  "license": "Apache-2.0",
+  "method": "voice design from text description (no cloning of real people); es3 = diseño desde cero, acento castellano",
+  "chosen": "candidatas/espana/es3.wav",
+  "reference_wav": "character-bible/voice/ref.wav",
+  "reference_text": "character-bible/voice/ref.txt",
+  "generation": {
+    "cfg_value": 2.0,
+    "inference_timesteps": 10,
+    "load_denoiser": false
+  },
+  "tempo": 1.0,
+  "pronunciation": {
+    "P&Q": "Pérez y Quintano",
+    "IA": "i a"
+  },
+  "rules": [
+    "Acento de España (castellano) siempre: nunca latinoamericano",
+    "Nuevas frases: reference_wav_path=ref.wav (+ prompt_wav_path/prompt_text = ref.wav/ref.txt para continuar el timbre)",
+    "Mismo ref.wav en todos los episodios",
+    "No cambiar descripción, modelo ni parámetros sin aprobación de Beltrán",
+    "Sin secretos en este archivo"
+  ],
+  "description": "Chico de Madrid de veinte años, español de España con acento castellano muy marcado, pronuncia la zeta, nada de acento latinoamericano, voz masculina joven, natural y cercana, con un punto nasal de personaje de dibujos animados, vacilón e irónico, relajado y con sonrisa en la voz",
+  "seed": 1
+}
