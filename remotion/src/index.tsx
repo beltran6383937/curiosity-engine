@@ -7,6 +7,9 @@ import { MotionTest5s } from "./ratopin/MotionTest5s";
 import { MouthSheet } from "./ratopin/MouthSheet";
 import { Tuerca5s } from "./tuerca/Tuerca5s";
 import { TuercaEp1 } from "./tuerca/Ep1";
+import { Casting } from "./casting/Casting";
+import { PepaEp1 } from "./pepa/Ep1";
+import PepaTL from "./pepa/ep1-timeline.json";
 import TuercaTL from "./tuerca/ep1-timeline.json";
 
 declare const require: { context: (dir: string, deep: boolean, re: RegExp) => { keys: () => string[]; (k: string): any } };
@@ -25,6 +28,8 @@ const Root = () => (
     <Composition id="RatopinMotion5s" component={MotionTest5s} width={1080} height={1920} fps={24} durationInFrames={120} defaultProps={{ camera: true, boil: true }} />
     <Composition id="Tuerca5s" component={Tuerca5s} width={1080} height={1920} fps={24} durationInFrames={120} defaultProps={{ camera: true, boil: true }} />
     <Composition id="TuercaEp1" component={TuercaEp1} width={1080} height={1920} fps={24} durationInFrames={TuercaTL.total} defaultProps={{ camera: true, boil: true }} />
+    <Composition id="Casting" component={Casting} width={1080} height={1920} fps={24} durationInFrames={3} />
+    <Composition id="PepaEp1" component={PepaEp1} width={1080} height={1920} fps={24} durationInFrames={PepaTL.total} defaultProps={{ camera: true, boil: true }} />
   </>
 );
 registerRoot(Root);
