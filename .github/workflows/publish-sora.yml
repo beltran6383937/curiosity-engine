@@ -1,0 +1,46 @@
+# SORA: publica en Instagram (@perezandquintano) y deja TikTok en la bandeja un episodio ya aprobado y subido como release.
+# Lo lanza a mano o la tarea local de las 09:00 (sora-city/06_pipeline/days/ep002/publicar.ps1): gh workflow run publish-sora.yml -f tag=sora-ep002
+name: publish-sora
+on:
+  workflow_dispatch:
+    inputs:
+      tag: { description: "Tag de la release (p. ej. sora-ep002) con SORA_EPNNN_final.mp4 y caption.txt", required: true }
+concurrency: { group: publish-sora, cancel-in-progress: false }
+permissions: { contents: read, issues: write }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { ref: main }
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with: { node-version: 24 }
+      - name: Renovar tokens (pasan por $GITHUB_ENV, enmascarados)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+        run: node pipeline/tokens.mjs
+      - name: Traer el vídeo y publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          [[ "$TAG" =~ ^sora-ep[0-9]{3}$ ]] || { echo "::error::tag inválido"; exit 1; }
+          mkdir -p work/sora && gh release download "$TAG" -D work/sora --clobber
+          V=$(ls work/sora/SORA_EP*_final.mp4 | head -1)
+          [ -f "$V" ] && [ -f work/sora/caption.txt ] || { echo "::error::faltan el MP4 o caption.txt en la release"; exit 1; }
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/$(basename "$V")"
+          node pipeline/publish-sora.mjs --video "$V" --video-url "$URL" --caption work/sora/caption.txt --tiktok --out work/sora/res.json
+      - if: always()
+        name: Descripción de TikTok al buzón (issue)
+        env: { GH_TOKEN: "${{ github.token }}", TAG: "${{ inputs.tag }}" }
+        run: |
+          [ -f work/sora/caption.txt ] || exit 0
+          gh issue create -t "TikTok $TAG: terminar en la app y marcar «Contenido generado por IA»" -l tiktok -F work/sora/caption.txt || true
