@@ -1,0 +1,18 @@
+# Comprobación de solo lectura: lanza a mano. Lee el nombre de la cuenta de Instagram con el token guardado.
+# No publica, no responde comentarios y no imprime el token.
+name: check-ig
+on:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leer cuenta de Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          echo "::add-mask::$IG_ACCESS_TOKEN"
+          R=$(curl -s "https://graph.instagram.com/v21.0/me?fields=user_id,username&access_token=$IG_ACCESS_TOKEN")
+          echo "$R" | sed -E 's/access_token=[^&"]*/[oculto]/g'
+          echo "$R" | grep -q '"username"' && echo "RESULTADO: token válido" || { echo "RESULTADO: token NO válido"; exit 1; }
