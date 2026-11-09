@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       tag: { description: "Tag de la release (p. ej. sora-ep002) con SORA_EPNNN_final.mp4 y caption.txt", required: true }
+      solo_tiktok: { description: "Solo TikTok a la bandeja (no vuelve a publicar en Instagram); usa SORA_EPNNN_tiktok.mp4 (<64 MB)", type: boolean, default: false }
 concurrency: { group: publish-sora, cancel-in-progress: false }
 permissions: { contents: read, issues: write }
 jobs:
@@ -31,13 +32,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           TAG: ${{ inputs.tag }}
+          SOLO_TIKTOK: ${{ inputs.solo_tiktok }}
         run: |
           [[ "$TAG" =~ ^sora-ep[0-9]{3}$ ]] || { echo "::error::tag inválido"; exit 1; }
           mkdir -p work/sora && gh release download "$TAG" -D work/sora --clobber
-          V=$(ls work/sora/SORA_EP*_final.mp4 | head -1)
-          [ -f "$V" ] && [ -f work/sora/caption.txt ] || { echo "::error::faltan el MP4 o caption.txt en la release"; exit 1; }
-          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/$(basename "$V")"
-          node pipeline/publish-sora.mjs --video "$V" --video-url "$URL" --caption work/sora/caption.txt --tiktok --out work/sora/res.json
+          if [ "$SOLO_TIKTOK" = "true" ]; then
+            V=$(ls work/sora/SORA_EP*_tiktok.mp4 2>/dev/null | head -1)
+            [ -n "$V" ] && [ -f work/sora/caption.txt ] || { echo "::error::faltan SORA_EPNNN_tiktok.mp4 o caption.txt en la release"; exit 1; }
+            node pipeline/publish-sora.mjs --video "$V" --video-url "" --caption work/sora/caption.txt --solo-tiktok --out work/sora/res.json
+          else
+            V=$(ls work/sora/SORA_EP*_final.mp4 | head -1)
+            [ -f "$V" ] && [ -f work/sora/caption.txt ] || { echo "::error::faltan el MP4 o caption.txt en la release"; exit 1; }
+            URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/$(basename "$V")"
+            node pipeline/publish-sora.mjs --video "$V" --video-url "$URL" --caption work/sora/caption.txt --tiktok --out work/sora/res.json
+          fi
       - if: always()
         name: Descripción de TikTok al buzón (issue)
         env: { GH_TOKEN: "${{ github.token }}", TAG: "${{ inputs.tag }}" }
