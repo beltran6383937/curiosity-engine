@@ -1,0 +1,51 @@
+# Publica en Instagram (@perezandquintano) y deja TikTok en la bandeja un vídeo ya aprobado y subido como release (p. ej. cuentas-claras-n1).
+# La release lleva video.mp4 y caption.txt. Se lanza a mano: gh workflow run publish-video.yml -f tag=cuentas-claras-n1
+name: publish-video
+on:
+  workflow_dispatch:
+    inputs:
+      tag: { description: "Tag de la release (p. ej. cuentas-claras-n1) con video.mp4 y caption.txt", required: true }
+      solo_tiktok: { description: "Solo TikTok a la bandeja (no vuelve a publicar en Instagram); video.mp4 debe pesar <64 MB", type: boolean, default: false }
+concurrency: { group: publish-video, cancel-in-progress: false }
+permissions: { contents: read, issues: write }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { ref: main }
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with: { node-version: 24 }
+      - name: Renovar tokens (pasan por $GITHUB_ENV, enmascarados)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+        run: node pipeline/tokens.mjs
+      - name: Traer el vídeo y publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          TAG: ${{ inputs.tag }}
+          SOLO_TIKTOK: ${{ inputs.solo_tiktok }}
+        run: |
+          [[ "$TAG" =~ ^[a-z0-9][a-z0-9-]{2,39}$ ]] || { echo "::error::tag inválido"; exit 1; }
+          mkdir -p work/video && gh release download "$TAG" -D work/video --clobber
+          [ -f work/video/video.mp4 ] && [ -f work/video/caption.txt ] || { echo "::error::faltan video.mp4 o caption.txt en la release"; exit 1; }
+          if [ "$SOLO_TIKTOK" = "true" ]; then
+            node pipeline/publish-video.mjs --video work/video/video.mp4 --video-url "" --caption work/video/caption.txt --solo-tiktok --out work/video/res.json
+          else
+            URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/video.mp4"
+            node pipeline/publish-video.mjs --video work/video/video.mp4 --video-url "$URL" --caption work/video/caption.txt --tiktok --out work/video/res.json
+          fi
+      - if: always()
+        name: Descripción de TikTok al buzón (issue)
+        env: { GH_TOKEN: "${{ github.token }}", TAG: "${{ inputs.tag }}" }
+        run: |
+          [ -f work/video/caption.txt ] || exit 0
+          gh issue create -t "TikTok $TAG: terminar en la app y marcar «Contenido generado por IA»" -l tiktok -F work/video/caption.txt || true

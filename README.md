@@ -1,6 +1,6 @@
 # P&Q AI CONTENT ENGINE (repo `curiosity-engine`)
 
-Productora autónoma del vídeo diario de PÉREZ & QUINTANO para Instagram y TikTok: IA aplicada y sistemas para **empresas de instalaciones** (electricistas, fontaneros, climatización y aerotermia, mantenimiento). Publica a las **08:30 de Madrid** desde el 23-10-2026; el vídeo se produce la víspera. Estrategia: [docs/11-ESTRATEGIA-EDITORIAL.md](docs/11-ESTRATEGIA-EDITORIAL.md) · qué se puede afirmar: [docs/12-VERDAD-PRODUCTO.md](docs/12-VERDAD-PRODUCTO.md).
+Productora autónoma del vídeo diario de PÉREZ & QUINTANO para Instagram y TikTok: IA aplicada y sistemas para **empresas de instalaciones** (electricistas, fontaneros, climatización y aerotermia, mantenimiento). Publica a las **08:30 de Madrid** desde el 23-10-2026; el vídeo se produce la víspera. Estrategia: [docs/11-ESTRATEGIA-EDITORIAL.md](docs/11-ESTRATEGIA-EDITORIAL.md) · qué se puede afirmar: [docs/12-VERDAD-PRODUCTO.md](docs/12-VERDAD-PRODUCTO.md) · modelo «Cuentas Claras»: [docs/13-CUENTAS-CLARAS.md](docs/13-CUENTAS-CLARAS.md).
 
 Hasta el 22-10-2026 fue CURIOSITY ENGINE (curiosidades de espacio, coches, animales); esos episodios quedan como histórico. 14 agentes (subagentes de Claude Code + pipeline determinista), vídeo 100 % programático (Remotion + three.js), voz local VoxCPM2, música original y publicación por APIs oficiales.
 

@@ -1,0 +1,16 @@
+{
+ "numero": 1,
+ "titulo": "CUENTAS CLARAS",
+ "subtitulo": "Nº1 · LA LLAMADA QUE NO COGES",
+ "rows": [
+  {"label": "LLAMADAS PERDIDAS / SEMANA", "value": "6"},
+  {"label": "1 DE CADA 3 ERA TRABAJO", "value": "2"},
+  {"label": "2 × 350 € POR TRABAJO", "value": "700 €"},
+  {"label": "700 € × 4 SEMANAS", "value": "= MES"}
+ ],
+ "total": {"value": 2800, "unit": "AL MES"},
+ "sello": "EJEMPLO",
+ "nota": "CAMBIA LOS NÚMEROS POR LOS TUYOS",
+ "veredicto": {"arriba": "VEREDICTO", "centro": "NO NECESITA IA", "abajo": "RESPUESTA AUTOMÁTICA BASTA"},
+ "cta": {"arriba": "COMENTA", "centro": "CUENTA", "abajo": "Y TE HAGO LA TUYA"}
+}
